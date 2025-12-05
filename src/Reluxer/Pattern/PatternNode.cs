@@ -24,6 +24,7 @@ public enum PatternNodeType
     BalancedUntil,  // Match until separator at depth 0 (\Bc for comma)
     JsxElementComplete, // \Je - matches any complete JSX element with depth tracking
     JsxElement,     // High-level JSX element matching with depth tracking
+    BalancedJsxContent, // \Bj - matches JSX content between > and </tag>
     JsxCloseBackref, // </\1> - closing tag that matches a captured opening tag
     Lookahead,      // (?=...) positive or (?!...) negative lookahead
     Lookbehind,     // (?<=...) positive or (?<!...) negative lookbehind
@@ -292,6 +293,26 @@ public class JsxElementCompleteNode : PatternNode
 
     /// <summary>
     /// If true, captures the entire element content
+    /// </summary>
+    public bool CaptureContent { get; set; }
+
+    /// <summary>
+    /// Capture group index for the content (if CaptureContent is true)
+    /// </summary>
+    public int CaptureIndex { get; set; } = -1;
+}
+
+/// <summary>
+/// Matches JSX content between > (tag end) and the matching closing tag.
+/// Tracks JSX depth to find the correct closing tag.
+/// Used by \Bj macro - starts after JsxTagEnd and captures until closing tag.
+/// </summary>
+public class BalancedJsxContentNode : PatternNode
+{
+    public override PatternNodeType NodeType => PatternNodeType.BalancedJsxContent;
+
+    /// <summary>
+    /// If true, captures the matched content (excluding the closing tag)
     /// </summary>
     public bool CaptureContent { get; set; }
 

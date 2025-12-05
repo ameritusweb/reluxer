@@ -179,4 +179,93 @@ public class TokenCapture
     /// Returns true if this capture contains any tokens
     /// </summary>
     public bool HasValue => Tokens.Length > 0;
+
+    #region Type Coercion Methods
+
+    /// <summary>
+    /// Gets the combined value of all tokens as a string.
+    /// Alias for Value property for fluent API consistency.
+    /// </summary>
+    public string AsString() => Value;
+
+    /// <summary>
+    /// Gets the value of the first Identifier token in this capture.
+    /// Returns null if no identifier is found.
+    /// </summary>
+    public string? AsIdentifier() =>
+        Tokens.FirstOrDefault(t => t.Type == TokenType.Identifier)?.Value;
+
+    /// <summary>
+    /// Gets the value of the first Keyword token in this capture.
+    /// Returns null if no keyword is found.
+    /// </summary>
+    public string? AsKeyword() =>
+        Tokens.FirstOrDefault(t => t.Type == TokenType.Keyword)?.Value;
+
+    /// <summary>
+    /// Gets the value of the first String token in this capture.
+    /// Returns null if no string is found.
+    /// </summary>
+    public string? AsStringLiteral() =>
+        Tokens.FirstOrDefault(t => t.Type == TokenType.String)?.Value;
+
+    /// <summary>
+    /// Gets the value of the first Number token in this capture, parsed as int.
+    /// Returns null if no number is found or parsing fails.
+    /// </summary>
+    public int? AsInt()
+    {
+        var numToken = Tokens.FirstOrDefault(t => t.Type == TokenType.Number);
+        if (numToken != null && int.TryParse(numToken.Value, out var result))
+            return result;
+        return null;
+    }
+
+    /// <summary>
+    /// Gets the value of the first Number token in this capture, parsed as double.
+    /// Returns null if no number is found or parsing fails.
+    /// </summary>
+    public double? AsDouble()
+    {
+        var numToken = Tokens.FirstOrDefault(t => t.Type == TokenType.Number);
+        if (numToken != null && double.TryParse(numToken.Value, out var result))
+            return result;
+        return null;
+    }
+
+    /// <summary>
+    /// Gets the value interpreted as a boolean.
+    /// Returns true for "true", false for "false", null otherwise.
+    /// </summary>
+    public bool? AsBool()
+    {
+        var value = Value.Trim().ToLowerInvariant();
+        return value switch
+        {
+            "true" => true,
+            "false" => false,
+            _ => null
+        };
+    }
+
+    /// <summary>
+    /// Gets the first token of a specific type, or null if not found.
+    /// </summary>
+    public Token? FirstOfType(TokenType type) =>
+        Tokens.FirstOrDefault(t => t.Type == type);
+
+    /// <summary>
+    /// Gets all tokens of a specific type.
+    /// </summary>
+    public Token[] AllOfType(TokenType type) =>
+        Tokens.Where(t => t.Type == type).ToArray();
+
+    /// <summary>
+    /// Gets the value of the first token of a specific type.
+    /// Returns null if no token of that type is found.
+    /// </summary>
+    public string? ValueOfType(TokenType type) =>
+        FirstOfType(type)?.Value;
+
+    #endregion
 }

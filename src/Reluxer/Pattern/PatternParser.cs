@@ -151,6 +151,9 @@ public class PatternParser
         // \Bb - balanced braces: { ... }
         // \Bk - balanced brackets: [ ... ]
         // \Ba - balanced angle brackets: < ... >
+        // \Bc - balanced until comma (at depth 0)
+        // \Bs - balanced until semicolon (at depth 0)
+        // \Bj - balanced JSX content (between > and </tag)
     };
 
     public PatternParser(string pattern)
@@ -350,14 +353,35 @@ public class PatternParser
         {
             var captureIndex = _captureIndex++;
 
-            // Special handling: if the inner pattern is a BalancedMatchNode,
-            // set up capturing on the balanced node itself rather than wrapping it.
-            // This allows (\Bp) to capture the content between parens.
+            // Special handling: if the inner pattern is a balanced/JSX node,
+            // set up capturing on the node itself rather than wrapping it.
+            // This allows (\Bp), (\Bj), (\Je), etc. to capture content directly.
             if (innerPattern is BalancedMatchNode balanced)
             {
                 balanced.CaptureContent = true;
                 balanced.CaptureIndex = captureIndex;
                 return balanced;
+            }
+
+            if (innerPattern is BalancedUntilNode balancedUntil)
+            {
+                balancedUntil.CaptureContent = true;
+                balancedUntil.CaptureIndex = captureIndex;
+                return balancedUntil;
+            }
+
+            if (innerPattern is BalancedJsxContentNode balancedJsx)
+            {
+                balancedJsx.CaptureContent = true;
+                balancedJsx.CaptureIndex = captureIndex;
+                return balancedJsx;
+            }
+
+            if (innerPattern is JsxElementCompleteNode jsxComplete)
+            {
+                jsxComplete.CaptureContent = true;
+                jsxComplete.CaptureIndex = captureIndex;
+                return jsxComplete;
             }
 
             return new GroupNode(innerPattern, captureIndex, name);
@@ -453,7 +477,9 @@ public class PatternParser
                     's' => new BalancedUntilNode(
                         new LiteralNode(";"),
                         new LiteralNode("}")),
-                    _ => throw new PatternParseException($"Unknown balanced type: \\B{bracketType}. Use p, b, k, a, c, or s.")
+                    // Balanced JSX content - matches content between > and </tag
+                    'j' => new BalancedJsxContentNode(),
+                    _ => throw new PatternParseException($"Unknown balanced type: \\B{bracketType}. Use p, b, k, a, c, s, or j.")
                 };
             }
 

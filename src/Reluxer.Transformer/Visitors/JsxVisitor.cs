@@ -155,37 +155,15 @@ public class JsxVisitor : TokenVisitor
 
     private void ParseElementChildren(Token[] tokens, VElementModel element, string path)
     {
-        // Find content between > and </tag using functional approach
-        int contentStart = Array.FindIndex(tokens, t => t.Type == TokenType.JsxTagEnd);
-        if (contentStart < 0) return;
-        contentStart++; // Move past >
+        // Find > (JsxTagEnd) then use \Bj to capture content until closing tag
+        int tagEndIdx = Array.FindIndex(tokens, t => t.Type == TokenType.JsxTagEnd);
+        if (tagEndIdx < 0) return;
 
-        // Find closing tag at depth 0 using Aggregate
-        var afterStart = tokens.Skip(contentStart).Select((t, i) => (token: t, index: i));
-        var result = afterStart.Aggregate(
-            (depth: 1, endIdx: -1, done: false),
-            (acc, item) =>
-            {
-                if (acc.done) return acc;
-                var (t, i) = item;
-                int depth = acc.depth;
-
-                if (t.Type == TokenType.JsxTagOpen && !t.Value.StartsWith("</"))
-                    depth++;
-                else if (t.Type == TokenType.JsxTagClose || (t.Type == TokenType.JsxTagOpen && t.Value.StartsWith("</")))
-                {
-                    depth--;
-                    if (depth == 0) return (depth, i, true);
-                }
-                else if (t.Type == TokenType.JsxTagSelfClose)
-                    depth--;
-
-                return (depth, acc.endIdx, false);
-            });
-
-        if (result.endIdx >= 0)
+        // Use \Bj pattern starting right after the >
+        var contentMatcher = new PatternMatcher(@"(\Bj)");
+        if (contentMatcher.TryMatch(tokens, tagEndIdx + 1, out var match) && match?.Captures.Length > 0)
         {
-            var childTokens = tokens.Skip(contentStart).Take(result.endIdx).ToArray();
+            var childTokens = match.Captures[0].Tokens;
             ParseChildren(childTokens, element, path);
         }
     }
@@ -642,26 +620,35 @@ public class JsxVisitor : TokenVisitor
 
     private void ParseKeyValuePairs(Token[] tokens, Dictionary<string, string> target)
     {
-        // Pattern-based key:value parsing using \Bc (balanced until comma)
-        // \Bc matches content until comma at depth 0, respecting nested brackets
-        var keyValueMatcher = new PatternMatcher(@"\i \co (\Bc)");
+        // Pattern-based key:value parsing using named captures, \Bc, and skipWhitespace
+        // (?<key>\i) captures the identifier as "key"
+        // (\Bc) captures the value content until comma at depth 0
+        // skipWhitespace: true automatically skips whitespace between tokens
+        var keyValueMatcher = new PatternMatcher(@"(?<key>\i) \co (?<value>\Bc)", skipWhitespace: true);
 
         int i = 0;
         while (i < tokens.Length)
         {
-            // Skip whitespace and commas
+            // Skip commas (whitespace is handled by the matcher)
             while (i < tokens.Length && (tokens[i].Type == TokenType.Whitespace || tokens[i].Value == ","))
                 i++;
 
             if (i >= tokens.Length) break;
 
-            // Try to match identifier : value using \Bc
+            // Try to match identifier : value using named captures
             if (keyValueMatcher.TryMatch(tokens, i, out var match) && match != null)
             {
-                var key = match.MatchedTokens.FirstOrDefault(t => t.Type == TokenType.Identifier)?.Value;
-                if (key != null && match.Captures.Length > 0)
+                // Use type coercion: AsIdentifier() extracts the identifier value directly
+                var key = match.NamedCaptures.TryGetValue("key", out var keyCapture)
+                    ? keyCapture.AsIdentifier()
+                    : null;
+                var value = match.NamedCaptures.TryGetValue("value", out var valueCapture)
+                    ? valueCapture.AsString().Trim()
+                    : null;
+
+                if (key != null && value != null)
                 {
-                    target[key] = TokensToString(match.Captures[0].Tokens).Trim();
+                    target[key] = value;
                 }
                 i = match.EndIndex;
             }

@@ -11,6 +11,7 @@ public class PatternMatcher
 {
     private readonly PatternNode _pattern;
     private readonly string _patternString;
+    private readonly bool _skipWhitespace;
     private List<TokenCapture> _captures = new();
     private Dictionary<string, TokenCapture> _namedCaptures = new();
 
@@ -18,16 +19,26 @@ public class PatternMatcher
     private int _currentDepth;
     private Stack<(string TagName, int Depth)> _tagStack = new();
 
-    public PatternMatcher(string pattern)
+    /// <summary>
+    /// Creates a new pattern matcher with the given pattern string.
+    /// </summary>
+    /// <param name="pattern">The pattern to match.</param>
+    /// <param name="skipWhitespace">If true, automatically skips whitespace tokens during matching.</param>
+    public PatternMatcher(string pattern, bool skipWhitespace = false)
     {
         _patternString = pattern;
         _pattern = new PatternParser(pattern).Parse();
+        _skipWhitespace = skipWhitespace;
     }
 
-    public PatternMatcher(PatternNode pattern, string patternString)
+    /// <summary>
+    /// Creates a new pattern matcher with a pre-parsed pattern node.
+    /// </summary>
+    public PatternMatcher(PatternNode pattern, string patternString, bool skipWhitespace = false)
     {
         _pattern = pattern;
         _patternString = patternString;
+        _skipWhitespace = skipWhitespace;
     }
 
     /// <summary>
@@ -40,7 +51,7 @@ public class PatternMatcher
         _currentDepth = 0;
         _tagStack = new Stack<(string, int)>();
 
-        var ctx = new MatchContext(tokens, startIndex);
+        var ctx = new MatchContext(tokens, startIndex, _skipWhitespace);
         var success = Match(_pattern, ctx);
 
         if (success)
@@ -288,6 +299,7 @@ public class PatternMatcher
             JsxElementCompleteNode jsxComplete => MatchJsxElementComplete(jsxComplete, ctx),
             BalancedMatchNode balanced => MatchBalanced(balanced, ctx),
             BalancedUntilNode balancedUntil => MatchBalancedUntil(balancedUntil, ctx),
+            BalancedJsxContentNode balancedJsx => MatchBalancedJsxContent(balancedJsx, ctx),
             LookaheadNode lookahead => MatchLookahead(lookahead, ctx),
             LookbehindNode lookbehind => MatchLookbehind(lookbehind, ctx),
             _ => false
@@ -909,6 +921,76 @@ public class PatternMatcher
         return true;
     }
 
+    /// <summary>
+    /// Matches JSX content between > (tag end) and the matching closing tag.
+    /// Used by \Bj macro - assumes we're positioned right after the opening tag's >.
+    /// Tracks depth to find the matching closing tag.
+    /// </summary>
+    private bool MatchBalancedJsxContent(BalancedJsxContentNode balancedJsx, MatchContext ctx)
+    {
+        var checkpoint = ctx.Checkpoint();
+        var contentStartMatchCount = ctx.MatchedTokens.Count;
+
+        // Start at depth 1 (we're inside one open tag)
+        int depth = 1;
+
+        while (!ctx.IsAtEnd && depth > 0)
+        {
+            var current = ctx.Current;
+
+            // Opening tag (not closing tag) - increases depth
+            if (current.Type == TokenType.JsxTagOpen && !current.Value.StartsWith("</"))
+            {
+                depth++;
+                ctx.Advance();
+            }
+            // Self-closing tag /> - decreases depth
+            else if (current.Type == TokenType.JsxTagSelfClose)
+            {
+                depth--;
+                if (depth <= 0) break; // Don't consume - we're done
+                ctx.Advance();
+            }
+            // Closing tag </foo> - decreases depth
+            else if (current.Type == TokenType.JsxTagClose ||
+                    (current.Type == TokenType.JsxTagOpen && current.Value.StartsWith("</")))
+            {
+                depth--;
+                if (depth <= 0) break; // Don't consume the closing tag - it's not part of content
+                ctx.Advance();
+                // Also consume the trailing > if present
+                if (!ctx.IsAtEnd && ctx.Current.Type == TokenType.JsxTagEnd)
+                    ctx.Advance();
+            }
+            else
+            {
+                ctx.Advance();
+            }
+        }
+
+        // Must have matched at least some content or ended at depth 0
+        if (depth > 0)
+        {
+            ctx.Restore(checkpoint);
+            return false;
+        }
+
+        // Capture content if requested
+        if (balancedJsx.CaptureContent && balancedJsx.CaptureIndex >= 0)
+        {
+            var contentTokens = ctx.MatchedTokens
+                .Skip(contentStartMatchCount)
+                .ToArray();
+
+            while (_captures.Count <= balancedJsx.CaptureIndex)
+                _captures.Add(new TokenCapture(Array.Empty<Token>(), _captures.Count));
+
+            _captures[balancedJsx.CaptureIndex] = new TokenCapture(contentTokens, balancedJsx.CaptureIndex);
+        }
+
+        return true;
+    }
+
     private bool MatchBalanced(BalancedMatchNode balanced, MatchContext ctx)
     {
         var checkpoint = ctx.Checkpoint();
@@ -1311,13 +1393,18 @@ public class PatternMatcher
     private class MatchContext
     {
         private readonly IReadOnlyList<Token> _tokens;
+        private readonly bool _skipWhitespace;
         public int Index { get; private set; }
         public List<Token> MatchedTokens { get; } = new();
 
-        public MatchContext(IReadOnlyList<Token> tokens, int startIndex)
+        public MatchContext(IReadOnlyList<Token> tokens, int startIndex, bool skipWhitespace = false)
         {
             _tokens = tokens;
+            _skipWhitespace = skipWhitespace;
             Index = startIndex;
+            // Skip initial whitespace if flag is set
+            if (_skipWhitespace)
+                SkipWhitespace();
         }
 
         public bool IsAtEnd => Index >= _tokens.Count;
@@ -1328,6 +1415,20 @@ public class PatternMatcher
             if (!IsAtEnd)
             {
                 MatchedTokens.Add(_tokens[Index]);
+                Index++;
+                // Skip whitespace after advancing if flag is set
+                if (_skipWhitespace)
+                    SkipWhitespace();
+            }
+        }
+
+        /// <summary>
+        /// Skips whitespace tokens without adding them to MatchedTokens.
+        /// </summary>
+        private void SkipWhitespace()
+        {
+            while (Index < _tokens.Count && _tokens[Index].Type == TokenType.Whitespace)
+            {
                 Index++;
             }
         }
