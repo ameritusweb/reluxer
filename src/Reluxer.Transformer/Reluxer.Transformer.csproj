@@ -7,7 +7,7 @@
 
     <!-- NuGet Package Metadata -->
     <PackageId>Reluxer.Transformer</PackageId>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <Authors>ameritusweb</Authors>
     <Company>ameritusweb</Company>
     <Description>Transform TSX/JSX React components into C# using Reluxer's token-based pattern matching. Generates VNode trees, state management, and event handlers for server-side rendering frameworks.</Description>

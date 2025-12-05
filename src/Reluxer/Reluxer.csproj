@@ -7,7 +7,7 @@
 
     <!-- NuGet Package Metadata -->
     <PackageId>Reluxer</PackageId>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <Authors>ameritusweb</Authors>
     <Company>ameritusweb</Company>
     <Description>A token-based pattern matching and visitor framework for C#, inspired by Babel's AST traversal. Designed for transforming TSX/JSX to C# or other source-to-source transformations.</Description>
