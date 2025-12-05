@@ -40,7 +40,7 @@ public class StateVisitor : TokenVisitor
     }
 
     // Match: const [name, setName] = useState(value)
-    [TokenPattern(@"\k""const"" ""["" (\i) "","" (\i) ""]"" ""="" \i""useState"" ""(""")]
+    [TokenPattern(@"\k""const"" ""["" (\i) "","" (\i) ""]"" ""="" \i""useState"" ""(""", Name = "VisitUseState")]
     public void VisitUseState(TokenMatch match, string stateName, string setterName)
     {
         // Skip if already added (prevent duplicates)
@@ -74,7 +74,7 @@ public class StateVisitor : TokenVisitor
 
     // Match: const [name] = useMvcState<Type>('key') - immutable
     // Use \go and \gc for generic type angle brackets, \o for operator =
-    [TokenPattern(@"\k""const"" ""["" (\i) ""]"" \o""="" \i""useMvcState"" \go (\tn) \gc ""("" (\s)")]
+    [TokenPattern(@"\k""const"" ""["" (\i) ""]"" \o""="" \i""useMvcState"" \go (\tn) \gc ""("" (\s)", Name = "VisitUseMvcStateImmutable")]
     public void VisitUseMvcStateImmutable(TokenMatch match, string localName, string typeName, string viewModelKey)
     {
         var cleanKey = viewModelKey.Trim('\'', '"');
@@ -93,7 +93,7 @@ public class StateVisitor : TokenVisitor
     }
 
     // Match: const [name, setName] = useMvcState<Type>('key'...) - mutable
-    [TokenPattern(@"\k""const"" ""["" (\i) "","" (\i) ""]"" \o""="" \i""useMvcState"" \go (\tn) \gc ""("" (\s)")]
+    [TokenPattern(@"\k""const"" ""["" (\i) "","" (\i) ""]"" \o""="" \i""useMvcState"" \go (\tn) \gc ""("" (\s)", Name = "VisitUseMvcStateMutable")]
     public void VisitUseMvcStateMutable(TokenMatch match, string localName, string setterName, string typeName, string viewModelKey)
     {
         var cleanKey = viewModelKey.Trim('\'', '"');
@@ -112,7 +112,7 @@ public class StateVisitor : TokenVisitor
     }
 
     // Match: const viewModel = useMvcViewModel<Type>()
-    [TokenPattern(@"\k""const"" (\i) \o""="" \i""useMvcViewModel"" \go")]
+    [TokenPattern(@"\k""const"" (\i) \o""="" \i""useMvcViewModel"" \go", Name = "VisitUseMvcViewModel")]
     public void VisitUseMvcViewModel(TokenMatch match, string varName)
     {
         _component.HasMvcViewModel = true;
@@ -120,7 +120,7 @@ public class StateVisitor : TokenVisitor
 
     // Match: const name = (params) => { body } - helper function with parameters
     // Use \fa (Arrow type) since tokenizer outputs => as Arrow when params present
-    [TokenPattern(@"\k""const"" (\i) \o""="" (\Bp) \fa (\Bb)")]
+    [TokenPattern(@"\k""const"" (\i) \o""="" (\Bp) \fa (\Bb)", Name = "VisitHelperFunction")]
     public void VisitHelperFunction(TokenMatch match, string funcName, Token[] paramsTokens, Token[] bodyTokens)
     {
         AddHelperFunction(funcName, paramsTokens, bodyTokens);
@@ -128,7 +128,7 @@ public class StateVisitor : TokenVisitor
 
     // Match: const name = () => { body } - helper function without parameters
     // Use \fa (Arrow type) - tokenizer now consistently outputs => as Arrow
-    [TokenPattern(@"\k""const"" (\i) \o""="" \p""("" \p"")"" \fa (\Bb)", Priority = 90)]
+    [TokenPattern(@"\k""const"" (\i) \o""="" \p""("" \p"")"" \fa (\Bb)", Priority = 90, Name = "VisitHelperFunctionNoParams")]
     public void VisitHelperFunctionNoParams(TokenMatch match, string funcName, Token[] bodyTokens)
     {
         AddHelperFunction(funcName, Array.Empty<Token>(), bodyTokens);
@@ -138,6 +138,12 @@ public class StateVisitor : TokenVisitor
     {
         // Only capture helper functions (lowercase start)
         if (char.IsUpper(funcName[0])) return;
+
+        // Skip handlers (they're handled by HandlerVisitor)
+        if (funcName.StartsWith("handle", StringComparison.OrdinalIgnoreCase) ||
+            funcName.EndsWith("Handler", StringComparison.OrdinalIgnoreCase) ||
+            funcName.StartsWith("on", StringComparison.OrdinalIgnoreCase))
+            return;
 
         // Skip if already added (prevent duplicates)
         if (_component.HelperFunctions.Any(h => h.Name == funcName))
@@ -162,16 +168,21 @@ public class StateVisitor : TokenVisitor
     }
 
     // Match: state["Component.key"] for lifted state reads
-    [TokenPattern(@"\i""state"" ""["" \s")]
+    [TokenPattern(@"\i""state"" ""["" \s", Name = "VisitLiftedState")]
     public void VisitLiftedState(TokenMatch match)
     {
         // This creates a local variable that reads from state manager
         var stringToken = match.MatchedTokens.Last(t => t.Type == TokenType.String);
         var stateKey = stringToken.Value.Trim('"', '\'');
+        var varName = $"_{stateKey.Replace(".", "_")}_reader";
+
+        // Skip if already added (prevent duplicates)
+        if (_component.LocalVariables.Any(lv => lv.Name == varName))
+            return;
 
         _component.LocalVariables.Add(new LocalVariable
         {
-            Name = $"_{stateKey.Replace(".", "_")}_reader",
+            Name = varName,
             Expression = $"State[\"{stateKey}\"]",
             IsConst = true
         });

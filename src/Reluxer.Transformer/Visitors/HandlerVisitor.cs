@@ -34,12 +34,21 @@ public class HandlerVisitor : TokenVisitor
         }
     }
 
-    // Match: const handleName = () => { ... }
-    [TokenPattern(@"\k""const"" (\i) ""="" .+? ""=>""")]
-    public void VisitConstHandler(TokenMatch match, string name)
+    // Match: const handleName = (...) => { ... }
+    // Uses \Bp for balanced parentheses and \fa for function arrow
+    // Name ensures this only runs during explicit Traverse, not default Visit
+    [TokenPattern(@"\k""const"" (\i) ""="" (\Bp) \fa", Name = "VisitConstHandler")]
+    public void VisitConstHandler(TokenMatch match, string name, Token[] paramsTokens)
     {
         // Check if this looks like a handler (starts with "handle" or ends with "Handler")
         if (!IsHandlerName(name)) return;
+
+        // Skip if already added (prevent duplicates)
+        if (_component.EventHandlers.Any(h => h.GeneratedName == name))
+        {
+            SkipFunctionBody();
+            return;
+        }
 
         var handler = new Models.EventHandler
         {
@@ -60,7 +69,7 @@ public class HandlerVisitor : TokenVisitor
     }
 
     // Match: const name = expression (not a function)
-    [TokenPattern(@"\k""const"" (\i) ""=""", Priority = -10)]
+    [TokenPattern(@"\k""const"" (\i) ""=""", Priority = -10, Name = "VisitConstVariable")]
     public void VisitConstVariable(TokenMatch match, string name)
     {
         // Skip if it's a handler (already processed above)
@@ -86,7 +95,7 @@ public class HandlerVisitor : TokenVisitor
     }
 
     // Match: let name = expression
-    [TokenPattern(@"\k""let"" (\i) ""=""")]
+    [TokenPattern(@"\k""let"" (\i) ""=""", Name = "VisitLetVariable")]
     public void VisitLetVariable(TokenMatch match, string name)
     {
         var exprTokens = ExtractExpressionUntilSemicolon(0);
@@ -107,14 +116,22 @@ public class HandlerVisitor : TokenVisitor
     /// </summary>
     public string RegisterInlineHandler(Token[] handlerTokens)
     {
+        var originalExpr = TokensToString(handlerTokens);
+        var body = ExtractArrowBody(handlerTokens);
+
+        // Check if we already have an identical handler (prevent duplicates)
+        var existing = _component.EventHandlers.FirstOrDefault(h => h.Body == body);
+        if (existing != null)
+            return existing.GeneratedName;
+
         var handlerName = $"Handle{_handlerCounter++}";
 
         var handler = new Models.EventHandler
         {
             GeneratedName = handlerName,
             IsArrowFunction = true,
-            OriginalExpression = TokensToString(handlerTokens),
-            Body = ExtractArrowBody(handlerTokens)
+            OriginalExpression = originalExpr,
+            Body = body
         };
 
         _component.EventHandlers.Add(handler);
