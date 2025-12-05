@@ -514,15 +514,21 @@ public class JsxVisitor : TokenVisitor
         string itemName = identifiers.Count > 0 ? identifiers[0].Value : "item";
         string? indexName = identifiers.Count > 1 ? identifiers[1].Value : null;
 
-        // Set loop context for handlers inside this loop
-        var previousLoopItem = _currentLoopItemName;
-        _currentLoopItemName = itemName;
+        // Store loop context in VisitorContext for nested handlers to access
+        var previousLoopItem = Context.Get<string>("LoopItemName");
+        Context.Set("LoopItemName", itemName);
+        if (indexName != null)
+            Context.Set("LoopIndexName", indexName);
 
-        // Parse template from body
+        // Parse template from body (nested handlers will read Context)
         var template = ParseBranch(bodyTokens, $"{path}.item");
 
-        // Restore previous loop context
-        _currentLoopItemName = previousLoopItem;
+        // Restore previous loop context (supports nested loops)
+        if (previousLoopItem != null)
+            Context.Set("LoopItemName", previousLoopItem);
+        else
+            Context.Remove("LoopItemName");
+        Context.Remove("LoopIndexName");
 
         return new VListModel
         {
@@ -687,9 +693,13 @@ public class JsxVisitor : TokenVisitor
     /// <summary>
     /// Parses an event handler expression using patterns.
     /// Returns (name, isInline, loopBinding) where loopBinding is the item name if inside a loop.
+    /// Reads loop context from VisitorContext (set by enclosing map pattern).
     /// </summary>
     private (string name, bool isInline, string? loopBinding) ParseEventHandler(Token[] tokens)
     {
+        // Get loop context from VisitorContext (declaratively set by ParseMapCallback)
+        var loopItemName = Context.Get<string>("LoopItemName");
+
         // Pattern 1: Direct reference - single identifier
         var directMatcher = new PatternMatcher(@"\i");
         var nonWhitespace = tokens.Where(t => t.Type != TokenType.Whitespace).ToArray();
@@ -712,10 +722,10 @@ public class JsxVisitor : TokenVisitor
                 IsArrowFunction = true,
                 OriginalExpression = TokensToString(tokens),
                 Body = TokensToString(bodyTokens),
-                LoopItemName = _currentLoopItemName
+                LoopItemName = loopItemName
             });
 
-            return (handlerName, true, _currentLoopItemName);
+            return (handlerName, true, loopItemName);
         }
 
         // Fallback: treat whole thing as inline handler
@@ -726,10 +736,10 @@ public class JsxVisitor : TokenVisitor
             IsArrowFunction = false,
             OriginalExpression = TokensToString(tokens),
             Body = TokensToString(tokens),
-            LoopItemName = _currentLoopItemName
+            LoopItemName = loopItemName
         });
 
-        return (fallbackName, true, _currentLoopItemName);
+        return (fallbackName, true, loopItemName);
     }
 
     #endregion

@@ -167,24 +167,20 @@ public class StateVisitor : TokenVisitor
         _component.HelperFunctions.Add(helper);
     }
 
-    // Match: state["Component.key"] for lifted state reads
-    [TokenPattern(@"\i""state"" ""["" \s", Name = "VisitLiftedState")]
-    public void VisitLiftedState(TokenMatch match)
+    // Match: const varName = state["Component.key"] for lifted state reads
+    [TokenPattern(@"\k""const"" (\i) \o""="" \i""state"" ""["" (\s)", Name = "VisitLiftedState")]
+    public void VisitLiftedState(TokenMatch match, string varName, string stateKeyString)
     {
-        // This creates a local variable that reads from state manager
-        var stringToken = match.MatchedTokens.Last(t => t.Type == TokenType.String);
-        var stateKey = stringToken.Value.Trim('"', '\'');
-        var varName = $"_{stateKey.Replace(".", "_")}_reader";
+        var stateKey = stateKeyString.Trim('"', '\'');
 
         // Skip if already added (prevent duplicates)
-        if (_component.LocalVariables.Any(lv => lv.Name == varName))
+        if (_component.LiftedStateReads.Any(lsr => lsr.LocalName == varName))
             return;
 
-        _component.LocalVariables.Add(new LocalVariable
+        _component.LiftedStateReads.Add(new LiftedStateRead
         {
-            Name = varName,
-            Expression = $"State[\"{stateKey}\"]",
-            IsConst = true
+            LocalName = varName,
+            StateKey = stateKey
         });
     }
 

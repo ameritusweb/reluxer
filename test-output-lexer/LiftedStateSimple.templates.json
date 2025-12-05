@@ -2,7 +2,7 @@
   {
     "component": "Counter",
     "version": "1.0",
-    "generatedAt": 1764964173052,
+    "generatedAt": 1764967173484,
     "templates": {
       "1.@class": {
         "template": "counter",
@@ -134,7 +134,7 @@
   {
     "component": "App",
     "version": "1.0",
-    "generatedAt": 1764964173053,
+    "generatedAt": 1764967173484,
     "templates": {
       "1.@id": {
         "template": "app-root",

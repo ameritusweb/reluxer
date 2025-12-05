@@ -106,6 +106,18 @@ public class CSharpGenerator
             WriteLine();
         }
 
+        // Client-computed properties (lifted state reads from child components)
+        if (component.LiftedStateReads.Count > 0)
+        {
+            WriteLine("// Client-computed properties (lifted state from child components)");
+            foreach (var liftedState in component.LiftedStateReads)
+            {
+                WriteLine($"[ClientComputed(\"{liftedState.LocalName}\")]");
+                WriteLine($"private dynamic {liftedState.LocalName} => GetClientState<dynamic>(\"{liftedState.LocalName}\", default);");
+                WriteLine();
+            }
+        }
+
         // Render method
         WriteLine("protected override VNode Render()");
         WriteLine("{");
@@ -789,9 +801,14 @@ public class CSharpGenerator
             }
         }
 
+        // First, convert global setState("Component.key", value) to SetState("Component.key", value)
+        // This is used for lifted state writes
+        result = result.Replace("setState(", "SetState(");
+
         // Simple pattern: setXxx(value) -> SetState(nameof(xxx), value)
+        // Exclude "SetState" (already converted above) by requiring lowercase start after "set"
         var setterPattern = new System.Text.RegularExpressions.Regex(
-            @"set(\w+)\(([^)]+)\)");
+            @"(?<!Set)set([A-Z]\w*)\(([^)]+)\)");
 
         result = setterPattern.Replace(result, match =>
         {
@@ -801,9 +818,6 @@ public class CSharpGenerator
             value = System.Text.RegularExpressions.Regex.Replace(value, @"(\w+)\s*([+\-*/])\s*(\d+)", "$1 $2 $3");
             return $"SetState(nameof({fieldName}), {value})";
         });
-
-        // Convert setState("Component.key", value)
-        result = result.Replace("setState(", "SetState(");
 
         // Ensure statements end with semicolons
         if (!string.IsNullOrEmpty(result) && !result.EndsWith(";") && !result.EndsWith("}"))

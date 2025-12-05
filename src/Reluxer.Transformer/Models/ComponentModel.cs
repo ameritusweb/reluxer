@@ -15,6 +15,7 @@ public class ComponentModel
     public List<EventHandler> EventHandlers { get; } = new();
     public List<LocalVariable> LocalVariables { get; } = new();
     public List<HelperFunction> HelperFunctions { get; } = new();
+    public List<LiftedStateRead> LiftedStateReads { get; } = new();
     public bool HasMvcViewModel { get; set; }
     public HookConfigModel? HookConfig { get; set; }
     public TimelineModel? TimelineConfig { get; set; }
@@ -150,6 +151,17 @@ public class LocalVariable
     public string Name { get; set; } = "";
     public string Expression { get; set; } = "";
     public bool IsConst { get; set; }
+}
+
+/// <summary>
+/// Represents a lifted state read from a child component.
+/// Example: const counterValue = state["Counter.count"]
+/// Generates: [ClientComputed("counterValue")] private dynamic counterValue => GetClientState...
+/// </summary>
+public class LiftedStateRead
+{
+    public string LocalName { get; set; } = "";      // e.g., "counterValue"
+    public string StateKey { get; set; } = "";        // e.g., "Counter.count"
 }
 
 /// <summary>
