@@ -135,6 +135,11 @@ public class EventHandler
     public string OriginalExpression { get; set; } = "";
     public string Body { get; set; } = "";
     public bool IsArrowFunction { get; set; }
+
+    /// <summary>
+    /// If handler is inside a loop, this is the loop item variable name (e.g., "todo")
+    /// </summary>
+    public string? LoopItemName { get; set; }
 }
 
 /// <summary>

@@ -12,32 +12,36 @@ namespace MinimactTest.Components;
 [Component]
 public partial class TodoList : MinimactComponent
 {
+    [Prop]
+    public dynamic todos { get; set; }
+
+    [Prop]
+    public dynamic deleteTodo { get; set; }
+
+    [Prop]
+    public dynamic addTodo { get; set; }
+
     protected override VNode Render()
     {
         StateManager.SyncMembersToState(this);
 
-        return MinimactHelpers.createElement("div", null, new VElement("h1", "1.1", new Dictionary<string, string>(), "My Todos"), new VElement("ul", "1.2", new Dictionary<string, string>(), new VNode[]
+        return MinimactHelpers.createElement("div", null, new VElement("h1", "1.1", new Dictionary<string, string>(), "My Todos"), MinimactHelpers.createElement("ul", null, ((IEnumerable<dynamic>)todos).Select(todo => new VElement("li", "1.2.1.item", new Dictionary<string, string> { ["key"] = $"{(todo.id)}" }, new VNode[]
         {
-                        MinimactHelpers.createFragment(todos.Select((todo) =>
-                new VElement("li", "1.2.1.item", new Dictionary<string, string> { ["key"] = $"{(todo.id)}" }, new VNode[]
-                {
-                    new VElement("input", "1.2.1.item.1", new Dictionary<string, string> { ["type"] = "checkbox", ["checked"] = $"{(todo.completed)}" }),
-                    new VElement("span", "1.2.1.item.2", new Dictionary<string, string> { ["class"] = $"{(todo.completed?"completed":"")}" }, new VNode[]
-                    {
-                        new VText($"{(todo.text)}", "1.2.1.item.2.1")
-                    }),
-                    new VElement("button", "1.2.1.item.3", new Dictionary<string, string> { ["onclick"] = "Handle0" }, "Delete")
-                })
-            ).ToArray())
-        }), new VElement("button", "1.3", new Dictionary<string, string> { ["onclick"] = "addTodo" }, "Add Todo"));
+            new VElement("input", "1.2.1.item.1", new Dictionary<string, string> { ["type"] = "checkbox", ["checked"] = $"{(todo.completed)}" }),
+            new VElement("span", "1.2.1.item.2", new Dictionary<string, string> { ["class"] = $"{(todo.completed?"completed":"")}" }, new VNode[]
+            {
+                new VText($"{(todo.text)}", "1.2.1.item.2.1")
+            }),
+            new VElement("button", "1.2.1.item.3", new Dictionary<string, string> { ["onclick"] = "Handle0:{todo}" }, "Delete")
+        })).ToArray()), new VElement("button", "1.3", new Dictionary<string, string> { ["onclick"] = "addTodo" }, "Add Todo"));
     }
 
-    public void Handle0()
+    public void Handle0(dynamic todo)
     {
         deleteTodo(todo.id);
     }
 
-    public void Handle1()
+    public void Handle1(dynamic todo)
     {
         deleteTodo(todo.id);
     }

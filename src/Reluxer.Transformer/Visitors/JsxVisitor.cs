@@ -514,8 +514,15 @@ public class JsxVisitor : TokenVisitor
         string itemName = identifiers.Count > 0 ? identifiers[0].Value : "item";
         string? indexName = identifiers.Count > 1 ? identifiers[1].Value : null;
 
+        // Set loop context for handlers inside this loop
+        var previousLoopItem = _currentLoopItemName;
+        _currentLoopItemName = itemName;
+
         // Parse template from body
         var template = ParseBranch(bodyTokens, $"{path}.item");
+
+        // Restore previous loop context
+        _currentLoopItemName = previousLoopItem;
 
         return new VListModel
         {
@@ -556,12 +563,16 @@ public class JsxVisitor : TokenVisitor
             if (IsEventAttribute(attrName))
             {
                 var handlerInfo = ParseEventHandler(exprContent);
+                // Include loop binding in handler ref if inside a loop: "Handle0:{todo}"
+                var handlerRef = handlerInfo.loopBinding != null
+                    ? $"{handlerInfo.name}:{{{handlerInfo.loopBinding}}}"
+                    : handlerInfo.name;
                 element.Attributes[NormalizeEventName(attrName)] = new AttributeValue
                 {
-                    RawValue = handlerInfo.name,
+                    RawValue = handlerRef,
                     IsDynamic = false,
                     IsEventHandler = true,
-                    EventHandlerRef = handlerInfo.name
+                    EventHandlerRef = handlerRef
                 };
             }
             else if (attrName == "style")
@@ -675,15 +686,16 @@ public class JsxVisitor : TokenVisitor
 
     /// <summary>
     /// Parses an event handler expression using patterns.
+    /// Returns (name, isInline, loopBinding) where loopBinding is the item name if inside a loop.
     /// </summary>
-    private (string name, bool isInline) ParseEventHandler(Token[] tokens)
+    private (string name, bool isInline, string? loopBinding) ParseEventHandler(Token[] tokens)
     {
         // Pattern 1: Direct reference - single identifier
         var directMatcher = new PatternMatcher(@"\i");
         var nonWhitespace = tokens.Where(t => t.Type != TokenType.Whitespace).ToArray();
         if (nonWhitespace.Length == 1 && nonWhitespace[0].Type == TokenType.Identifier)
         {
-            return (nonWhitespace[0].Value, false);
+            return (nonWhitespace[0].Value, false, null);
         }
 
         // Pattern 2: Arrow function - (params) => body or params => body
@@ -699,10 +711,11 @@ public class JsxVisitor : TokenVisitor
                 GeneratedName = handlerName,
                 IsArrowFunction = true,
                 OriginalExpression = TokensToString(tokens),
-                Body = TokensToString(bodyTokens)
+                Body = TokensToString(bodyTokens),
+                LoopItemName = _currentLoopItemName
             });
 
-            return (handlerName, true);
+            return (handlerName, true, _currentLoopItemName);
         }
 
         // Fallback: treat whole thing as inline handler
@@ -712,10 +725,11 @@ public class JsxVisitor : TokenVisitor
             GeneratedName = fallbackName,
             IsArrowFunction = false,
             OriginalExpression = TokensToString(tokens),
-            Body = TokensToString(tokens)
+            Body = TokensToString(tokens),
+            LoopItemName = _currentLoopItemName
         });
 
-        return (fallbackName, true);
+        return (fallbackName, true, _currentLoopItemName);
     }
 
     #endregion

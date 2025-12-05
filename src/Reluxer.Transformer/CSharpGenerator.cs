@@ -62,6 +62,24 @@ public class CSharpGenerator
         WriteLine("{");
         _indentLevel++;
 
+        // Props (component parameters)
+        foreach (var prop in component.Props)
+        {
+            WriteLine("[Prop]");
+            // Use dynamic for JS props (they could be functions, arrays, objects, etc.)
+            var csharpType = "dynamic";
+            if (prop.DefaultValue != null)
+            {
+                var defaultVal = ConvertInitialValue(prop.DefaultValue, prop.Type);
+                WriteLine($"public {csharpType} {prop.Name} {{ get; set; }} = {defaultVal};");
+            }
+            else
+            {
+                WriteLine($"public {csharpType} {prop.Name} {{ get; set; }}");
+            }
+            WriteLine();
+        }
+
         // State fields (regular useState)
         foreach (var state in component.StateFields)
         {
@@ -362,6 +380,9 @@ public class CSharpGenerator
         // Generate attributes dictionary
         var attrs = GenerateAttributesDictionary(element.Attributes);
 
+        // Check if any children are lists - if so, use createElement which handles varargs
+        var hasListChild = element.Children.Any(c => c is VListModel);
+
         if (element.Children.Count == 0 && !HasTextContent(element))
         {
             // Self-closing or empty element
@@ -373,9 +394,11 @@ public class CSharpGenerator
             var escapedText = EscapeString(textChild.Text);
             Write($"new VElement(\"{tag}\", \"{path}\", {attrs}, \"{escapedText}\")");
         }
-        else if (isRoot)
+        else if (isRoot || hasListChild)
         {
-            // Root element uses MinimactHelpers.createElement for varargs children
+            // Use MinimactHelpers.createElement for:
+            // - Root elements (varargs children)
+            // - Elements containing list children (Select().ToArray() results)
             Write($"MinimactHelpers.createElement(\"{tag}\", null, ");
 
             for (int i = 0; i < element.Children.Count; i++)
@@ -489,9 +512,9 @@ public class CSharpGenerator
     {
         var arrayExpr = ConvertExpression(list.ArrayExpression);
 
-        WriteLine($"MinimactHelpers.createFragment({arrayExpr}.Select(({list.ItemName}{(list.IndexName != null ? $", {list.IndexName}" : "")}) =>");
-        _indentLevel++;
-        WriteIndent();
+        // Generate: ((IEnumerable<dynamic>)arrayExpr).Select(item => ...).ToArray()
+        // Cast to IEnumerable<dynamic> to avoid dynamic dispatch issues with lambda
+        Write($"((IEnumerable<dynamic>){arrayExpr}).Select({list.ItemName} => ");
 
         if (list.ItemTemplate != null)
         {
@@ -502,15 +525,14 @@ public class CSharpGenerator
             Write($"new VNull(\"{list.HexPath}\")");
         }
 
-        _indentLevel--;
-        WriteLine();
-        WriteIndent();
-        Write(").ToArray())");
+        Write(").ToArray()");
     }
 
     private void GenerateEventHandler(Models.EventHandler handler)
     {
-        WriteLine($"public void {handler.GeneratedName}()");
+        // Add loop item parameter if handler is inside a loop
+        var paramList = handler.LoopItemName != null ? $"dynamic {handler.LoopItemName}" : "";
+        WriteLine($"public void {handler.GeneratedName}({paramList})");
         WriteLine("{");
         _indentLevel++;
 

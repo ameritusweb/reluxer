@@ -47,6 +47,22 @@ public class TsxTransformer
         componentVisitor.Visit(tokens, source, sharedContext);
         var components = componentVisitor.Components;
 
+        // Phase 1.5: Extract props from destructured parameters
+        foreach (var component in components)
+        {
+            var paramsKey = $"ComponentParams:{component.Name}";
+            var paramTokens = sharedContext.Get<Token[]>(paramsKey);
+            if (paramTokens != null && paramTokens.Length > 0)
+            {
+                var propsVisitor = new PropsVisitor();
+                propsVisitor.ExtractPropsFromParams(paramTokens, component.Name);
+                foreach (var prop in propsVisitor.Props)
+                {
+                    component.Props.Add(prop);
+                }
+            }
+        }
+
         // Phase 2: Extract state (useState hooks)
         foreach (var component in components)
         {

@@ -201,6 +201,18 @@ public class ComponentVisitor : TokenVisitor
             return;
         }
 
+        // Extract parameter tokens (between ( and ) exclusive) for props detection
+        var paramCount = parenEnd - parenStart - 1;
+        if (paramCount > 0)
+        {
+            var paramTokens = new Token[paramCount];
+            for (int i = 0; i < paramCount; i++)
+            {
+                paramTokens[i] = _tokens[parenStart + 1 + i];
+            }
+            Context.Set($"ComponentParams:{component.Name}", paramTokens);
+        }
+
         // Now find the function body { } starting AFTER the closing )
         int braceStart = -1;
         for (int i = parenEnd + 1; i < _tokens.Count; i++)
