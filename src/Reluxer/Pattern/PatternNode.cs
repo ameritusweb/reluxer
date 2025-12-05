@@ -80,21 +80,29 @@ public class QuantifierNode : PatternNode
     public int Max { get; set; } // -1 means unlimited
     public bool Greedy { get; set; } = true;
 
-    public QuantifierNode(PatternNode child, int min, int max, bool greedy = true)
+    /// <summary>
+    /// When true, captures inside this quantifier will collect each repetition
+    /// into the Repetitions list of TokenCapture.
+    /// Enabled by default for quantifiers that can match multiple times (+ and *).
+    /// </summary>
+    public bool CollectRepetitions { get; set; } = false;
+
+    public QuantifierNode(PatternNode child, int min, int max, bool greedy = true, bool collectRepetitions = false)
     {
         Child = child;
         Min = min;
         Max = max;
         Greedy = greedy;
+        CollectRepetitions = collectRepetitions;
     }
 
     // Factory methods
-    public static QuantifierNode ZeroOrMore(PatternNode child, bool greedy = true) => new(child, 0, -1, greedy);
-    public static QuantifierNode OneOrMore(PatternNode child, bool greedy = true) => new(child, 1, -1, greedy);
+    public static QuantifierNode ZeroOrMore(PatternNode child, bool greedy = true, bool collectRepetitions = false) => new(child, 0, -1, greedy, collectRepetitions);
+    public static QuantifierNode OneOrMore(PatternNode child, bool greedy = true, bool collectRepetitions = false) => new(child, 1, -1, greedy, collectRepetitions);
     public static QuantifierNode ZeroOrOne(PatternNode child, bool greedy = true) => new(child, 0, 1, greedy);
     public static QuantifierNode Exactly(PatternNode child, int n) => new(child, n, n);
-    public static QuantifierNode AtLeast(PatternNode child, int n, bool greedy = true) => new(child, n, -1, greedy);
-    public static QuantifierNode Between(PatternNode child, int min, int max, bool greedy = true) => new(child, min, max, greedy);
+    public static QuantifierNode AtLeast(PatternNode child, int n, bool greedy = true, bool collectRepetitions = false) => new(child, n, -1, greedy, collectRepetitions);
+    public static QuantifierNode Between(PatternNode child, int min, int max, bool greedy = true, bool collectRepetitions = false) => new(child, min, max, greedy, collectRepetitions);
 }
 
 /// <summary>

@@ -709,18 +709,21 @@ public class PatternParser
 
         PatternNode? result = null;
 
+        // Check if the node contains capturing groups - if so, enable repetition collection
+        bool hasCapturingGroups = ContainsCapturingGroup(node);
+
         switch (c)
         {
             case '*':
                 Advance();
                 if (Peek() == '?') { Advance(); greedy = false; }
-                result = QuantifierNode.ZeroOrMore(node, greedy);
+                result = QuantifierNode.ZeroOrMore(node, greedy, collectRepetitions: hasCapturingGroups);
                 break;
 
             case '+':
                 Advance();
                 if (Peek() == '?') { Advance(); greedy = false; }
-                result = QuantifierNode.OneOrMore(node, greedy);
+                result = QuantifierNode.OneOrMore(node, greedy, collectRepetitions: hasCapturingGroups);
                 break;
 
             case '?':
@@ -738,6 +741,21 @@ public class PatternParser
         }
 
         return result ?? node;
+    }
+
+    /// <summary>
+    /// Checks if a pattern node contains any capturing groups.
+    /// </summary>
+    private static bool ContainsCapturingGroup(PatternNode node)
+    {
+        return node switch
+        {
+            GroupNode group => group.Capturing || ContainsCapturingGroup(group.Child),
+            SequenceNode seq => seq.Children.Any(ContainsCapturingGroup),
+            AlternationNode alt => alt.Alternatives.Any(ContainsCapturingGroup),
+            QuantifierNode quant => ContainsCapturingGroup(quant.Child),
+            _ => false
+        };
     }
 
     private PatternNode ParseBraceQuantifier(PatternNode node)
@@ -775,7 +793,11 @@ public class PatternParser
             greedy = false;
         }
 
-        return new QuantifierNode(node, min, max, greedy);
+        // Enable repetition collection for brace quantifiers that can repeat and contain captures
+        bool canRepeat = max != 1;
+        bool hasCapturingGroups = ContainsCapturingGroup(node);
+
+        return new QuantifierNode(node, min, max, greedy, collectRepetitions: canRepeat && hasCapturingGroups);
     }
 
     private string ReadIdentifier()

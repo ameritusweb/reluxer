@@ -144,7 +144,9 @@ public class TokenMatch
 public class TokenCapture
 {
     /// <summary>
-    /// The tokens captured by this group
+    /// The tokens captured by this group.
+    /// When the group is inside a quantifier with CollectRepetitions=true,
+    /// this contains all tokens from all repetitions combined.
     /// </summary>
     public Token[] Tokens { get; }
 
@@ -158,6 +160,13 @@ public class TokenCapture
     /// </summary>
     public int Index { get; }
 
+    /// <summary>
+    /// When the capture group is inside a repeating quantifier (+, *, {n,m}),
+    /// this contains each individual repetition's captured tokens.
+    /// For non-repeating captures, this will be empty or contain a single entry.
+    /// </summary>
+    public List<Token[]> Repetitions { get; } = new();
+
     public TokenCapture(Token[] tokens, int index, string? name = null)
     {
         Tokens = tokens;
@@ -166,9 +175,30 @@ public class TokenCapture
     }
 
     /// <summary>
+    /// Creates a TokenCapture with repetition data.
+    /// </summary>
+    public TokenCapture(Token[] tokens, int index, string? name, List<Token[]> repetitions)
+    {
+        Tokens = tokens;
+        Index = index;
+        Name = name;
+        Repetitions = repetitions;
+    }
+
+    /// <summary>
     /// Gets the first token in this capture, or null if empty
     /// </summary>
     public Token? First => Tokens.FirstOrDefault();
+
+    /// <summary>
+    /// Returns true if this capture has multiple repetitions.
+    /// </summary>
+    public bool HasRepetitions => Repetitions.Count > 1;
+
+    /// <summary>
+    /// Gets the number of repetitions captured.
+    /// </summary>
+    public int RepetitionCount => Repetitions.Count;
 
     /// <summary>
     /// Gets the combined value of all tokens in this capture

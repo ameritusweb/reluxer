@@ -15,6 +15,12 @@ public class PatternMatcher
     private List<TokenCapture> _captures = new();
     private Dictionary<string, TokenCapture> _namedCaptures = new();
 
+    // Repetition tracking for captures inside quantifiers with CollectRepetitions=true
+    private Dictionary<int, List<Token[]>> _captureRepetitions = new();
+
+    // Set of group indices currently being collected as repetitions
+    private HashSet<int> _collectingGroups = new();
+
     // Depth tracking for balanced matching
     private int _currentDepth;
     private Stack<(string TagName, int Depth)> _tagStack = new();
@@ -48,6 +54,8 @@ public class PatternMatcher
     {
         _captures = new List<TokenCapture>();
         _namedCaptures = new Dictionary<string, TokenCapture>();
+        _captureRepetitions = new Dictionary<int, List<Token[]>>();
+        _collectingGroups = new HashSet<int>();
         _currentDepth = 0;
         _tagStack = new Stack<(string, int)>();
 
@@ -431,32 +439,67 @@ public class PatternMatcher
         // or when we don't need backtracking
         int matchCount = 0;
 
-        if (quant.Greedy)
+        // If collecting repetitions, enable collection mode for groups inside this quantifier
+        var groupIndices = quant.CollectRepetitions ? FindGroupIndices(quant.Child).ToList() : null;
+        var groupNames = quant.CollectRepetitions ? FindGroupNames(quant.Child) : null;
+
+        if (quant.CollectRepetitions && groupIndices != null)
         {
-            // Greedy: match as many as possible
-            while (quant.Max < 0 || matchCount < quant.Max)
+            foreach (var idx in groupIndices)
             {
-                var checkpoint = ctx.Checkpoint();
-                if (!Match(quant.Child, ctx) || ctx.Index == checkpoint.Index)
-                {
-                    ctx.Restore(checkpoint);
-                    break;
-                }
-                matchCount++;
-            }
-        }
-        else
-        {
-            // Non-greedy: match minimum (backtracking handled by MatchNonGreedyWithContinuation)
-            while (matchCount < quant.Min)
-            {
-                if (!Match(quant.Child, ctx))
-                    return false;
-                matchCount++;
+                _collectingGroups.Add(idx);
+                _captureRepetitions[idx] = new List<Token[]>();
             }
         }
 
-        return matchCount >= quant.Min;
+        try
+        {
+            if (quant.Greedy)
+            {
+                // Greedy: match as many as possible
+                while (quant.Max < 0 || matchCount < quant.Max)
+                {
+                    var checkpoint = ctx.Checkpoint();
+                    if (!Match(quant.Child, ctx) || ctx.Index == checkpoint.Index)
+                    {
+                        ctx.Restore(checkpoint);
+                        break;
+                    }
+                    matchCount++;
+                }
+            }
+            else
+            {
+                // Non-greedy: match minimum (backtracking handled by MatchNonGreedyWithContinuation)
+                while (matchCount < quant.Min)
+                {
+                    if (!Match(quant.Child, ctx))
+                        return false;
+                    matchCount++;
+                }
+            }
+
+            var success = matchCount >= quant.Min;
+
+            // Finalize repetitions into TokenCapture objects
+            if (success && quant.CollectRepetitions && groupIndices != null && groupNames != null)
+            {
+                FinalizeRepetitions(groupIndices, groupNames);
+            }
+
+            return success;
+        }
+        finally
+        {
+            // Remove groups from collecting mode
+            if (quant.CollectRepetitions && groupIndices != null)
+            {
+                foreach (var idx in groupIndices)
+                {
+                    _collectingGroups.Remove(idx);
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -593,6 +636,97 @@ public class PatternMatcher
         }
     }
 
+    /// <summary>
+    /// Finds all group indices within a pattern node (recursive).
+    /// </summary>
+    private static IEnumerable<int> FindGroupIndices(PatternNode node)
+    {
+        switch (node)
+        {
+            case GroupNode group:
+                if (group.Capturing)
+                    yield return group.Index;
+                foreach (var idx in FindGroupIndices(group.Child))
+                    yield return idx;
+                break;
+            case SequenceNode seq:
+                foreach (var child in seq.Children)
+                    foreach (var idx in FindGroupIndices(child))
+                        yield return idx;
+                break;
+            case AlternationNode alt:
+                foreach (var child in alt.Alternatives)
+                    foreach (var idx in FindGroupIndices(child))
+                        yield return idx;
+                break;
+            case QuantifierNode quant:
+                foreach (var idx in FindGroupIndices(quant.Child))
+                    yield return idx;
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Finalizes repetition data into TokenCapture objects after a collecting quantifier completes.
+    /// </summary>
+    private void FinalizeRepetitions(IEnumerable<int> groupIndices, Dictionary<int, string?> groupNames)
+    {
+        foreach (var groupIndex in groupIndices)
+        {
+            if (_captureRepetitions.TryGetValue(groupIndex, out var repetitions) && repetitions.Count > 0)
+            {
+                // Combine all tokens from all repetitions
+                var allTokens = repetitions.SelectMany(r => r).ToArray();
+                var name = groupNames.GetValueOrDefault(groupIndex);
+                var capture = new TokenCapture(allTokens, groupIndex, name, repetitions);
+
+                // Ensure captures list is large enough
+                while (_captures.Count <= groupIndex)
+                    _captures.Add(new TokenCapture(Array.Empty<Token>(), _captures.Count));
+
+                _captures[groupIndex] = capture;
+
+                if (name != null)
+                {
+                    _namedCaptures[name] = capture;
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Finds all group names within a pattern node.
+    /// </summary>
+    private static Dictionary<int, string?> FindGroupNames(PatternNode node)
+    {
+        var result = new Dictionary<int, string?>();
+        CollectGroupNames(node, result);
+        return result;
+    }
+
+    private static void CollectGroupNames(PatternNode node, Dictionary<int, string?> result)
+    {
+        switch (node)
+        {
+            case GroupNode group:
+                if (group.Capturing)
+                    result[group.Index] = group.Name;
+                CollectGroupNames(group.Child, result);
+                break;
+            case SequenceNode seq:
+                foreach (var child in seq.Children)
+                    CollectGroupNames(child, result);
+                break;
+            case AlternationNode alt:
+                foreach (var child in alt.Alternatives)
+                    CollectGroupNames(child, result);
+                break;
+            case QuantifierNode quant:
+                CollectGroupNames(quant.Child, result);
+                break;
+        }
+    }
+
     private bool MatchGroup(GroupNode group, MatchContext ctx)
     {
         var startIndex = ctx.Index;
@@ -604,17 +738,30 @@ public class PatternMatcher
         if (group.Capturing)
         {
             var capturedTokens = ctx.MatchedTokens.Skip(startMatchCount).ToArray();
-            var capture = new TokenCapture(capturedTokens, group.Index, group.Name);
 
-            // Ensure captures list is large enough
-            while (_captures.Count <= group.Index)
-                _captures.Add(new TokenCapture(Array.Empty<Token>(), _captures.Count));
-
-            _captures[group.Index] = capture;
-
-            if (group.Name != null)
+            // Check if this group is being collected as repetitions
+            if (_collectingGroups.Contains(group.Index))
             {
-                _namedCaptures[group.Name] = capture;
+                // Add to repetitions list instead of overwriting
+                if (!_captureRepetitions.ContainsKey(group.Index))
+                    _captureRepetitions[group.Index] = new List<Token[]>();
+                _captureRepetitions[group.Index].Add(capturedTokens);
+            }
+            else
+            {
+                // Normal capture - overwrite previous value
+                var capture = new TokenCapture(capturedTokens, group.Index, group.Name);
+
+                // Ensure captures list is large enough
+                while (_captures.Count <= group.Index)
+                    _captures.Add(new TokenCapture(Array.Empty<Token>(), _captures.Count));
+
+                _captures[group.Index] = capture;
+
+                if (group.Name != null)
+                {
+                    _namedCaptures[group.Name] = capture;
+                }
             }
         }
 
