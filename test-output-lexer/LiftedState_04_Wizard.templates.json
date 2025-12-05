@@ -1,0 +1,1454 @@
+[
+  {
+    "component": "Step1",
+    "version": "1.0",
+    "generatedAt": 1764963771821,
+    "templates": {
+      "1.@class": {
+        "template": "{0}",
+        "bindings": [
+          "`wizard-step ${complete ? 'complete' : ''}`"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.@key": {
+        "template": "1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.@key": {
+        "template": "1.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.1": {
+        "template": "Step 1: Basic Information",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.2.@id": {
+        "template": "step1-name",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@type": {
+        "template": "text",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@placeholder": {
+        "template": "Name",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@value": {
+        "template": "{0}",
+        "bindings": [
+          "data.name||''"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.2.@key": {
+        "template": "1.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@id": {
+        "template": "step1-email",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@type": {
+        "template": "email",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@placeholder": {
+        "template": "Email",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@value": {
+        "template": "{0}",
+        "bindings": [
+          "data.email||''"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.3.@key": {
+        "template": "1.3",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.4.1.@class": {
+        "template": "check",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "4",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.4.1.1": {
+        "template": "✓ Complete",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "4",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      }
+    },
+    "conditionalElements": {
+      "1.4": {
+        "type": "conditional-element",
+        "conditionExpression": "complete",
+        "conditionBindings": [
+          "state_0"
+        ],
+        "evaluable": true,
+        "operator": "&&",
+        "branches": {
+          "true": {
+            "type": "element",
+            "tag": "span",
+            "hexPath": "1.4.1",
+            "attributes": {
+              "key": "1.4.1",
+              "className": "check"
+            },
+            "children": [
+              {
+                "type": "text",
+                "hexPath": "1.4.1.1",
+                "value": "✓ Complete"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "component": "Step2",
+    "version": "1.0",
+    "generatedAt": 1764963771822,
+    "templates": {
+      "1.@class": {
+        "template": "{0}",
+        "bindings": [
+          "`wizard-step ${complete ? 'complete' : ''}`"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.@key": {
+        "template": "1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.@key": {
+        "template": "1.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.1": {
+        "template": "Step 2: Address",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.2.@id": {
+        "template": "step2-address",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@type": {
+        "template": "text",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@placeholder": {
+        "template": "Address",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@value": {
+        "template": "{0}",
+        "bindings": [
+          "data.address||''"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.2.@key": {
+        "template": "1.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@id": {
+        "template": "step2-city",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@type": {
+        "template": "text",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@placeholder": {
+        "template": "City",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@value": {
+        "template": "{0}",
+        "bindings": [
+          "data.city||''"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.3.@key": {
+        "template": "1.3",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.4.1.@class": {
+        "template": "check",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "4",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.4.1.1": {
+        "template": "✓ Complete",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "4",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      }
+    },
+    "conditionalElements": {
+      "1.4": {
+        "type": "conditional-element",
+        "conditionExpression": "complete",
+        "conditionBindings": [
+          "state_0"
+        ],
+        "evaluable": true,
+        "operator": "&&",
+        "branches": {
+          "true": {
+            "type": "element",
+            "tag": "span",
+            "hexPath": "1.4.1",
+            "attributes": {
+              "key": "1.4.1",
+              "className": "check"
+            },
+            "children": [
+              {
+                "type": "text",
+                "hexPath": "1.4.1.1",
+                "value": "✓ Complete"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "component": "Step3",
+    "version": "1.0",
+    "generatedAt": 1764963771822,
+    "templates": {
+      "1.@class": {
+        "template": "{0}",
+        "bindings": [
+          "`wizard-step ${complete ? 'complete' : ''}`"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.@key": {
+        "template": "1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.@key": {
+        "template": "1.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.1": {
+        "template": "Step 3: Payment",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.2.@id": {
+        "template": "step3-card",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@type": {
+        "template": "text",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@placeholder": {
+        "template": "Card Number",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@value": {
+        "template": "{0}",
+        "bindings": [
+          "data.cardNumber||''"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.2.@key": {
+        "template": "1.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@id": {
+        "template": "step3-cvv",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@type": {
+        "template": "text",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@placeholder": {
+        "template": "CVV",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@value": {
+        "template": "{0}",
+        "bindings": [
+          "data.cvv||''"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.3.@key": {
+        "template": "1.3",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.4.1.@class": {
+        "template": "check",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "4",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.4.1.1": {
+        "template": "✓ Complete",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "4",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      }
+    },
+    "conditionalElements": {
+      "1.4": {
+        "type": "conditional-element",
+        "conditionExpression": "complete",
+        "conditionBindings": [
+          "state_0"
+        ],
+        "evaluable": true,
+        "operator": "&&",
+        "branches": {
+          "true": {
+            "type": "element",
+            "tag": "span",
+            "hexPath": "1.4.1",
+            "attributes": {
+              "key": "1.4.1",
+              "className": "check"
+            },
+            "children": [
+              {
+                "type": "text",
+                "hexPath": "1.4.1.1",
+                "value": "✓ Complete"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "component": "WizardPage",
+    "version": "1.0",
+    "generatedAt": 1764963771822,
+    "templates": {
+      "1.@id": {
+        "template": "wizard-root",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.@key": {
+        "template": "1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.@key": {
+        "template": "1.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.1": {
+        "template": "Setup Wizard",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.2.@class": {
+        "template": "progress-bar",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@key": {
+        "template": "1.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.1.@id": {
+        "template": "progress-1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.1.@class": {
+        "template": "{0}",
+        "bindings": [
+          "`step ${step1Complete ? 'complete' : currentStep === 1 ? 'active' : ''}`"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "2",
+          "1"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.2.1.@key": {
+        "template": "1.2.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.1.1": {
+        "template": "1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.2.2.@id": {
+        "template": "progress-2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.2.@class": {
+        "template": "{0}",
+        "bindings": [
+          "`step ${step2Complete ? 'complete' : currentStep === 2 ? 'active' : ''}`"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "2",
+          "2"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.2.2.@key": {
+        "template": "1.2.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.2.1": {
+        "template": "2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "2",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.2.3.@id": {
+        "template": "progress-3",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.3.@class": {
+        "template": "{0}",
+        "bindings": [
+          "`step ${step3Complete ? 'complete' : currentStep === 3 ? 'active' : ''}`"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "2",
+          "3"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.2.3.@key": {
+        "template": "1.2.3",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.3.1": {
+        "template": "3",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "3",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.6.1.@id": {
+        "template": "completion-message",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.1.@class": {
+        "template": "completion",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.1.1.1": {
+        "template": "All Steps Complete!",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "1",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.6.1.2.1": {
+        "template": "You have completed all wizard steps.",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "1",
+          "2",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.6.1.3.@id": {
+        "template": "complete-btn",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.1.3.@type": {
+        "template": "button",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.1.3.1": {
+        "template": "Finish",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "1",
+          "3",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.7.@class": {
+        "template": "wizard-nav",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "7"
+        ],
+        "type": "attribute-static"
+      },
+      "1.7.@key": {
+        "template": "1.7",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "7"
+        ],
+        "type": "attribute-static"
+      },
+      "1.7.1.@id": {
+        "template": "back-btn",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "7",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.7.1.@type": {
+        "template": "button",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "7",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.7.1.@disabled": {
+        "template": "{0}",
+        "bindings": [
+          "currentStep===1"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "7",
+          "1"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.7.1.@key": {
+        "template": "1.7.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "7",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.7.1.1": {
+        "template": "← Back",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "7",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.7.2.@id": {
+        "template": "next-btn",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "7",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.7.2.@type": {
+        "template": "button",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "7",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.7.2.@disabled": {
+        "template": "{0}",
+        "bindings": [
+          "currentStep===4"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "7",
+          "2"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.7.2.@key": {
+        "template": "1.7.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "7",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.7.2.1": {
+        "template": "Next →",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "7",
+          "2",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.8.@id": {
+        "template": "status",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8"
+        ],
+        "type": "attribute-static"
+      },
+      "1.8.@class": {
+        "template": "status",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8"
+        ],
+        "type": "attribute-static"
+      },
+      "1.8.@key": {
+        "template": "1.8",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8"
+        ],
+        "type": "attribute-static"
+      },
+      "1.8.1.@key": {
+        "template": "1.8.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.8.1.1": {
+        "template": "Current Step:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.8.1.2.@id": {
+        "template": "current-step",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8",
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.8.1.2.@key": {
+        "template": "1.8.1.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8",
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.8.1.2.1": {
+        "template": "{0}",
+        "bindings": [
+          "currentStep"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "8",
+          "1",
+          "2"
+        ],
+        "type": "dynamic"
+      },
+      "1.8.2.@key": {
+        "template": "1.8.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.8.2.1": {
+        "template": "Step 1 Complete:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8",
+          "2",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.8.2.2.@id": {
+        "template": "step1-status",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8",
+          "2",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.8.2.2.@key": {
+        "template": "1.8.2.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8",
+          "2",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.8.2.2.1": {
+        "template": "{0}",
+        "bindings": [
+          "step1Complete?'Yes':'No'"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "8",
+          "2",
+          "2"
+        ],
+        "type": "dynamic"
+      },
+      "1.8.3.@key": {
+        "template": "1.8.3",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.8.3.1": {
+        "template": "Step 2 Complete:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8",
+          "3",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.8.3.2.@id": {
+        "template": "step2-status",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8",
+          "3",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.8.3.2.@key": {
+        "template": "1.8.3.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8",
+          "3",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.8.3.2.1": {
+        "template": "{0}",
+        "bindings": [
+          "step2Complete?'Yes':'No'"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "8",
+          "3",
+          "2"
+        ],
+        "type": "dynamic"
+      },
+      "1.8.4.@key": {
+        "template": "1.8.4",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8",
+          "4"
+        ],
+        "type": "attribute-static"
+      },
+      "1.8.4.1": {
+        "template": "Step 3 Complete:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8",
+          "4",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.8.4.2.@id": {
+        "template": "step3-status",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8",
+          "4",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.8.4.2.@key": {
+        "template": "1.8.4.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8",
+          "4",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.8.4.2.1": {
+        "template": "{0}",
+        "bindings": [
+          "step3Complete?'Yes':'No'"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "8",
+          "4",
+          "2"
+        ],
+        "type": "dynamic"
+      }
+    },
+    "conditionalElements": {
+      "1.3": {
+        "type": "conditional-element",
+        "conditionExpression": "currentStep>=1",
+        "conditionBindings": [
+          "state_0"
+        ],
+        "evaluable": true,
+        "operator": "&&",
+        "branches": {}
+      },
+      "1.4": {
+        "type": "conditional-element",
+        "conditionExpression": "currentStep>=2",
+        "conditionBindings": [
+          "state_0"
+        ],
+        "evaluable": true,
+        "operator": "&&",
+        "branches": {}
+      },
+      "1.5": {
+        "type": "conditional-element",
+        "conditionExpression": "currentStep>=3",
+        "conditionBindings": [
+          "state_0"
+        ],
+        "evaluable": true,
+        "operator": "&&",
+        "branches": {}
+      },
+      "1.6": {
+        "type": "conditional-element",
+        "conditionExpression": "currentStep===4",
+        "conditionBindings": [
+          "state_0"
+        ],
+        "evaluable": true,
+        "operator": "&&",
+        "branches": {
+          "true": {
+            "type": "element",
+            "tag": "div",
+            "hexPath": "1.6.1",
+            "attributes": {
+              "key": "1.6.1",
+              "id": "completion-message",
+              "className": "completion"
+            },
+            "children": [
+              {
+                "type": "element",
+                "tag": "h2",
+                "hexPath": "1.6.1.1",
+                "attributes": {
+                  "key": "1.6.1.1"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "hexPath": "1.6.1.1.1",
+                    "value": "All Steps Complete!"
+                  }
+                ]
+              },
+              {
+                "type": "element",
+                "tag": "p",
+                "hexPath": "1.6.1.2",
+                "attributes": {
+                  "key": "1.6.1.2"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "hexPath": "1.6.1.2.1",
+                    "value": "You have completed all wizard steps."
+                  }
+                ]
+              },
+              {
+                "type": "element",
+                "tag": "button",
+                "hexPath": "1.6.1.3",
+                "attributes": {
+                  "key": "1.6.1.3",
+                  "id": "complete-btn",
+                  "type": "button"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "hexPath": "1.6.1.3.1",
+                    "value": "Finish"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+]

@@ -1,9 +1,11 @@
-using Minimact.AspNetCore.Core;
-using Minimact.AspNetCore.Extensions;
-using MinimactHelpers = Minimact.AspNetCore.Core.Minimact;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Minimact.AspNetCore.Core;
+using Minimact.AspNetCore.Rendering;
+using Minimact.AspNetCore.Extensions;
+using MinimactHelpers = Minimact.AspNetCore.Core.Minimact;
 
 namespace MinimactTest.Components;
 
@@ -14,7 +16,16 @@ public partial class Card : MinimactComponent
     {
         StateManager.SyncMembersToState(this);
 
-        return new VNull("1");
+        return MinimactHelpers.createElement("div", null, new VElement("div", "1.1", new Dictionary<string, string> { ["class"] = "card-header" }, new VNode[]
+        {
+            new VElement("h2", "1.1.1", new Dictionary<string, string>(), new VNode[]
+            {
+                new VText($"{(title)}", "1.1.1.1")
+            })
+        }), new VElement("div", "1.2", new Dictionary<string, string> { ["class"] = "card-body" }, new VNode[]
+        {
+            new VText($"{(children)}", "1.2.1")
+        }));
     }
 }
 

@@ -1,0 +1,1659 @@
+[
+  {
+    "component": "RecipientList",
+    "version": "1.0",
+    "generatedAt": 1764963791329,
+    "templates": {
+      "1.@class": {
+        "template": "recipient-list",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.@key": {
+        "template": "1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.@key": {
+        "template": "1.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.1": {
+        "template": "To:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.2.@id": {
+        "template": "recipients",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@key": {
+        "template": "1.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.1.item.@key": {
+        "template": "{0}",
+        "bindings": [
+          "idx"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "2",
+          "1",
+          "item"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.2.1.item.@class": {
+        "template": "recipient-chip",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "1",
+          "item"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.1.item.@data-recipient-index": {
+        "template": "{0}",
+        "bindings": [
+          "idx"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "2",
+          "1",
+          "item"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.2.1.item.1": {
+        "template": "{0}",
+        "bindings": [
+          "email"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "2",
+          "1",
+          "item"
+        ],
+        "type": "dynamic"
+      },
+      "1.2.1.item.2.@type": {
+        "template": "button",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "1",
+          "item",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.1.item.2.@class": {
+        "template": "remove-recipient-btn",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "1",
+          "item",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.1.item.2.@key": {
+        "template": "1.2.1.item.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "1",
+          "item",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.1.item.2.1": {
+        "template": "×",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "1",
+          "item",
+          "2",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.3.@id": {
+        "template": "add-recipient-btn",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@type": {
+        "template": "button",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@key": {
+        "template": "1.3",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.1": {
+        "template": "Add Recipient",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3",
+          "1"
+        ],
+        "type": "static"
+      }
+    }
+  },
+  {
+    "component": "SubjectLine",
+    "version": "1.0",
+    "generatedAt": 1764963791329,
+    "templates": {
+      "1.@class": {
+        "template": "subject-line",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.@key": {
+        "template": "1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.@for": {
+        "template": "subject-input",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.@key": {
+        "template": "1.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.1": {
+        "template": "Subject:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.2.@id": {
+        "template": "subject-input",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@type": {
+        "template": "text",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@value": {
+        "template": "{0}",
+        "bindings": [
+          "text"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.2.@placeholder": {
+        "template": "Enter subject...",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@key": {
+        "template": "1.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      }
+    }
+  },
+  {
+    "component": "MessageBody",
+    "version": "1.0",
+    "generatedAt": 1764963791330,
+    "templates": {
+      "1.@class": {
+        "template": "message-body",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.@key": {
+        "template": "1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.@for": {
+        "template": "body-textarea",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.@key": {
+        "template": "1.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.1": {
+        "template": "Message:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.2.@id": {
+        "template": "body-textarea",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@value": {
+        "template": "{0}",
+        "bindings": [
+          "content"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.2.@placeholder": {
+        "template": "Enter message...",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@rows": {
+        "template": "{0}",
+        "bindings": [
+          "10"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.2.@key": {
+        "template": "1.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@key": {
+        "template": "1.3",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.1": {
+        "template": "Characters:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.3.2.@id": {
+        "template": "body-char-count",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.2.@key": {
+        "template": "1.3.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.2.1": {
+        "template": "{0}",
+        "bindings": [
+          "content.length"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "3",
+          "2"
+        ],
+        "type": "dynamic"
+      }
+    }
+  },
+  {
+    "component": "AttachmentPanel",
+    "version": "1.0",
+    "generatedAt": 1764963791330,
+    "templates": {
+      "1.@class": {
+        "template": "attachment-panel",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.@key": {
+        "template": "1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.@key": {
+        "template": "1.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.1": {
+        "template": "Attachments (",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.1.2.@id": {
+        "template": "attachment-size",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.2.@key": {
+        "template": "1.1.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.2.1": {
+        "template": "{0}",
+        "bindings": [
+          "formatBytes(totalSize)"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "1",
+          "2"
+        ],
+        "type": "dynamic"
+      },
+      "1.1.3": {
+        "template": "/",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1",
+          "3"
+        ],
+        "type": "static"
+      },
+      "1.1.4": {
+        "template": "{0}",
+        "bindings": [
+          "formatBytes(maxSize)"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "1"
+        ],
+        "type": "dynamic"
+      },
+      "1.1.5": {
+        "template": ")",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1",
+          "5"
+        ],
+        "type": "static"
+      },
+      "1.2.@id": {
+        "template": "add-file-btn",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@type": {
+        "template": "button",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@key": {
+        "template": "1.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.1": {
+        "template": "Add File (Simulated)",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.3.@id": {
+        "template": "file-list",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@key": {
+        "template": "1.3",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.1.item.@key": {
+        "template": "{0}",
+        "bindings": [
+          "idx"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "3",
+          "1",
+          "item"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.3.1.item.@data-file-index": {
+        "template": "{0}",
+        "bindings": [
+          "idx"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "3",
+          "1",
+          "item"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.3.1.item.1": {
+        "template": "{0}",
+        "bindings": [
+          "file.name"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "3",
+          "1",
+          "item"
+        ],
+        "type": "dynamic"
+      },
+      "1.3.1.item.2": {
+        "template": "(",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3",
+          "1",
+          "item",
+          "2"
+        ],
+        "type": "static"
+      },
+      "1.3.1.item.3": {
+        "template": "{0}",
+        "bindings": [
+          "formatBytes(file.size)"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "3",
+          "1",
+          "item"
+        ],
+        "type": "dynamic"
+      },
+      "1.3.1.item.4": {
+        "template": ")",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3",
+          "1",
+          "item",
+          "4"
+        ],
+        "type": "static"
+      },
+      "1.3.1.item.5.@type": {
+        "template": "button",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3",
+          "1",
+          "item",
+          "5"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.1.item.5.@class": {
+        "template": "remove-file-btn",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3",
+          "1",
+          "item",
+          "5"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.1.item.5.@key": {
+        "template": "1.3.1.item.5",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3",
+          "1",
+          "item",
+          "5"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.1.item.5.1": {
+        "template": "Remove",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3",
+          "1",
+          "item",
+          "5",
+          "1"
+        ],
+        "type": "static"
+      }
+    }
+  },
+  {
+    "component": "EmailComposer",
+    "version": "1.0",
+    "generatedAt": 1764963791331,
+    "templates": {
+      "1.@id": {
+        "template": "email-composer-root",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.@class": {
+        "template": "email-composer",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.@key": {
+        "template": "1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.@key": {
+        "template": "1.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.1": {
+        "template": "New Message",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.2.1.@id": {
+        "template": "error-panel",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.1.@class": {
+        "template": "error-panel",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.1.1.1": {
+        "template": "Cannot send:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "1",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.2.1.2.1.item.1": {
+        "template": "{0}",
+        "bindings": [
+          "error"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "2",
+          "1",
+          "2",
+          "1",
+          "item"
+        ],
+        "type": "dynamic"
+      },
+      "1.3.1.@id": {
+        "template": "warning-panel",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.1.@class": {
+        "template": "warning-panel",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.8.@class": {
+        "template": "send-controls",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8"
+        ],
+        "type": "attribute-static"
+      },
+      "1.8.@key": {
+        "template": "1.8",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8"
+        ],
+        "type": "attribute-static"
+      },
+      "1.8.1.@id": {
+        "template": "send-btn",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.8.1.@class": {
+        "template": "btn-send",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.8.1.@type": {
+        "template": "button",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.8.1.@disabled": {
+        "template": "{0}",
+        "bindings": [
+          "!canSend"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "8",
+          "1"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.8.1.@key": {
+        "template": "1.8.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.8.1.1": {
+        "template": "Send Email",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.8.2.@id": {
+        "template": "reset-btn",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.8.2.@type": {
+        "template": "button",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.8.2.@key": {
+        "template": "1.8.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.8.2.1": {
+        "template": "Reset All",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8",
+          "2",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.8.3.@id": {
+        "template": "recipient-count",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.8.3.@class": {
+        "template": "recipient-count",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.8.3.@key": {
+        "template": "1.8.3",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.8.3.1": {
+        "template": "To:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8",
+          "3",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.8.3.2": {
+        "template": "{0}",
+        "bindings": [
+          "recipients.length"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "8",
+          "3"
+        ],
+        "type": "dynamic"
+      },
+      "1.8.3.3": {
+        "template": "recipient",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "8",
+          "3",
+          "3"
+        ],
+        "type": "static"
+      },
+      "1.8.3.4": {
+        "template": "{0}",
+        "bindings": [
+          "recipients.length!==1?'s':''"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "8",
+          "3"
+        ],
+        "type": "dynamic"
+      },
+      "1.9.@id": {
+        "template": "status",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "9"
+        ],
+        "type": "attribute-static"
+      },
+      "1.9.@class": {
+        "template": "status",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "9"
+        ],
+        "type": "attribute-static"
+      },
+      "1.9.@key": {
+        "template": "1.9",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "9"
+        ],
+        "type": "attribute-static"
+      },
+      "1.9.1.@key": {
+        "template": "1.9.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "9",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.9.1.1": {
+        "template": "Recipients:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "9",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.9.1.2.@id": {
+        "template": "status-recipients",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "9",
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.9.1.2.@key": {
+        "template": "1.9.1.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "9",
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.9.1.2.1": {
+        "template": "{0}",
+        "bindings": [
+          "recipients.length"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "9",
+          "1",
+          "2"
+        ],
+        "type": "dynamic"
+      },
+      "1.9.2.@key": {
+        "template": "1.9.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "9",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.9.2.1": {
+        "template": "Subject Length:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "9",
+          "2",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.9.2.2.@id": {
+        "template": "status-subject",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "9",
+          "2",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.9.2.2.@key": {
+        "template": "1.9.2.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "9",
+          "2",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.9.2.2.1": {
+        "template": "{0}",
+        "bindings": [
+          "subject.length"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "9",
+          "2",
+          "2"
+        ],
+        "type": "dynamic"
+      },
+      "1.9.3.@key": {
+        "template": "1.9.3",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "9",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.9.3.1": {
+        "template": "Body Length:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "9",
+          "3",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.9.3.2.@id": {
+        "template": "status-body",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "9",
+          "3",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.9.3.2.@key": {
+        "template": "1.9.3.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "9",
+          "3",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.9.3.2.1": {
+        "template": "{0}",
+        "bindings": [
+          "body.length"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "9",
+          "3",
+          "2"
+        ],
+        "type": "dynamic"
+      },
+      "1.9.4.@key": {
+        "template": "1.9.4",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "9",
+          "4"
+        ],
+        "type": "attribute-static"
+      },
+      "1.9.4.1": {
+        "template": "Attachments:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "9",
+          "4",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.9.4.2.@id": {
+        "template": "status-attachments",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "9",
+          "4",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.9.4.2.@key": {
+        "template": "1.9.4.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "9",
+          "4",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.9.4.2.1": {
+        "template": "{0}",
+        "bindings": [
+          "attachments.length"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "9",
+          "4",
+          "2"
+        ],
+        "type": "dynamic"
+      },
+      "1.9.5.@key": {
+        "template": "1.9.5",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "9",
+          "5"
+        ],
+        "type": "attribute-static"
+      },
+      "1.9.5.1": {
+        "template": "Total Size:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "9",
+          "5",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.9.5.2.@id": {
+        "template": "status-size",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "9",
+          "5",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.9.5.2.@key": {
+        "template": "1.9.5.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "9",
+          "5",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.9.5.2.1": {
+        "template": "{0}",
+        "bindings": [
+          "formatBytes(totalSize)"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "9",
+          "5",
+          "2"
+        ],
+        "type": "dynamic"
+      },
+      "1.9.6.@key": {
+        "template": "1.9.6",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "9",
+          "6"
+        ],
+        "type": "attribute-static"
+      },
+      "1.9.6.1": {
+        "template": "Can Send:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "9",
+          "6",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.9.6.2.@id": {
+        "template": "status-can-send",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "9",
+          "6",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.9.6.2.@key": {
+        "template": "1.9.6.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "9",
+          "6",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.9.6.2.1": {
+        "template": "{0}",
+        "bindings": [
+          "canSend?'Yes':'No'"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "9",
+          "6",
+          "2"
+        ],
+        "type": "dynamic"
+      }
+    },
+    "conditionalElements": {
+      "1.2": {
+        "type": "conditional-element",
+        "conditionExpression": "errors.length>0",
+        "conditionBindings": [
+          "state_0",
+          "state_1"
+        ],
+        "evaluable": true,
+        "operator": "&&",
+        "branches": {
+          "true": {
+            "type": "element",
+            "tag": "div",
+            "hexPath": "1.2.1",
+            "attributes": {
+              "key": "1.2.1",
+              "id": "error-panel",
+              "className": "error-panel"
+            },
+            "children": [
+              {
+                "type": "element",
+                "tag": "strong",
+                "hexPath": "1.2.1.1",
+                "attributes": {
+                  "key": "1.2.1.1"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "hexPath": "1.2.1.1.1",
+                    "value": "Cannot send:"
+                  }
+                ]
+              },
+              {
+                "type": "element",
+                "tag": "ul",
+                "hexPath": "1.2.1.2",
+                "attributes": {
+                  "key": "1.2.1.2"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "1.3": {
+        "type": "conditional-element",
+        "conditionExpression": "totalSize>MAX_ATTACHMENT_SIZE*0.8",
+        "conditionBindings": [
+          "state_0",
+          "state_1"
+        ],
+        "evaluable": true,
+        "operator": "&&",
+        "branches": {
+          "true": {
+            "type": "element",
+            "tag": "div",
+            "hexPath": "1.3.1",
+            "attributes": {
+              "key": "1.3.1",
+              "id": "warning-panel",
+              "className": "warning-panel"
+            }
+          }
+        }
+      }
+    }
+  }
+]

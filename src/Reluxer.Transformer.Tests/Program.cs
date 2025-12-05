@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Reluxer.Lexer;
 using Reluxer.Transformer;
 using Reluxer.Transformer.Visitors;
@@ -161,12 +162,80 @@ class Program
                 Log($"    - Templates: {component.Templates.Count}");
             }
 
+            // Compile the C# code
+            Log($"\n{new string('━', 80)}", Cyan);
+            Log($"\nCompiling C# code...", Yellow);
+
+            var csFilename = Path.ChangeExtension(filename, ".cs");
+            var compileSuccess = CompileCSharp(TestOutputDir, csFilename);
+            if (compileSuccess)
+            {
+                Log($"\n✓ C# compilation successful!", Green);
+            }
+            else
+            {
+                Log($"\n✗ C# compilation failed!", Red);
+            }
+
             Log($"\n✓ Done!", Green);
         }
         catch (Exception ex)
         {
             Log($"\n✗ Failed: {ex.Message}", Red);
             Log(ex.StackTrace ?? "", Red);
+        }
+    }
+
+    static bool CompileCSharp(string projectDir, string csFilename)
+    {
+        try
+        {
+            var psi = new ProcessStartInfo
+            {
+                FileName = "dotnet",
+                Arguments = $"build -p:TestFile={csFilename}",
+                WorkingDirectory = projectDir,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+
+            using var process = Process.Start(psi);
+            if (process == null) return false;
+
+            var stdout = process.StandardOutput.ReadToEnd();
+            var stderr = process.StandardError.ReadToEnd();
+            process.WaitForExit();
+
+            if (process.ExitCode != 0)
+            {
+                // Show error output
+                if (!string.IsNullOrEmpty(stdout))
+                {
+                    // Filter to show only error lines
+                    var lines = stdout.Split('\n');
+                    foreach (var line in lines)
+                    {
+                        if (line.Contains("error CS") || line.Contains("Build FAILED"))
+                        {
+                            Log(line.Trim(), Red);
+                        }
+                    }
+                }
+                if (!string.IsNullOrEmpty(stderr))
+                {
+                    Log(stderr, Red);
+                }
+                return false;
+            }
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Log($"Compilation error: {ex.Message}", Red);
+            return false;
         }
     }
 }

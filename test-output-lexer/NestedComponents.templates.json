@@ -2,13 +2,112 @@
   {
     "component": "Card",
     "version": "1.0",
-    "generatedAt": 1764910211760,
-    "templates": {}
+    "generatedAt": 1764963719368,
+    "templates": {
+      "1.@class": {
+        "template": "card",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.@key": {
+        "template": "1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.@class": {
+        "template": "card-header",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.@key": {
+        "template": "1.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.1.@key": {
+        "template": "1.1.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.1.1": {
+        "template": "{0}",
+        "bindings": [
+          "title"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "1",
+          "1"
+        ],
+        "type": "dynamic"
+      },
+      "1.2.@class": {
+        "template": "card-body",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@key": {
+        "template": "1.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.1": {
+        "template": "{0}",
+        "bindings": [
+          "children"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "dynamic"
+      }
+    }
   },
   {
     "component": "Dashboard",
     "version": "1.0",
-    "generatedAt": 1764910211761,
+    "generatedAt": 1764963719368,
     "templates": {
       "1.@class": {
         "template": "dashboard",

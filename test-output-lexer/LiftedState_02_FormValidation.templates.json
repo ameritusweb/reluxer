@@ -1,0 +1,1303 @@
+[
+  {
+    "component": "PersonalInfoForm",
+    "version": "1.0",
+    "generatedAt": 1764963758868,
+    "templates": {
+      "1.@class": {
+        "template": "{0}",
+        "bindings": [
+          "`form-section ${isValid ? 'valid' : 'invalid'}`"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.@key": {
+        "template": "1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.@key": {
+        "template": "1.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.1": {
+        "template": "Personal Information",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.2.@id": {
+        "template": "name-input",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@type": {
+        "template": "text",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@placeholder": {
+        "template": "Name",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@value": {
+        "template": "{0}",
+        "bindings": [
+          "data.name||''"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.2.@key": {
+        "template": "1.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@id": {
+        "template": "email-input",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@type": {
+        "template": "email",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@placeholder": {
+        "template": "Email",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@value": {
+        "template": "{0}",
+        "bindings": [
+          "data.email||''"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.3.@key": {
+        "template": "1.3",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.4.@id": {
+        "template": "phone-input",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "4"
+        ],
+        "type": "attribute-static"
+      },
+      "1.4.@type": {
+        "template": "tel",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "4"
+        ],
+        "type": "attribute-static"
+      },
+      "1.4.@placeholder": {
+        "template": "Phone",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "4"
+        ],
+        "type": "attribute-static"
+      },
+      "1.4.@value": {
+        "template": "{0}",
+        "bindings": [
+          "data.phone||''"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "4"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.4.@key": {
+        "template": "1.4",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "4"
+        ],
+        "type": "attribute-static"
+      },
+      "1.5.1.@class": {
+        "template": "check-mark",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "5",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.5.1.1": {
+        "template": "✓",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "5",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      }
+    },
+    "conditionalElements": {
+      "1.5": {
+        "type": "conditional-element",
+        "conditionExpression": "isValid",
+        "conditionBindings": [
+          "state_0"
+        ],
+        "evaluable": true,
+        "operator": "&&",
+        "branches": {
+          "true": {
+            "type": "element",
+            "tag": "span",
+            "hexPath": "1.5.1",
+            "attributes": {
+              "key": "1.5.1",
+              "className": "check-mark"
+            },
+            "children": [
+              {
+                "type": "text",
+                "hexPath": "1.5.1.1",
+                "value": "✓"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "component": "AddressForm",
+    "version": "1.0",
+    "generatedAt": 1764963758869,
+    "templates": {
+      "1.@class": {
+        "template": "{0}",
+        "bindings": [
+          "`form-section ${isValid ? 'valid' : 'invalid'}`"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.@key": {
+        "template": "1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.@key": {
+        "template": "1.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.1": {
+        "template": "Address",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.2.@id": {
+        "template": "street-input",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@type": {
+        "template": "text",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@placeholder": {
+        "template": "Street",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@value": {
+        "template": "{0}",
+        "bindings": [
+          "data.street||''"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.2.@key": {
+        "template": "1.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@id": {
+        "template": "city-input",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@type": {
+        "template": "text",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@placeholder": {
+        "template": "City",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@value": {
+        "template": "{0}",
+        "bindings": [
+          "data.city||''"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.3.@key": {
+        "template": "1.3",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.4.@id": {
+        "template": "zip-input",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "4"
+        ],
+        "type": "attribute-static"
+      },
+      "1.4.@type": {
+        "template": "text",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "4"
+        ],
+        "type": "attribute-static"
+      },
+      "1.4.@placeholder": {
+        "template": "ZIP Code",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "4"
+        ],
+        "type": "attribute-static"
+      },
+      "1.4.@value": {
+        "template": "{0}",
+        "bindings": [
+          "data.zip||''"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "4"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.4.@key": {
+        "template": "1.4",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "4"
+        ],
+        "type": "attribute-static"
+      },
+      "1.5.1.@class": {
+        "template": "check-mark",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "5",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.5.1.1": {
+        "template": "✓",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "5",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      }
+    },
+    "conditionalElements": {
+      "1.5": {
+        "type": "conditional-element",
+        "conditionExpression": "isValid",
+        "conditionBindings": [
+          "state_0"
+        ],
+        "evaluable": true,
+        "operator": "&&",
+        "branches": {
+          "true": {
+            "type": "element",
+            "tag": "span",
+            "hexPath": "1.5.1",
+            "attributes": {
+              "key": "1.5.1",
+              "className": "check-mark"
+            },
+            "children": [
+              {
+                "type": "text",
+                "hexPath": "1.5.1.1",
+                "value": "✓"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "component": "PaymentForm",
+    "version": "1.0",
+    "generatedAt": 1764963758869,
+    "templates": {
+      "1.@class": {
+        "template": "{0}",
+        "bindings": [
+          "`form-section ${isValid ? 'valid' : 'invalid'}`"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.@key": {
+        "template": "1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.@key": {
+        "template": "1.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.1": {
+        "template": "Payment",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.2.@id": {
+        "template": "card-input",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@type": {
+        "template": "text",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@placeholder": {
+        "template": "Card Number",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@value": {
+        "template": "{0}",
+        "bindings": [
+          "data.cardNumber||''"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.2.@key": {
+        "template": "1.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@id": {
+        "template": "cvv-input",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@type": {
+        "template": "text",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@placeholder": {
+        "template": "CVV",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@value": {
+        "template": "{0}",
+        "bindings": [
+          "data.cvv||''"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.3.@key": {
+        "template": "1.3",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.4.@id": {
+        "template": "expiry-input",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "4"
+        ],
+        "type": "attribute-static"
+      },
+      "1.4.@type": {
+        "template": "text",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "4"
+        ],
+        "type": "attribute-static"
+      },
+      "1.4.@placeholder": {
+        "template": "Expiry (MM/YY)",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "4"
+        ],
+        "type": "attribute-static"
+      },
+      "1.4.@value": {
+        "template": "{0}",
+        "bindings": [
+          "data.expiry||''"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "4"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.4.@key": {
+        "template": "1.4",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "4"
+        ],
+        "type": "attribute-static"
+      },
+      "1.5.1.@class": {
+        "template": "check-mark",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "5",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.5.1.1": {
+        "template": "✓",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "5",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      }
+    },
+    "conditionalElements": {
+      "1.5": {
+        "type": "conditional-element",
+        "conditionExpression": "isValid",
+        "conditionBindings": [
+          "state_0"
+        ],
+        "evaluable": true,
+        "operator": "&&",
+        "branches": {
+          "true": {
+            "type": "element",
+            "tag": "span",
+            "hexPath": "1.5.1",
+            "attributes": {
+              "key": "1.5.1",
+              "className": "check-mark"
+            },
+            "children": [
+              {
+                "type": "text",
+                "hexPath": "1.5.1.1",
+                "value": "✓"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "component": "RegistrationPage",
+    "version": "1.0",
+    "generatedAt": 1764963758870,
+    "templates": {
+      "1.@id": {
+        "template": "registration-root",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.@key": {
+        "template": "1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.@key": {
+        "template": "1.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.1": {
+        "template": "Registration",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.2.1.@id": {
+        "template": "validation-summary",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.1.@class": {
+        "template": "validation-summary error",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.1.1.1": {
+        "template": "Please complete the following sections:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "1",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.2.1.2.1": {
+        "template": "{0}",
+        "bindings": [
+          "invalidSections"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "2",
+          "1",
+          "2"
+        ],
+        "type": "transform",
+        "transform": {
+          "method": "map",
+          "args": [
+            "section=>(<likey={section}>{section}</li>"
+          ]
+        }
+      },
+      "1.6.@id": {
+        "template": "submit-btn",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.@type": {
+        "template": "button",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.@disabled": {
+        "template": "{0}",
+        "bindings": [
+          "!allValid"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "6"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.6.@class": {
+        "template": "{0}",
+        "bindings": [
+          "allValid?\"btn-primary\":\"btn-disabled\""
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "6"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.6.@key": {
+        "template": "1.6",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.1": {
+        "template": "Complete Registration",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.7.@id": {
+        "template": "status",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "7"
+        ],
+        "type": "attribute-static"
+      },
+      "1.7.@class": {
+        "template": "status",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "7"
+        ],
+        "type": "attribute-static"
+      },
+      "1.7.@key": {
+        "template": "1.7",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "7"
+        ],
+        "type": "attribute-static"
+      },
+      "1.7.1.@key": {
+        "template": "1.7.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "7",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.7.1.1": {
+        "template": "Personal Valid:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "7",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.7.1.2.@id": {
+        "template": "personal-valid",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "7",
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.7.1.2.@key": {
+        "template": "1.7.1.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "7",
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.7.1.2.1": {
+        "template": "{0}",
+        "bindings": [
+          "personalValid?'Yes':'No'"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "7",
+          "1",
+          "2"
+        ],
+        "type": "dynamic"
+      },
+      "1.7.2.@key": {
+        "template": "1.7.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "7",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.7.2.1": {
+        "template": "Address Valid:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "7",
+          "2",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.7.2.2.@id": {
+        "template": "address-valid",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "7",
+          "2",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.7.2.2.@key": {
+        "template": "1.7.2.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "7",
+          "2",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.7.2.2.1": {
+        "template": "{0}",
+        "bindings": [
+          "addressValid?'Yes':'No'"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "7",
+          "2",
+          "2"
+        ],
+        "type": "dynamic"
+      },
+      "1.7.3.@key": {
+        "template": "1.7.3",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "7",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.7.3.1": {
+        "template": "Payment Valid:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "7",
+          "3",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.7.3.2.@id": {
+        "template": "payment-valid",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "7",
+          "3",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.7.3.2.@key": {
+        "template": "1.7.3.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "7",
+          "3",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.7.3.2.1": {
+        "template": "{0}",
+        "bindings": [
+          "paymentValid?'Yes':'No'"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "7",
+          "3",
+          "2"
+        ],
+        "type": "dynamic"
+      },
+      "1.7.4.@key": {
+        "template": "1.7.4",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "7",
+          "4"
+        ],
+        "type": "attribute-static"
+      },
+      "1.7.4.1": {
+        "template": "All Valid:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "7",
+          "4",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.7.4.2.@id": {
+        "template": "all-valid",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "7",
+          "4",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.7.4.2.@key": {
+        "template": "1.7.4.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "7",
+          "4",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.7.4.2.1": {
+        "template": "{0}",
+        "bindings": [
+          "allValid?'Yes':'No'"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "7",
+          "4",
+          "2"
+        ],
+        "type": "dynamic"
+      }
+    },
+    "conditionalElements": {
+      "1.2": {
+        "type": "conditional-element",
+        "conditionExpression": "!allValid",
+        "conditionBindings": [
+          "state_0"
+        ],
+        "evaluable": true,
+        "operator": "&&",
+        "branches": {
+          "true": {
+            "type": "element",
+            "tag": "div",
+            "hexPath": "1.2.1",
+            "attributes": {
+              "key": "1.2.1",
+              "id": "validation-summary",
+              "className": "validation-summary error"
+            },
+            "children": [
+              {
+                "type": "element",
+                "tag": "strong",
+                "hexPath": "1.2.1.1",
+                "attributes": {
+                  "key": "1.2.1.1"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "hexPath": "1.2.1.1.1",
+                    "value": "Please complete the following sections:"
+                  }
+                ]
+              },
+              {
+                "type": "element",
+                "tag": "ul",
+                "hexPath": "1.2.1.2",
+                "attributes": {
+                  "key": "1.2.1.2"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "hexPath": "1.2.1.2.1",
+                    "binding": "invalidSections.map(section=>(<likey={section}>{section}</li>))"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+]

@@ -1,9 +1,11 @@
-using Minimact.AspNetCore.Core;
-using Minimact.AspNetCore.Extensions;
-using MinimactHelpers = Minimact.AspNetCore.Core.Minimact;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Minimact.AspNetCore.Core;
+using Minimact.AspNetCore.Rendering;
+using Minimact.AspNetCore.Extensions;
+using MinimactHelpers = Minimact.AspNetCore.Core.Minimact;
 
 namespace MinimactTest.Components;
 

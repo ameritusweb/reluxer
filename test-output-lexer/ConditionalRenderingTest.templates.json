@@ -1,0 +1,147 @@
+{
+  "component": "ConditionalRenderingTest",
+  "version": "1.0",
+  "generatedAt": 1764963823700,
+  "templates": {
+    "1.@key": {
+      "template": "1",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1"
+      ],
+      "type": "attribute-static"
+    },
+    "1.1": {
+      "template": "{0}",
+      "bindings": [
+        "isLoggedIn?(<div><h1>Welcome back!</h1><buttononClick={()=>setIsLoggedIn(false)}>Logout</button></div>):(<div><h1>Please log in</h1><buttononClick={()=>setIsLoggedIn(true)}>Login</button></div>)"
+      ],
+      "slots": [
+        0
+      ],
+      "path": [
+        "1"
+      ],
+      "type": "dynamic"
+    },
+    "1.2.1.1": {
+      "template": "User:",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "2",
+        "1",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.2.1.2": {
+      "template": "{0}",
+      "bindings": [
+        "user.name"
+      ],
+      "slots": [
+        0
+      ],
+      "path": [
+        "1",
+        "2",
+        "1"
+      ],
+      "type": "dynamic"
+    },
+    "1.3.1.1": {
+      "template": "Count is positive:",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "3",
+        "1",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.3.1.2": {
+      "template": "{0}",
+      "bindings": [
+        "count"
+      ],
+      "slots": [
+        0
+      ],
+      "path": [
+        "1",
+        "3",
+        "1"
+      ],
+      "type": "dynamic"
+    }
+  },
+  "conditionalElements": {
+    "1.2": {
+      "type": "conditional-element",
+      "conditionExpression": "user",
+      "conditionBindings": [
+        "state_0"
+      ],
+      "evaluable": true,
+      "operator": "&&",
+      "branches": {
+        "true": {
+          "type": "element",
+          "tag": "p",
+          "hexPath": "1.2.1",
+          "attributes": {
+            "key": "1.2.1"
+          },
+          "children": [
+            {
+              "type": "text",
+              "hexPath": "1.2.1.1",
+              "value": "User:"
+            },
+            {
+              "type": "text",
+              "hexPath": "1.2.1.2",
+              "binding": "user.name"
+            }
+          ]
+        }
+      }
+    },
+    "1.3": {
+      "type": "conditional-element",
+      "conditionExpression": "count>0",
+      "conditionBindings": [
+        "state_0"
+      ],
+      "evaluable": true,
+      "operator": "&&",
+      "branches": {
+        "true": {
+          "type": "element",
+          "tag": "p",
+          "hexPath": "1.3.1",
+          "attributes": {
+            "key": "1.3.1"
+          },
+          "children": [
+            {
+              "type": "text",
+              "hexPath": "1.3.1.1",
+              "value": "Count is positive:"
+            },
+            {
+              "type": "text",
+              "hexPath": "1.3.1.2",
+              "binding": "count"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

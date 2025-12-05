@@ -138,14 +138,122 @@ public class ComponentVisitor : TokenVisitor
 
     private void ExtractComponentBody(ComponentModel component, int startOffset)
     {
-        // Extract the function body (everything inside { })
-        // startOffset is 0 to search from current match position
-        var bodyTokens = ExtractFunctionBody(0);
+        // For functions with destructured parameters like:
+        //   function UserProfile({ user, loading }) { ... }
+        // We need to skip past the parameter list (...) before looking for { }
+        //
+        // First, find the opening ( of the parameter list
+        // Then find its matching )
+        // Then extract the function body { } after that
 
-        if (bodyTokens.Length > 0)
+        if (_tokens == null) return;
+
+        // startOffset is actually the match.EndIndex (absolute index after the pattern match)
+        int searchStart = startOffset;
+
+        // Find opening ( of parameter list
+        int parenStart = -1;
+        for (int i = searchStart; i < _tokens.Count; i++)
         {
-            // Store body tokens in shared context for other visitors
-            Context.Set($"ComponentBody:{component.Name}", bodyTokens);
+            if (_tokens[i].Value == "(")
+            {
+                parenStart = i;
+                break;
+            }
+        }
+
+        if (parenStart < 0)
+        {
+            // No parameters, just extract body from current position
+            var bodyTokens = ExtractFunctionBody(0);
+            if (bodyTokens.Length > 0)
+            {
+                Context.Set($"ComponentBody:{component.Name}", bodyTokens);
+            }
+            return;
+        }
+
+        // Find matching ) with depth tracking
+        int depth = 1;
+        int parenEnd = -1;
+        for (int i = parenStart + 1; i < _tokens.Count; i++)
+        {
+            if (_tokens[i].Value == "(") depth++;
+            else if (_tokens[i].Value == ")")
+            {
+                depth--;
+                if (depth == 0)
+                {
+                    parenEnd = i;
+                    break;
+                }
+            }
+        }
+
+        if (parenEnd < 0)
+        {
+            // Couldn't find closing ), try default extraction
+            var bodyTokens = ExtractFunctionBody(0);
+            if (bodyTokens.Length > 0)
+            {
+                Context.Set($"ComponentBody:{component.Name}", bodyTokens);
+            }
+            return;
+        }
+
+        // Now find the function body { } starting AFTER the closing )
+        int braceStart = -1;
+        for (int i = parenEnd + 1; i < _tokens.Count; i++)
+        {
+            if (_tokens[i].Value == "{")
+            {
+                braceStart = i;
+                break;
+            }
+        }
+
+        if (braceStart < 0)
+        {
+            // No function body found
+            return;
+        }
+
+        // Find matching } with depth tracking
+        depth = 1;
+        int braceEnd = -1;
+        for (int i = braceStart + 1; i < _tokens.Count; i++)
+        {
+            if (_tokens[i].Value == "{") depth++;
+            else if (_tokens[i].Value == "}")
+            {
+                depth--;
+                if (depth == 0)
+                {
+                    braceEnd = i;
+                    break;
+                }
+            }
+        }
+
+        if (braceEnd < 0)
+        {
+            // Couldn't find closing }
+            return;
+        }
+
+        // Extract tokens between { and } (exclusive)
+        var count = braceEnd - braceStart - 1;
+        if (count <= 0) return;
+
+        var result = new Token[count];
+        for (int i = 0; i < count; i++)
+        {
+            result[i] = _tokens[braceStart + 1 + i];
+        }
+
+        if (result.Length > 0)
+        {
+            Context.Set($"ComponentBody:{component.Name}", result);
         }
     }
 }

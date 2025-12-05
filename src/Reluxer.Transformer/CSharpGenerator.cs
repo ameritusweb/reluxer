@@ -652,7 +652,63 @@ public class CSharpGenerator
         // console.log -> Console.WriteLine
         expr = expr.Replace("console.log", "Console.WriteLine");
 
+        // Convert JS single-quoted strings to C# double-quoted strings
+        // 'text' -> "text"
+        // But be careful not to convert char literals or strings inside template literals
+        expr = ConvertSingleQuotedStrings(expr);
+
         return expr;
+    }
+
+    private string ConvertSingleQuotedStrings(string expr)
+    {
+        // Convert JS single-quoted strings to C# double-quoted strings
+        // 'hello' -> "hello"
+        // 'completed' -> "completed"
+        // '' -> ""
+        // But skip if already inside a double-quoted string
+
+        var result = new System.Text.StringBuilder();
+        bool inDoubleQuote = false;
+        bool inSingleQuote = false;
+        bool escape = false;
+
+        for (int i = 0; i < expr.Length; i++)
+        {
+            char c = expr[i];
+
+            if (escape)
+            {
+                result.Append(c);
+                escape = false;
+                continue;
+            }
+
+            if (c == '\\')
+            {
+                result.Append(c);
+                escape = true;
+                continue;
+            }
+
+            if (c == '"' && !inSingleQuote)
+            {
+                inDoubleQuote = !inDoubleQuote;
+                result.Append(c);
+            }
+            else if (c == '\'' && !inDoubleQuote)
+            {
+                // Convert single quote to double quote
+                result.Append('"');
+                inSingleQuote = !inSingleQuote;
+            }
+            else
+            {
+                result.Append(c);
+            }
+        }
+
+        return result.ToString();
     }
 
     private string ConvertCondition(string condition)

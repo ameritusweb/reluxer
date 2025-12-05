@@ -1,0 +1,1064 @@
+[
+  {
+    "component": "Counter",
+    "version": "1.0",
+    "generatedAt": 1764963765286,
+    "templates": {
+      "1.@class": {
+        "template": "counter",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.@key": {
+        "template": "1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.@key": {
+        "template": "1.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.1": {
+        "template": "Counter",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.2.@key": {
+        "template": "1.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.1": {
+        "template": "Count:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.2.2.@id": {
+        "template": "counter-value",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.2.@key": {
+        "template": "1.2.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.2.1": {
+        "template": "{0}",
+        "bindings": [
+          "count"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "2",
+          "2"
+        ],
+        "type": "dynamic"
+      },
+      "1.3.@id": {
+        "template": "increment-btn",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@type": {
+        "template": "button",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@key": {
+        "template": "1.3",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.1": {
+        "template": "Increment",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3",
+          "1"
+        ],
+        "type": "static"
+      }
+    }
+  },
+  {
+    "component": "Timer",
+    "version": "1.0",
+    "generatedAt": 1764963765286,
+    "templates": {
+      "1.@class": {
+        "template": "timer",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.@key": {
+        "template": "1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.@key": {
+        "template": "1.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.1": {
+        "template": "Timer",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.2.@key": {
+        "template": "1.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.1": {
+        "template": "Seconds:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.2.2.@id": {
+        "template": "timer-value",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.2.@key": {
+        "template": "1.2.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.2.1": {
+        "template": "{0}",
+        "bindings": [
+          "seconds"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "2",
+          "2"
+        ],
+        "type": "dynamic"
+      },
+      "1.3.@id": {
+        "template": "tick-btn",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@type": {
+        "template": "button",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@key": {
+        "template": "1.3",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.1": {
+        "template": "Tick",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3",
+          "1"
+        ],
+        "type": "static"
+      }
+    }
+  },
+  {
+    "component": "Form",
+    "version": "1.0",
+    "generatedAt": 1764963765286,
+    "templates": {
+      "1.@class": {
+        "template": "form",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.@key": {
+        "template": "1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.@key": {
+        "template": "1.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.1": {
+        "template": "Form",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.2.@id": {
+        "template": "text-input",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@type": {
+        "template": "text",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@placeholder": {
+        "template": "Enter text...",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@value": {
+        "template": "{0}",
+        "bindings": [
+          "text"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.2.@key": {
+        "template": "1.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.@key": {
+        "template": "1.3",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.1": {
+        "template": "Length:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.3.2.@id": {
+        "template": "text-length",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.2.@key": {
+        "template": "1.3.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.2.1": {
+        "template": "{0}",
+        "bindings": [
+          "text.length"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "3",
+          "2"
+        ],
+        "type": "dynamic"
+      }
+    }
+  },
+  {
+    "component": "Dashboard",
+    "version": "1.0",
+    "generatedAt": 1764963765286,
+    "templates": {
+      "1.@id": {
+        "template": "dashboard-root",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.@key": {
+        "template": "1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.@key": {
+        "template": "1.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.1": {
+        "template": "Dashboard",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.2.@class": {
+        "template": "controls",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@key": {
+        "template": "1.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.1.@id": {
+        "template": "reset-all-btn",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.1.@type": {
+        "template": "button",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.1.@disabled": {
+        "template": "{0}",
+        "bindings": [
+          "!hasChanges"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "2",
+          "1"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.2.1.@key": {
+        "template": "1.2.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.1.1": {
+        "template": "Reset All Components",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.2.2.@id": {
+        "template": "reset-counter-btn",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.2.@type": {
+        "template": "button",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.2.@disabled": {
+        "template": "{0}",
+        "bindings": [
+          "counterValue===0"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "2",
+          "2"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.2.2.@key": {
+        "template": "1.2.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.2.1": {
+        "template": "Reset Counter Only",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "2",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.2.3.@id": {
+        "template": "reset-timer-btn",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.3.@type": {
+        "template": "button",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.3.@disabled": {
+        "template": "{0}",
+        "bindings": [
+          "timerValue===0"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "2",
+          "3"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.2.3.@key": {
+        "template": "1.2.3",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.3.1": {
+        "template": "Reset Timer Only",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "3",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.2.4.@id": {
+        "template": "reset-form-btn",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "4"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.4.@type": {
+        "template": "button",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "4"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.4.@disabled": {
+        "template": "{0}",
+        "bindings": [
+          "formValue===\"\""
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "2",
+          "4"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.2.4.@key": {
+        "template": "1.2.4",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "4"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.4.1": {
+        "template": "Reset Form Only",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "4",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.6.@id": {
+        "template": "status",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.@class": {
+        "template": "status",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.@key": {
+        "template": "1.6",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.1.@key": {
+        "template": "1.6.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.1.1": {
+        "template": "Counter:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.6.1.2.@id": {
+        "template": "status-counter",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.1.2.@key": {
+        "template": "1.6.1.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.1.2.1": {
+        "template": "{0}",
+        "bindings": [
+          "counterValue"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "6",
+          "1",
+          "2"
+        ],
+        "type": "dynamic"
+      },
+      "1.6.2.@key": {
+        "template": "1.6.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.2.1": {
+        "template": "Timer:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "2",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.6.2.2.@id": {
+        "template": "status-timer",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "2",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.2.2.@key": {
+        "template": "1.6.2.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "2",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.2.2.1": {
+        "template": "{0}",
+        "bindings": [
+          "timerValue"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "6",
+          "2",
+          "2"
+        ],
+        "type": "dynamic"
+      },
+      "1.6.3.@key": {
+        "template": "1.6.3",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.3.1": {
+        "template": "Form Text:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "3",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.6.3.2.@id": {
+        "template": "status-form",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "3",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.3.2.@key": {
+        "template": "1.6.3.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "3",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.3.2.1": {
+        "template": "\"",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "3",
+          "2",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.6.3.2.2": {
+        "template": "{0}",
+        "bindings": [
+          "formValue"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "6",
+          "3",
+          "2"
+        ],
+        "type": "dynamic"
+      },
+      "1.6.3.2.3": {
+        "template": "\"",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "3",
+          "2",
+          "3"
+        ],
+        "type": "static"
+      },
+      "1.6.4.@key": {
+        "template": "1.6.4",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "4"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.4.1": {
+        "template": "Has Changes:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "4",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.6.4.2.@id": {
+        "template": "has-changes",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "4",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.4.2.@key": {
+        "template": "1.6.4.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "4",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.4.2.1": {
+        "template": "{0}",
+        "bindings": [
+          "hasChanges?'Yes':'No'"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "6",
+          "4",
+          "2"
+        ],
+        "type": "dynamic"
+      }
+    }
+  }
+]

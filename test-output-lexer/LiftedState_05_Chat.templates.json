@@ -1,0 +1,904 @@
+[
+  {
+    "component": "ChatHeader",
+    "version": "1.0",
+    "generatedAt": 1764963779521,
+    "templates": {
+      "1.@class": {
+        "template": "chat-header",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.@key": {
+        "template": "1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.@key": {
+        "template": "1.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.1": {
+        "template": "Chat Room",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.2.1.@id": {
+        "template": "unread-badge",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.1.@class": {
+        "template": "unread-badge",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.1.1": {
+        "template": "{0}",
+        "bindings": [
+          "unreadCount"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "2",
+          "1"
+        ],
+        "type": "dynamic"
+      }
+    },
+    "conditionalElements": {
+      "1.2": {
+        "type": "conditional-element",
+        "conditionExpression": "unreadCount>0",
+        "conditionBindings": [
+          "state_0"
+        ],
+        "evaluable": true,
+        "operator": "&&",
+        "branches": {
+          "true": {
+            "type": "element",
+            "tag": "span",
+            "hexPath": "1.2.1",
+            "attributes": {
+              "key": "1.2.1",
+              "id": "unread-badge",
+              "className": "unread-badge"
+            },
+            "children": [
+              {
+                "type": "text",
+                "hexPath": "1.2.1.1",
+                "binding": "unreadCount"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "component": "MessageList",
+    "version": "1.0",
+    "generatedAt": 1764963779522,
+    "templates": {
+      "1.@class": {
+        "template": "message-list",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.@key": {
+        "template": "1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.@key": {
+        "template": "1.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.1": {
+        "template": "Messages (",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.1.2": {
+        "template": "{0}",
+        "bindings": [
+          "messages.length"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "1"
+        ],
+        "type": "dynamic"
+      },
+      "1.1.3": {
+        "template": ")",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1",
+          "3"
+        ],
+        "type": "static"
+      },
+      "1.2.@id": {
+        "template": "messages-container",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@key": {
+        "template": "1.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.1": {
+        "template": "{0}",
+        "bindings": [
+          "messages"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "transform",
+        "transform": {
+          "method": "map",
+          "args": [
+            "msg=>(<divkey={msg.id}className=\"message\"data-message-id={msg.id}><strong>{msg.author}:</strong>{msg.text}<spanclassName=\"timestamp\">{msg.timestamp}</span></div>"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "component": "MessageInput",
+    "version": "1.0",
+    "generatedAt": 1764963779522,
+    "templates": {
+      "1.@class": {
+        "template": "message-input",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.@key": {
+        "template": "1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.@id": {
+        "template": "message-textarea",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.@value": {
+        "template": "{0}",
+        "bindings": [
+          "draft"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "1"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.1.@placeholder": {
+        "template": "Type a message...",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.1.@key": {
+        "template": "1.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@id": {
+        "template": "send-btn",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@type": {
+        "template": "button",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.@disabled": {
+        "template": "{0}",
+        "bindings": [
+          "!draft.trim()"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.2.@key": {
+        "template": "1.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.2.1": {
+        "template": "Send",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "2",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.3.@key": {
+        "template": "1.3",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.1": {
+        "template": "Characters:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.3.2.@id": {
+        "template": "char-count",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.2.@key": {
+        "template": "1.3.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.2.1": {
+        "template": "{0}",
+        "bindings": [
+          "draft.length"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "3",
+          "2"
+        ],
+        "type": "dynamic"
+      }
+    }
+  },
+  {
+    "component": "ChatPage",
+    "version": "1.0",
+    "generatedAt": 1764963779523,
+    "templates": {
+      "1.@id": {
+        "template": "chat-root",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.@key": {
+        "template": "1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.1.@id": {
+        "template": "typing-indicator",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.1.@class": {
+        "template": "typing-indicator",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.3.1.1": {
+        "template": "You are typing...",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "3",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.5.@class": {
+        "template": "controls",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "5"
+        ],
+        "type": "attribute-static"
+      },
+      "1.5.@key": {
+        "template": "1.5",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "5"
+        ],
+        "type": "attribute-static"
+      },
+      "1.5.1.@id": {
+        "template": "add-bot-btn",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "5",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.5.1.@type": {
+        "template": "button",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "5",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.5.1.@key": {
+        "template": "1.5.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "5",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.5.1.1": {
+        "template": "Add Bot Message",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "5",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.5.2.@id": {
+        "template": "clear-btn",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "5",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.5.2.@type": {
+        "template": "button",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "5",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.5.2.@disabled": {
+        "template": "{0}",
+        "bindings": [
+          "messages.length===0&&draft===\"\""
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "5",
+          "2"
+        ],
+        "type": "attribute-dynamic"
+      },
+      "1.5.2.@key": {
+        "template": "1.5.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "5",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.5.2.1": {
+        "template": "Clear All",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "5",
+          "2",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.6.@id": {
+        "template": "status",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.@class": {
+        "template": "status",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.@key": {
+        "template": "1.6",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.1.@key": {
+        "template": "1.6.1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.1.1": {
+        "template": "Message Count:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "1",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.6.1.2.@id": {
+        "template": "message-count",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.1.2.@key": {
+        "template": "1.6.1.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "1",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.1.2.1": {
+        "template": "{0}",
+        "bindings": [
+          "messages.length"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "6",
+          "1",
+          "2"
+        ],
+        "type": "dynamic"
+      },
+      "1.6.2.@key": {
+        "template": "1.6.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.2.1": {
+        "template": "Draft Length:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "2",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.6.2.2.@id": {
+        "template": "draft-length",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "2",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.2.2.@key": {
+        "template": "1.6.2.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "2",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.2.2.1": {
+        "template": "{0}",
+        "bindings": [
+          "draft.length"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "6",
+          "2",
+          "2"
+        ],
+        "type": "dynamic"
+      },
+      "1.6.3.@key": {
+        "template": "1.6.3",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "3"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.3.1": {
+        "template": "Is Typing:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "3",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.6.3.2.@id": {
+        "template": "is-typing",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "3",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.3.2.@key": {
+        "template": "1.6.3.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "3",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.3.2.1": {
+        "template": "{0}",
+        "bindings": [
+          "isTyping?'Yes':'No'"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "6",
+          "3",
+          "2"
+        ],
+        "type": "dynamic"
+      },
+      "1.6.4.@key": {
+        "template": "1.6.4",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "4"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.4.1": {
+        "template": "Unread:",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "4",
+          "1"
+        ],
+        "type": "static"
+      },
+      "1.6.4.2.@id": {
+        "template": "unread-count",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "4",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.4.2.@key": {
+        "template": "1.6.4.2",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1",
+          "6",
+          "4",
+          "2"
+        ],
+        "type": "attribute-static"
+      },
+      "1.6.4.2.1": {
+        "template": "{0}",
+        "bindings": [
+          "state[\"ChatHeader.unreadCount\"]||0"
+        ],
+        "slots": [
+          0
+        ],
+        "path": [
+          "1",
+          "6",
+          "4",
+          "2"
+        ],
+        "type": "dynamic"
+      }
+    },
+    "conditionalElements": {
+      "1.3": {
+        "type": "conditional-element",
+        "conditionExpression": "isTyping",
+        "conditionBindings": [
+          "state_0"
+        ],
+        "evaluable": true,
+        "operator": "&&",
+        "branches": {
+          "true": {
+            "type": "element",
+            "tag": "div",
+            "hexPath": "1.3.1",
+            "attributes": {
+              "key": "1.3.1",
+              "id": "typing-indicator",
+              "className": "typing-indicator"
+            },
+            "children": [
+              {
+                "type": "text",
+                "hexPath": "1.3.1.1",
+                "value": "You are typing..."
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+]
