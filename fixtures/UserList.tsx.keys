@@ -1,0 +1,133 @@
+import { usePaginatedServerTask } from '@minimact/core';
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+}
+
+interface UserFilters {
+  role?: string;
+  search?: string;
+}
+
+export function UserList() {
+  // Paginated server task with intelligent prefetching
+  const users = usePaginatedServerTask<User, UserFilters>(
+    async ({ page, pageSize, filters }) => {
+      // Server-side pagination query
+      // This gets transpiled to C# and executed on the server
+      const skip = (page - 1) * pageSize;
+      const take = pageSize;
+
+      // Simulate database query
+      const allUsers = generateMockUsers(100);
+
+      // Apply filters
+      let filtered = allUsers;
+      if (filters.role) {
+        filtered = filtered.filter(u => u.role === filters.role);
+      }
+      if (filters.search) {
+        const searchLower = filters.search.toLowerCase();
+        filtered = filtered.filter(u =>
+          u.name.toLowerCase().includes(searchLower) ||
+          u.email.toLowerCase().includes(searchLower)
+        );
+      }
+
+      // Return paginated results
+      return filtered.slice(skip, skip + take);
+    },
+    {
+      pageSize: 10,
+      getTotalCount: async (filters) => {
+        // Server-side count query
+        const allUsers = generateMockUsers(100);
+
+        let filtered = allUsers;
+        if (filters.role) {
+          filtered = filtered.filter(u => u.role === filters.role);
+        }
+        if (filters.search) {
+          const searchLower = filters.search.toLowerCase();
+          filtered = filtered.filter(u =>
+            u.name.toLowerCase().includes(searchLower) ||
+            u.email.toLowerCase().includes(searchLower)
+          );
+        }
+
+        return filtered.length;
+      },
+      prefetchNext: true,  // Intelligent prefetching
+      runtime: 'csharp'    // Can also be 'rust' for Rayon parallelism
+    }
+  );
+
+  return (
+    <div key='1' className="user-list">
+      <h1 key='1.1'>User Directory</h1>
+      <p key='1.2'>Page {users.page} of {users.totalPages} ({users.total} total users)</p>
+      {users.pending && <div key='1.3.1' className="loading">Loading...</div>}
+      {users.error && <div key='1.4.1' className="error">Error: {users.error}</div>}
+      <table key='1.5'>
+        <thead key='1.5.1'>
+          <tr key='1.5.1.1'>
+            <th key='1.5.1.1.1'>ID</th>
+            <th key='1.5.1.1.2'>Name</th>
+            <th key='1.5.1.1.3'>Email</th>
+            <th key='1.5.1.1.4'>Role</th>
+          </tr>
+        </thead>
+        <tbody key='1.5.2'>
+          {users.items.map(user => (
+            <tr key='1.5.2.1.1' key={user.id}>
+              <td key='1.5.2.1.1.1'>{user.id}</td>
+              <td key='1.5.2.1.1.2'>{user.name}</td>
+              <td key='1.5.2.1.1.3'>{user.email}</td>
+              <td key='1.5.2.1.1.4'>{user.role}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div key='1.6' className="pagination">
+        <button key='1.6.1' onClick={() => users.prev()} disabled={!users.hasPrev}>
+          Previous
+        </button>
+
+        <span key='1.6.2'>Page {users.page}</span>
+
+        <button key='1.6.3' onClick={() => users.next()} disabled={!users.hasNext}>
+          Next
+        </button>
+
+        <button key='1.6.4' onClick={() => users.goto(1)}>First</button>
+        <button key='1.6.5' onClick={() => users.goto(users.totalPages)}>Last</button>
+        <button key='1.6.6' onClick={() => users.refresh()}>Refresh</button>
+      </div>
+    </div>
+  );
+}
+
+// Helper function to generate mock users
+function generateMockUsers(count: number): User[] {
+  const roles = ['Admin', 'User', 'Editor', 'Viewer'];
+  const firstNames = ['Alice', 'Bob', 'Charlie', 'Diana', 'Eve', 'Frank', 'Grace', 'Henry'];
+  const lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis'];
+
+  const users: User[] = [];
+  for (let i = 1; i <= count; i++) {
+    const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+    const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+
+    users.push({
+      id: i,
+      name: `${firstName} ${lastName}`,
+      email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}@example.com`,
+      role: roles[Math.floor(Math.random() * roles.length)]
+    });
+  }
+
+  return users;
+}

@@ -852,11 +852,11 @@ public class TsxLexer
         // Handle multi-character operators
         var c = Advance();
 
-        // Arrow function
+        // Arrow function - always use Arrow type for consistency
         if (c == '=' && Peek() == '>')
         {
             Advance();
-            return new Token(TokenType.Operator, "=>", start, _position, startLine, startColumn);
+            return new Token(TokenType.Arrow, "=>", start, _position, startLine, startColumn);
         }
 
         // Triple operators (===, !==, etc.)

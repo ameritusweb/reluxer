@@ -44,12 +44,14 @@ public class CSharpGenerator
 
     private void WriteUsings()
     {
-        WriteLine("using Minimact.AspNetCore.Core;");
-        WriteLine("using Minimact.AspNetCore.Extensions;");
-        WriteLine("using MinimactHelpers = Minimact.AspNetCore.Core.Minimact;");
+        WriteLine("using System;");
         WriteLine("using System.Collections.Generic;");
         WriteLine("using System.Linq;");
         WriteLine("using System.Threading.Tasks;");
+        WriteLine("using Minimact.AspNetCore.Core;");
+        WriteLine("using Minimact.AspNetCore.Rendering;");
+        WriteLine("using Minimact.AspNetCore.Extensions;");
+        WriteLine("using MinimactHelpers = Minimact.AspNetCore.Core.Minimact;");
     }
 
     private void GenerateComponent(ComponentModel component)
@@ -60,13 +62,29 @@ public class CSharpGenerator
         WriteLine("{");
         _indentLevel++;
 
-        // State fields
+        // State fields (regular useState)
         foreach (var state in component.StateFields)
         {
             WriteLine("[State]");
             var csharpType = ConvertTypeToCSharp(state.Type);
             var initialValue = ConvertInitialValue(state.InitialValue, state.Type);
             WriteLine($"private {csharpType} {state.Name} = {initialValue};");
+            WriteLine();
+        }
+
+        // MVC State properties (useMvcState)
+        foreach (var mvcState in component.MvcStateFields)
+        {
+            WriteLine($"// MVC State property: {mvcState.ViewModelKey}");
+            WriteLine($"private {mvcState.Type} {mvcState.LocalName} => GetState<{mvcState.Type}>(\"{mvcState.ViewModelKey}\");");
+            WriteLine();
+        }
+
+        // viewModel field (useMvcViewModel)
+        if (component.HasMvcViewModel)
+        {
+            WriteLine("// useMvcViewModel - read-only access to entire ViewModel");
+            WriteLine("private dynamic viewModel = null;");
             WriteLine();
         }
 
@@ -77,6 +95,17 @@ public class CSharpGenerator
 
         WriteLine("StateManager.SyncMembersToState(this);");
         WriteLine();
+
+        // MVC State local variables
+        if (component.MvcStateFields.Count > 0)
+        {
+            WriteLine("// MVC State - read from State dictionary");
+            foreach (var mvcState in component.MvcStateFields)
+            {
+                WriteLine($"var {mvcState.LocalName} = GetState<{mvcState.Type}>(\"{mvcState.ViewModelKey}\");");
+            }
+            WriteLine();
+        }
 
         // Local variables
         foreach (var local in component.LocalVariables)
@@ -104,6 +133,13 @@ public class CSharpGenerator
         _indentLevel--;
         WriteLine("}");
 
+        // Helper functions (handleQuantityChange, handleAddToCart, etc.)
+        foreach (var helper in component.HelperFunctions)
+        {
+            WriteLine();
+            GenerateHelperFunction(helper);
+        }
+
         // Event handlers
         foreach (var handler in component.EventHandlers)
         {
@@ -118,8 +154,119 @@ public class CSharpGenerator
             GenerateGetClientHandlers(component);
         }
 
+        // MVC State setter methods
+        var mutableMvcStates = component.MvcStateFields.Where(m => !string.IsNullOrEmpty(m.SetterName)).ToList();
+        foreach (var mvcState in mutableMvcStates)
+        {
+            WriteLine();
+            GenerateMvcStateSetter(mvcState);
+        }
+
         _indentLevel--;
         WriteLine("}");
+    }
+
+    private void GenerateHelperFunction(HelperFunction helper)
+    {
+        var paramList = helper.Parameters.Count > 0
+            ? string.Join(", ", helper.Parameters.Select(p => $"dynamic {p}"))
+            : "";
+
+        WriteLine($"public void {helper.Name}({paramList})");
+        WriteLine("{");
+        _indentLevel++;
+
+        var body = ConvertHelperBody(helper.Body);
+        foreach (var line in body.Split('\n', StringSplitOptions.RemoveEmptyEntries))
+        {
+            WriteLine(line.Trim());
+        }
+
+        _indentLevel--;
+        WriteLine("}");
+    }
+
+    private void GenerateMvcStateSetter(MvcStateField mvcState)
+    {
+        WriteLine($"private void {mvcState.SetterName}({mvcState.Type} value)");
+        WriteLine("{");
+        _indentLevel++;
+        WriteLine($"SetState(\"{mvcState.ViewModelKey}\", value);");
+        _indentLevel--;
+        WriteLine("}");
+    }
+
+    private string ConvertHelperBody(string body)
+    {
+        if (string.IsNullOrWhiteSpace(body)) return "";
+
+        var result = body.Trim();
+
+        // Remove outer braces if present
+        if (result.StartsWith("{") && result.EndsWith("}"))
+            result = result[1..^1].Trim();
+
+        // Convert alert() to Console.WriteLine()
+        result = result.Replace("alert(", "Console.WriteLine(");
+
+        // Apply ConvertExpression transformations
+        result = ConvertExpression(result);
+
+        // Convert const/let to var (C# doesn't have const for local variables in this context)
+        result = System.Text.RegularExpressions.Regex.Replace(result, @"^const\s*", "var ");
+        result = System.Text.RegularExpressions.Regex.Replace(result, @";const\s*", "; var ");
+        result = System.Text.RegularExpressions.Regex.Replace(result, @"^let\s*", "var ");
+        result = System.Text.RegularExpressions.Regex.Replace(result, @";let\s*", "; var ");
+
+        // Fix spacing: add space after keywords when followed by identifier
+        result = System.Text.RegularExpressions.Regex.Replace(result, @"const([a-zA-Z])", "var $1");
+        result = System.Text.RegularExpressions.Regex.Replace(result, @"let([a-zA-Z])", "var $1");
+        result = System.Text.RegularExpressions.Regex.Replace(result, @"return([a-zA-Z])", "return $1");
+
+        // Fix spacing: add space around = (but not == or ===)
+        result = System.Text.RegularExpressions.Regex.Replace(
+            result,
+            @"(?<![=!<>])=(?![=])",
+            " = ");
+
+        // Fix spacing: add space after commas
+        result = System.Text.RegularExpressions.Regex.Replace(
+            result,
+            @",(?!\s)",
+            ", ");
+
+        // Fix spacing: add space around + - * / operators (but not ++)
+        result = System.Text.RegularExpressions.Regex.Replace(
+            result,
+            @"(?<!\+)\+(?!\+)(?!\s)",
+            " + ");
+        result = System.Text.RegularExpressions.Regex.Replace(
+            result,
+            @"(?<![- ])-(?!-)(?!\s)(?!\d)",
+            " - ");
+        result = System.Text.RegularExpressions.Regex.Replace(
+            result,
+            @"\*(?!\s)",
+            " * ");
+        result = System.Text.RegularExpressions.Regex.Replace(
+            result,
+            @"(?<!\s)/(?!\s)",
+            " / ");
+
+        // Clean up multiple spaces
+        result = System.Text.RegularExpressions.Regex.Replace(result, @"\s+", " ");
+
+        // NOTE: Don't convert setXxx(value) calls here because MVC state setter methods
+        // (like setQuantity, setColor) are generated separately. Let them call through
+        // to the setter methods instead of converting directly to SetState.
+
+        // Ensure statements end with semicolons
+        var lines = result.Split(';').Where(l => !string.IsNullOrWhiteSpace(l)).ToList();
+        result = string.Join(";\n", lines.Select(l => l.Trim()));
+        if (!string.IsNullOrEmpty(result) && !result.EndsWith(";"))
+            result += ";";
+
+        return result;
     }
 
     private void GenerateGetClientHandlers(ComponentModel component)
@@ -460,6 +607,7 @@ public class CSharpGenerator
         if (string.IsNullOrWhiteSpace(expr)) return "null";
 
         // Convert template literals: `text ${var}` -> $"text {var}"
+        // First handle complete template literals
         if (expr.StartsWith("`") && expr.EndsWith("`"))
         {
             var inner = expr[1..^1];
@@ -467,8 +615,42 @@ public class CSharpGenerator
             return $"$\"{inner}\"";
         }
 
+        // Handle embedded template literals: something(`template ${var}`) -> something($"template {var}")
+        expr = System.Text.RegularExpressions.Regex.Replace(
+            expr,
+            @"`([^`]*)`",
+            match =>
+            {
+                var inner = match.Groups[1].Value;
+                inner = inner.Replace("${", "{");
+                return $"$\"{inner}\"";
+            });
+
         // Convert state access: state["Key"] -> State["Key"]
         expr = expr.Replace("state[", "State[");
+
+        // Convert JS method calls to C# equivalents
+        // toFixed(n) -> ToString("Fn")
+        expr = System.Text.RegularExpressions.Regex.Replace(
+            expr,
+            @"\.toFixed\((\d+)\)",
+            ".ToString(\"F$1\")");
+
+        // toLocaleString() -> ToString("N0")
+        expr = expr.Replace(".toLocaleString()", ".ToString(\"N0\")");
+
+        // Math methods
+        expr = expr.Replace("Math.max", "Math.Max");
+        expr = expr.Replace("Math.min", "Math.Min");
+        expr = expr.Replace("Math.round", "Math.Round");
+        expr = expr.Replace("Math.floor", "(int)Math.Floor");
+        expr = expr.Replace("Math.ceil", "(int)Math.Ceiling");
+        expr = expr.Replace("Math.abs", "Math.Abs");
+        expr = expr.Replace("Math.sqrt", "Math.Sqrt");
+        expr = expr.Replace("Math.pow", "Math.Pow");
+
+        // console.log -> Console.WriteLine
+        expr = expr.Replace("console.log", "Console.WriteLine");
 
         return expr;
     }
@@ -512,6 +694,22 @@ public class CSharpGenerator
         // Convert setState calls
         // setCount(count + 1) -> SetState(nameof(count), count + 1);
         var result = body.Trim();
+
+        // Strip arrow function syntax: () => expr  or  (params) => expr
+        var arrowMatch = System.Text.RegularExpressions.Regex.Match(result, @"^\s*\([^)]*\)\s*=>\s*(.+)$");
+        if (arrowMatch.Success)
+        {
+            result = arrowMatch.Groups[1].Value.Trim();
+        }
+        // Also handle: param => expr (single param without parens)
+        else
+        {
+            var singleParamArrow = System.Text.RegularExpressions.Regex.Match(result, @"^\s*\w+\s*=>\s*(.+)$");
+            if (singleParamArrow.Success)
+            {
+                result = singleParamArrow.Groups[1].Value.Trim();
+            }
+        }
 
         // Simple pattern: setXxx(value) -> SetState(nameof(xxx), value)
         var setterPattern = new System.Text.RegularExpressions.Regex(

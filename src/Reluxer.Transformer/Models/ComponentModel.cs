@@ -10,9 +10,12 @@ public class ComponentModel
     public bool IsExported { get; set; }
     public bool IsHook { get; set; }
     public List<StateField> StateFields { get; } = new();
+    public List<MvcStateField> MvcStateFields { get; } = new();
     public List<PropField> Props { get; } = new();
     public List<EventHandler> EventHandlers { get; } = new();
     public List<LocalVariable> LocalVariables { get; } = new();
+    public List<HelperFunction> HelperFunctions { get; } = new();
+    public bool HasMvcViewModel { get; set; }
     public HookConfigModel? HookConfig { get; set; }
     public TimelineModel? TimelineConfig { get; set; }
     public VNodeModel? RenderTree { get; set; }
@@ -88,6 +91,28 @@ public class StateField
     public string SetterName { get; set; } = "";
     public string Type { get; set; } = "object";
     public string? InitialValue { get; set; }
+}
+
+/// <summary>
+/// Represents a useMvcState field (MVC ViewModel binding).
+/// </summary>
+public class MvcStateField
+{
+    public string LocalName { get; set; } = "";          // e.g., "isAdmin"
+    public string ViewModelKey { get; set; } = "";       // e.g., "isAdminRole"
+    public string Type { get; set; } = "object";         // e.g., "bool"
+    public string SetterName { get; set; } = "";         // e.g., "setIsExpanded"
+}
+
+/// <summary>
+/// Represents a helper function in the component.
+/// </summary>
+public class HelperFunction
+{
+    public string Name { get; set; } = "";
+    public string Body { get; set; } = "";
+    public List<string> Parameters { get; } = new();
+    public string ReturnType { get; set; } = "void";
 }
 
 /// <summary>

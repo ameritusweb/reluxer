@@ -1,0 +1,483 @@
+{
+  "component": "UserList",
+  "version": "1.0",
+  "generatedAt": 1764946568962,
+  "templates": {
+    "1.1.1": {
+      "template": "User Directory",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "1",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.2.1": {
+      "template": "Page {0} of {1} ({2} total users)",
+      "bindings": [
+        "users.page",
+        "users.totalPages",
+        "users.total"
+      ],
+      "slots": [
+        5,
+        12,
+        17
+      ],
+      "path": [
+        "1",
+        "2"
+      ],
+      "type": "dynamic"
+    },
+    "1.3.1.1": {
+      "template": "Loading...",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "3",
+        "1",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.4.1.1": {
+      "template": "Error: {0}",
+      "bindings": [
+        "users.error"
+      ],
+      "slots": [
+        7
+      ],
+      "path": [
+        "1",
+        "4",
+        "1"
+      ],
+      "type": "dynamic"
+    },
+    "1.5.1.1.1.1": {
+      "template": "ID",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.5.1.1.2.1": {
+      "template": "Name",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "5",
+        "1",
+        "1",
+        "2",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.5.1.1.3.1": {
+      "template": "Email",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "5",
+        "1",
+        "1",
+        "3",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.5.1.1.4.1": {
+      "template": "Role",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "5",
+        "1",
+        "1",
+        "4",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.6.1.1": {
+      "template": "Previous",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "1",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.6.2.1": {
+      "template": "Page {0}",
+      "bindings": [
+        "users.page"
+      ],
+      "slots": [
+        5
+      ],
+      "path": [
+        "1",
+        "6",
+        "2"
+      ],
+      "type": "dynamic"
+    },
+    "1.6.3.1": {
+      "template": "Next",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "3",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.6.4.1": {
+      "template": "First",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "4",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.6.5.1": {
+      "template": "Last",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "5",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.6.6.1": {
+      "template": "Refresh",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "6",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.@key": {
+      "template": "1",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1"
+      ],
+      "type": "attribute-static"
+    },
+    "1.@className": {
+      "template": "user-list",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1"
+      ],
+      "type": "attribute-static"
+    },
+    "1.1.@key": {
+      "template": "1.1",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "1"
+      ],
+      "type": "attribute-static"
+    },
+    "1.2.@key": {
+      "template": "1.2",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "2"
+      ],
+      "type": "attribute-static"
+    },
+    "1.5.@key": {
+      "template": "1.5",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "5"
+      ],
+      "type": "attribute-static"
+    },
+    "1.5.1.@key": {
+      "template": "1.5.1",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "5",
+        "1"
+      ],
+      "type": "attribute-static"
+    },
+    "1.5.1.1.@key": {
+      "template": "1.5.1.1",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "5",
+        "1",
+        "1"
+      ],
+      "type": "attribute-static"
+    },
+    "1.5.1.1.1.@key": {
+      "template": "1.5.1.1.1",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "5",
+        "1",
+        "1",
+        "1"
+      ],
+      "type": "attribute-static"
+    },
+    "1.5.1.1.2.@key": {
+      "template": "1.5.1.1.2",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "5",
+        "1",
+        "1",
+        "2"
+      ],
+      "type": "attribute-static"
+    },
+    "1.5.1.1.3.@key": {
+      "template": "1.5.1.1.3",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "5",
+        "1",
+        "1",
+        "3"
+      ],
+      "type": "attribute-static"
+    },
+    "1.5.1.1.4.@key": {
+      "template": "1.5.1.1.4",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "5",
+        "1",
+        "1",
+        "4"
+      ],
+      "type": "attribute-static"
+    },
+    "1.5.2.@key": {
+      "template": "1.5.2",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "5",
+        "2"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.@key": {
+      "template": "1.6",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.@className": {
+      "template": "pagination",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.1.@key": {
+      "template": "1.6.1",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "1"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.2.@key": {
+      "template": "1.6.2",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.3.@key": {
+      "template": "1.6.3",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "3"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.4.@key": {
+      "template": "1.6.4",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "4"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.5.@key": {
+      "template": "1.6.5",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "5"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.6.@key": {
+      "template": "1.6.6",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "6"
+      ],
+      "type": "attribute-static"
+    }
+  },
+  "conditionalElements": {
+    "1.3": {
+      "type": "conditional-element",
+      "conditionExpression": "users.pending",
+      "conditionBindings": [
+        "users.pending"
+      ],
+      "conditionMapping": {
+        "users.pending": "users.pending"
+      },
+      "evaluable": true,
+      "branches": {
+        "true": {
+          "type": "element",
+          "tag": "div",
+          "hexPath": "1.3.1",
+          "attributes": {
+            "key": "1.3.1",
+            "className": "loading"
+          },
+          "children": [
+            {
+              "type": "text",
+              "value": "Loading...",
+              "hexPath": "1.3.1.1"
+            }
+          ]
+        },
+        "false": null
+      },
+      "operator": "&&"
+    },
+    "1.4": {
+      "type": "conditional-element",
+      "conditionExpression": "users.error",
+      "conditionBindings": [
+        "users.error"
+      ],
+      "conditionMapping": {
+        "users.error": "users.error"
+      },
+      "evaluable": true,
+      "branches": {
+        "true": {
+          "type": "element",
+          "tag": "div",
+          "hexPath": "1.4.1",
+          "attributes": {
+            "key": "1.4.1",
+            "className": "error"
+          },
+          "children": [
+            {
+              "type": "text",
+              "value": "Error:",
+              "hexPath": "1.4.1.1"
+            },
+            {
+              "type": "text",
+              "binding": "users.error",
+              "hexPath": "1.4.1.2"
+            }
+          ]
+        },
+        "false": null
+      },
+      "operator": "&&"
+    }
+  }
+}

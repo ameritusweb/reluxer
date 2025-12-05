@@ -1,0 +1,26 @@
+{
+  "componentName": "UserList",
+  "timestamp": "2025-12-05T14:56:08.963Z",
+  "hooks": [
+    {
+      "type": "useServerTask",
+      "varName": "users_fetch",
+      "runtime": "csharp",
+      "isStreaming": false,
+      "index": 0
+    },
+    {
+      "type": "useServerTask",
+      "varName": "users_count",
+      "runtime": "csharp",
+      "isStreaming": false,
+      "index": 1
+    },
+    {
+      "type": "usePaginatedServerTask",
+      "varName": "users",
+      "runtime": "csharp",
+      "index": 2
+    }
+  ]
+}

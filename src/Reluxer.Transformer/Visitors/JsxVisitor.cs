@@ -564,6 +564,16 @@ public class JsxVisitor : TokenVisitor
                     EventHandlerRef = handlerInfo.name
                 };
             }
+            else if (attrName == "style")
+            {
+                // Transform JS style object to CSS string
+                var cssString = TransformStyleObject(exprContent);
+                element.Attributes["style"] = new AttributeValue
+                {
+                    RawValue = cssString,
+                    IsDynamic = false
+                };
+            }
             else
             {
                 element.Attributes[NormalizeAttributeName(attrName)] = new AttributeValue
@@ -761,6 +771,104 @@ public class JsxVisitor : TokenVisitor
 
     private string TokensToString(Token[] tokens) =>
         string.Join("", tokens.Select(t => t.Value));
+
+    /// <summary>
+    /// Transforms a JS style object like {marginBottom:'20px',fontSize:'14px'}
+    /// into a CSS string like "margin-bottom: 20px; font-size: 14px"
+    /// </summary>
+    private string TransformStyleObject(Token[] tokens)
+    {
+        // Skip the outer braces { }
+        var content = tokens.SkipWhile(t => t.Value == "{" || t.Type == TokenType.Whitespace)
+                           .Reverse()
+                           .SkipWhile(t => t.Value == "}" || t.Type == TokenType.Whitespace)
+                           .Reverse()
+                           .ToArray();
+
+        var cssProperties = new List<string>();
+        int i = 0;
+
+        while (i < content.Length)
+        {
+            // Skip whitespace and commas
+            while (i < content.Length && (content[i].Type == TokenType.Whitespace || content[i].Value == ","))
+                i++;
+
+            if (i >= content.Length) break;
+
+            // Get property name (identifier)
+            if (content[i].Type != TokenType.Identifier)
+            {
+                i++;
+                continue;
+            }
+
+            var propName = content[i].Value;
+            i++;
+
+            // Skip to colon
+            while (i < content.Length && content[i].Type == TokenType.Whitespace)
+                i++;
+
+            if (i >= content.Length || content[i].Value != ":" && content[i].Type != TokenType.Colon)
+                continue;
+
+            i++; // Skip colon
+
+            // Skip whitespace
+            while (i < content.Length && content[i].Type == TokenType.Whitespace)
+                i++;
+
+            if (i >= content.Length) break;
+
+            // Get property value (string or number)
+            string propValue;
+            if (content[i].Type == TokenType.String)
+            {
+                propValue = content[i].Value.Trim('\'', '"');
+                i++;
+            }
+            else if (content[i].Type == TokenType.Number)
+            {
+                propValue = content[i].Value;
+                i++;
+            }
+            else
+            {
+                // Skip unknown token
+                i++;
+                continue;
+            }
+
+            // Convert camelCase to kebab-case
+            var cssProperty = CamelToKebab(propName);
+            cssProperties.Add($"{cssProperty}: {propValue}");
+        }
+
+        return string.Join("; ", cssProperties);
+    }
+
+    /// <summary>
+    /// Converts camelCase to kebab-case: marginBottom -> margin-bottom
+    /// </summary>
+    private string CamelToKebab(string camelCase)
+    {
+        var result = new System.Text.StringBuilder();
+        foreach (char c in camelCase)
+        {
+            if (char.IsUpper(c))
+            {
+                if (result.Length > 0)
+                    result.Append('-');
+                result.Append(char.ToLower(c));
+            }
+            else
+            {
+                result.Append(c);
+            }
+        }
+        return result.ToString();
+    }
 
     #endregion
 }

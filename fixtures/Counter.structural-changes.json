@@ -1,7 +1,7 @@
 {
   "componentName": "Counter",
-  "timestamp": "2025-12-05T04:30:41.145Z",
-  "sourceFile": "J:\\projects\\lexer\\fixtures\\Counter.tsx",
+  "timestamp": "2025-12-05T14:55:59.651Z",
+  "sourceFile": "J:\\projects\\reluxer\\reluxer\\fixtures\\Counter.tsx",
   "changes": [
     {
       "type": "insert",
