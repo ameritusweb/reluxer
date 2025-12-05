@@ -1,0 +1,148 @@
+{
+  "component": "EventHandlersTest",
+  "version": "1.0",
+  "generatedAt": 1764910202958,
+  "templates": {
+    "1.@key": {
+      "template": "1",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1"
+      ],
+      "type": "attribute-static"
+    },
+    "1.1.@key": {
+      "template": "1.1",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "1"
+      ],
+      "type": "attribute-static"
+    },
+    "1.1.1": {
+      "template": "Count:",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "1",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.1.2": {
+      "template": "{0}",
+      "bindings": [
+        "count"
+      ],
+      "slots": [
+        0
+      ],
+      "path": [
+        "1",
+        "1"
+      ],
+      "type": "dynamic"
+    },
+    "1.2.@key": {
+      "template": "1.2",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "2"
+      ],
+      "type": "attribute-static"
+    },
+    "1.2.1": {
+      "template": "Increment",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "2",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.3.@key": {
+      "template": "1.3",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "3"
+      ],
+      "type": "attribute-static"
+    },
+    "1.3.1": {
+      "template": "Decrement",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "3",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.4.@key": {
+      "template": "1.4",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "4"
+      ],
+      "type": "attribute-static"
+    },
+    "1.4.1": {
+      "template": "Reset",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "4",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.5.@value": {
+      "template": "{0}",
+      "bindings": [
+        "message"
+      ],
+      "slots": [
+        0
+      ],
+      "path": [
+        "1",
+        "5"
+      ],
+      "type": "attribute-dynamic"
+    },
+    "1.5.@placeholder": {
+      "template": "Type something...",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "5"
+      ],
+      "type": "attribute-static"
+    },
+    "1.5.@key": {
+      "template": "1.5",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "5"
+      ],
+      "type": "attribute-static"
+    }
+  }
+}

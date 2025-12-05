@@ -1,0 +1,258 @@
+{
+  "component": "ListRenderingTest",
+  "version": "1.0",
+  "generatedAt": 1764912494343,
+  "templates": {
+    "1.@key": {
+      "template": "1",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1"
+      ],
+      "type": "attribute-static"
+    },
+    "1.1.@key": {
+      "template": "1.1",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "1"
+      ],
+      "type": "attribute-static"
+    },
+    "1.1.1": {
+      "template": "Products",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "1",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.2.@key": {
+      "template": "1.2",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "2"
+      ],
+      "type": "attribute-static"
+    },
+    "1.2.1.item.@key": {
+      "template": "{0}",
+      "bindings": [
+        "item.id"
+      ],
+      "slots": [
+        0
+      ],
+      "path": [
+        "1",
+        "2",
+        "1",
+        "item"
+      ],
+      "type": "attribute-dynamic"
+    },
+    "1.2.1.item.1": {
+      "template": "{0}",
+      "bindings": [
+        "item.name"
+      ],
+      "slots": [
+        0
+      ],
+      "path": [
+        "1",
+        "2",
+        "1",
+        "item"
+      ],
+      "type": "dynamic"
+    },
+    "1.2.1.item.2": {
+      "template": "- $",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "2",
+        "1",
+        "item",
+        "2"
+      ],
+      "type": "static"
+    },
+    "1.2.1.item.3": {
+      "template": "{0}",
+      "bindings": [
+        "item.price"
+      ],
+      "slots": [
+        0
+      ],
+      "path": [
+        "1",
+        "2",
+        "1",
+        "item"
+      ],
+      "type": "dynamic"
+    },
+    "1.3.@key": {
+      "template": "1.3",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "3"
+      ],
+      "type": "attribute-static"
+    },
+    "1.3.1": {
+      "template": "Users",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "3",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.4.@key": {
+      "template": "1.4",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "4"
+      ],
+      "type": "attribute-static"
+    },
+    "1.4.1.item.@key": {
+      "template": "{0}",
+      "bindings": [
+        "user.id"
+      ],
+      "slots": [
+        0
+      ],
+      "path": [
+        "1",
+        "4",
+        "1",
+        "item"
+      ],
+      "type": "attribute-dynamic"
+    },
+    "1.4.1.item.@class": {
+      "template": "user-card",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "4",
+        "1",
+        "item"
+      ],
+      "type": "attribute-static"
+    },
+    "1.4.1.item.1.@key": {
+      "template": "1.4.1.item.1",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "4",
+        "1",
+        "item",
+        "1"
+      ],
+      "type": "attribute-static"
+    },
+    "1.4.1.item.1.1": {
+      "template": "{0}",
+      "bindings": [
+        "index+1"
+      ],
+      "slots": [
+        0
+      ],
+      "path": [
+        "1",
+        "4",
+        "1",
+        "item",
+        "1"
+      ],
+      "type": "dynamic"
+    },
+    "1.4.1.item.1.2": {
+      "template": ".",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "4",
+        "1",
+        "item",
+        "1",
+        "2"
+      ],
+      "type": "static"
+    },
+    "1.4.1.item.1.3": {
+      "template": "{0}",
+      "bindings": [
+        "user.name"
+      ],
+      "slots": [
+        0
+      ],
+      "path": [
+        "1",
+        "4",
+        "1",
+        "item",
+        "1"
+      ],
+      "type": "dynamic"
+    },
+    "1.4.1.item.2.@key": {
+      "template": "1.4.1.item.2",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "4",
+        "1",
+        "item",
+        "2"
+      ],
+      "type": "attribute-static"
+    },
+    "1.4.1.item.2.1": {
+      "template": "{0}",
+      "bindings": [
+        "user.email"
+      ],
+      "slots": [
+        0
+      ],
+      "path": [
+        "1",
+        "4",
+        "1",
+        "item",
+        "2"
+      ],
+      "type": "dynamic"
+    }
+  }
+}

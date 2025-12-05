@@ -1,0 +1,182 @@
+using Reluxer.Tokens;
+
+namespace Reluxer.Matching;
+
+/// <summary>
+/// Represents the type of match in MatchAll results.
+/// </summary>
+public enum TokenMatchType
+{
+    /// <summary>Unknown or unspecified match type</summary>
+    Unknown,
+    /// <summary>Element match (e.g., JSX element)</summary>
+    Element,
+    /// <summary>Expression match (e.g., braced expression)</summary>
+    Expression,
+    /// <summary>Text match (e.g., JSX text)</summary>
+    Text,
+    /// <summary>Custom match type</summary>
+    Custom
+}
+
+/// <summary>
+/// Represents a single match result from MatchAll, including which alternative matched.
+/// </summary>
+public class MatchAllItem
+{
+    /// <summary>The underlying match result</summary>
+    public TokenMatch Match { get; }
+
+    /// <summary>Index of the alternative that matched (0-based)</summary>
+    public int AlternativeIndex { get; }
+
+    /// <summary>The type of match (for semantic clarity)</summary>
+    public TokenMatchType Type { get; }
+
+    /// <summary>Optional tag for custom identification</summary>
+    public string? Tag { get; }
+
+    public MatchAllItem(TokenMatch match, int alternativeIndex, TokenMatchType type = TokenMatchType.Unknown, string? tag = null)
+    {
+        Match = match;
+        AlternativeIndex = alternativeIndex;
+        Type = type;
+        Tag = tag;
+    }
+
+    /// <summary>Shorthand access to matched tokens</summary>
+    public Token[] Tokens => Match.MatchedTokens;
+
+    /// <summary>Shorthand access to captures</summary>
+    public TokenCapture[] Captures => Match.Captures;
+}
+
+/// <summary>
+/// Represents the result of a successful pattern match against a token stream.
+/// </summary>
+public class TokenMatch
+{
+    /// <summary>
+    /// All tokens that were matched by the pattern
+    /// </summary>
+    public Token[] MatchedTokens { get; }
+
+    /// <summary>
+    /// Captured groups (by index, 0 = first capture)
+    /// </summary>
+    public TokenCapture[] Captures { get; }
+
+    /// <summary>
+    /// Named captures (if the pattern uses named groups)
+    /// </summary>
+    public IReadOnlyDictionary<string, TokenCapture> NamedCaptures { get; }
+
+    /// <summary>
+    /// Starting index in the original token stream
+    /// </summary>
+    public int StartIndex { get; }
+
+    /// <summary>
+    /// Ending index (exclusive) in the original token stream
+    /// </summary>
+    public int EndIndex { get; }
+
+    /// <summary>
+    /// The pattern that produced this match
+    /// </summary>
+    public string Pattern { get; }
+
+    public TokenMatch(
+        Token[] matchedTokens,
+        TokenCapture[] captures,
+        Dictionary<string, TokenCapture>? namedCaptures,
+        int startIndex,
+        int endIndex,
+        string pattern)
+    {
+        MatchedTokens = matchedTokens;
+        Captures = captures;
+        NamedCaptures = namedCaptures ?? new Dictionary<string, TokenCapture>();
+        StartIndex = startIndex;
+        EndIndex = endIndex;
+        Pattern = pattern;
+    }
+
+    /// <summary>
+    /// Gets the number of tokens matched
+    /// </summary>
+    public int Length => MatchedTokens.Length;
+
+    /// <summary>
+    /// Gets a capture by index
+    /// </summary>
+    public TokenCapture this[int index] => Captures[index];
+
+    /// <summary>
+    /// Gets a capture by name
+    /// </summary>
+    public TokenCapture this[string name] => NamedCaptures[name];
+
+    /// <summary>
+    /// Gets the first token in a capture group
+    /// </summary>
+    public Token? GetCapturedToken(int captureIndex)
+    {
+        if (captureIndex < 0 || captureIndex >= Captures.Length)
+            return null;
+        return Captures[captureIndex].Tokens.FirstOrDefault();
+    }
+
+    /// <summary>
+    /// Gets all tokens in a capture group
+    /// </summary>
+    public Token[] GetCapturedTokens(int captureIndex)
+    {
+        if (captureIndex < 0 || captureIndex >= Captures.Length)
+            return Array.Empty<Token>();
+        return Captures[captureIndex].Tokens;
+    }
+}
+
+/// <summary>
+/// Represents a single capture group from a pattern match.
+/// </summary>
+public class TokenCapture
+{
+    /// <summary>
+    /// The tokens captured by this group
+    /// </summary>
+    public Token[] Tokens { get; }
+
+    /// <summary>
+    /// Optional name of this capture group
+    /// </summary>
+    public string? Name { get; }
+
+    /// <summary>
+    /// Index of this capture group in the pattern
+    /// </summary>
+    public int Index { get; }
+
+    public TokenCapture(Token[] tokens, int index, string? name = null)
+    {
+        Tokens = tokens;
+        Index = index;
+        Name = name;
+    }
+
+    /// <summary>
+    /// Gets the first token in this capture, or null if empty
+    /// </summary>
+    public Token? First => Tokens.FirstOrDefault();
+
+    /// <summary>
+    /// Gets the combined value of all tokens in this capture
+    /// </summary>
+    public string Value => string.Join("", Tokens.Select(t => t.Value));
+
+    /// <summary>
+    /// Returns true if this capture contains any tokens
+    /// </summary>
+    public bool HasValue => Tokens.Length > 0;
+}

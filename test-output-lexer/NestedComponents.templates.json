@@ -1,0 +1,33 @@
+[
+  {
+    "component": "Card",
+    "version": "1.0",
+    "generatedAt": 1764910211760,
+    "templates": {}
+  },
+  {
+    "component": "Dashboard",
+    "version": "1.0",
+    "generatedAt": 1764910211761,
+    "templates": {
+      "1.@class": {
+        "template": "dashboard",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      },
+      "1.@key": {
+        "template": "1",
+        "bindings": [],
+        "slots": [],
+        "path": [
+          "1"
+        ],
+        "type": "attribute-static"
+      }
+    }
+  }
+]

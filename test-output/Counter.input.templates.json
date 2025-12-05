@@ -1,0 +1,77 @@
+{
+  "component": "Counter",
+  "version": "1.0",
+  "generatedAt": 1762394396448,
+  "templates": {
+    "10000000.10000000.10000000": {
+      "template": "Counter Example",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "10000000",
+        "10000000",
+        "10000000"
+      ],
+      "type": "static"
+    },
+    "10000000.20000000.10000000": {
+      "template": "Current count: {0}",
+      "bindings": [
+        "count"
+      ],
+      "slots": [
+        15
+      ],
+      "path": [
+        "10000000",
+        "20000000"
+      ],
+      "type": "dynamic"
+    },
+    "10000000.30000000.10000000": {
+      "template": "Increment",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "10000000",
+        "30000000",
+        "10000000"
+      ],
+      "type": "static"
+    },
+    "10000000.40000000.10000000": {
+      "template": "Reset",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "10000000",
+        "40000000",
+        "10000000"
+      ],
+      "type": "static"
+    },
+    "10000000.@className": {
+      "template": "counter",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "10000000"
+      ],
+      "type": "attribute-static"
+    },
+    "10000000.30000000.@ref": {
+      "template": "{0}",
+      "bindings": [
+        "buttonRef"
+      ],
+      "slots": [
+        0
+      ],
+      "path": [
+        "10000000",
+        "30000000"
+      ],
+      "type": "attribute-dynamic"
+    }
+  }
+}

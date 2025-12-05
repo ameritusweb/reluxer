@@ -1,0 +1,95 @@
+{
+  "componentName": "Counter",
+  "timestamp": "2025-12-05T04:30:41.145Z",
+  "sourceFile": "J:\\projects\\lexer\\fixtures\\Counter.tsx",
+  "changes": [
+    {
+      "type": "insert",
+      "path": "1",
+      "vnode": {
+        "type": "element",
+        "tag": "div",
+        "path": "1",
+        "attributes": {
+          "id": "counter-root"
+        },
+        "children": [
+          {
+            "type": "element",
+            "path": "1.1",
+            "tag": "span"
+          },
+          {
+            "type": "element",
+            "path": "1.2",
+            "tag": "span"
+          },
+          {
+            "type": "element",
+            "path": "1.3",
+            "tag": "button"
+          }
+        ]
+      }
+    },
+    {
+      "type": "insert",
+      "path": "1.1",
+      "vnode": {
+        "type": "element",
+        "tag": "span",
+        "path": "1.1",
+        "attributes": {
+          "id": "counter-value"
+        },
+        "children": [
+          {
+            "type": "expression",
+            "path": "1.1.1",
+            "value": "__DYNAMIC__"
+          }
+        ]
+      }
+    },
+    {
+      "type": "insert",
+      "path": "1.2",
+      "vnode": {
+        "type": "element",
+        "tag": "span",
+        "path": "1.2",
+        "attributes": {
+          "id": "message"
+        },
+        "children": [
+          {
+            "type": "expression",
+            "path": "1.2.1",
+            "value": "__DYNAMIC__"
+          }
+        ]
+      }
+    },
+    {
+      "type": "insert",
+      "path": "1.3",
+      "vnode": {
+        "type": "element",
+        "tag": "button",
+        "path": "1.3",
+        "attributes": {
+          "id": "increment-btn",
+          "type": "button",
+          "onClick": "__DYNAMIC__"
+        },
+        "children": [
+          {
+            "type": "text",
+            "path": "1.3.1",
+            "value": "Increment"
+          }
+        ]
+      }
+    }
+  ]
+}

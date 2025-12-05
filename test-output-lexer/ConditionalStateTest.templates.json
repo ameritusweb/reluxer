@@ -1,0 +1,1270 @@
+{
+  "component": "ConditionalStateTest",
+  "version": "1.0",
+  "generatedAt": 1764940094908,
+  "templates": {
+    "1.@class": {
+      "template": "conditional-test-container",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1"
+      ],
+      "type": "attribute-static"
+    },
+    "1.@key": {
+      "template": "1",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1"
+      ],
+      "type": "attribute-static"
+    },
+    "1.1.@key": {
+      "template": "1.1",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "1"
+      ],
+      "type": "attribute-static"
+    },
+    "1.1.1": {
+      "template": "Conditional State Test",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "1",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.2.@class": {
+      "template": "controls",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "2"
+      ],
+      "type": "attribute-static"
+    },
+    "1.2.@key": {
+      "template": "1.2",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "2"
+      ],
+      "type": "attribute-static"
+    },
+    "1.2.1.@key": {
+      "template": "1.2.1",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "2",
+        "1"
+      ],
+      "type": "attribute-static"
+    },
+    "1.2.1.1": {
+      "template": "Toggle myState1 (currently:",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "2",
+        "1",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.2.1.2": {
+      "template": "{0}",
+      "bindings": [
+        "myState1?'true':'false'"
+      ],
+      "slots": [
+        0
+      ],
+      "path": [
+        "1",
+        "2",
+        "1"
+      ],
+      "type": "dynamic"
+    },
+    "1.2.1.3": {
+      "template": ")",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "2",
+        "1",
+        "3"
+      ],
+      "type": "static"
+    },
+    "1.2.2.@key": {
+      "template": "1.2.2",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "2",
+        "2"
+      ],
+      "type": "attribute-static"
+    },
+    "1.2.2.1": {
+      "template": "Toggle myState2 (currently:",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "2",
+        "2",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.2.2.2": {
+      "template": "{0}",
+      "bindings": [
+        "myState2?'true':'false'"
+      ],
+      "slots": [
+        0
+      ],
+      "path": [
+        "1",
+        "2",
+        "2"
+      ],
+      "type": "dynamic"
+    },
+    "1.2.2.3": {
+      "template": ")",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "2",
+        "2",
+        "3"
+      ],
+      "type": "static"
+    },
+    "1.2.3.@type": {
+      "template": "text",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "2",
+        "3"
+      ],
+      "type": "attribute-static"
+    },
+    "1.2.3.@value": {
+      "template": "{0}",
+      "bindings": [
+        "myState3"
+      ],
+      "slots": [
+        0
+      ],
+      "path": [
+        "1",
+        "2",
+        "3"
+      ],
+      "type": "attribute-dynamic"
+    },
+    "1.2.3.@placeholder": {
+      "template": "Edit myState3",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "2",
+        "3"
+      ],
+      "type": "attribute-static"
+    },
+    "1.2.3.@key": {
+      "template": "1.2.3",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "2",
+        "3"
+      ],
+      "type": "attribute-static"
+    },
+    "1.3.@class": {
+      "template": "state-display",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "3"
+      ],
+      "type": "attribute-static"
+    },
+    "1.3.@key": {
+      "template": "1.3",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "3"
+      ],
+      "type": "attribute-static"
+    },
+    "1.3.1.@key": {
+      "template": "1.3.1",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "3",
+        "1"
+      ],
+      "type": "attribute-static"
+    },
+    "1.3.1.1": {
+      "template": "myState1:",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "3",
+        "1",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.3.1.2": {
+      "template": "{0}",
+      "bindings": [
+        "myState1?'✓ true':'✗ false'"
+      ],
+      "slots": [
+        0
+      ],
+      "path": [
+        "1",
+        "3",
+        "1"
+      ],
+      "type": "dynamic"
+    },
+    "1.3.2.@key": {
+      "template": "1.3.2",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "3",
+        "2"
+      ],
+      "type": "attribute-static"
+    },
+    "1.3.2.1": {
+      "template": "myState2:",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "3",
+        "2",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.3.2.2": {
+      "template": "{0}",
+      "bindings": [
+        "myState2?'✓ true':'✗ false'"
+      ],
+      "slots": [
+        0
+      ],
+      "path": [
+        "1",
+        "3",
+        "2"
+      ],
+      "type": "dynamic"
+    },
+    "1.3.3.@key": {
+      "template": "1.3.3",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "3",
+        "3"
+      ],
+      "type": "attribute-static"
+    },
+    "1.3.3.1": {
+      "template": "myState3: \"",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "3",
+        "3",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.3.3.2": {
+      "template": "{0}",
+      "bindings": [
+        "myState3"
+      ],
+      "slots": [
+        0
+      ],
+      "path": [
+        "1",
+        "3",
+        "3"
+      ],
+      "type": "dynamic"
+    },
+    "1.3.3.3": {
+      "template": "\"",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "3",
+        "3",
+        "3"
+      ],
+      "type": "static"
+    },
+    "1.3.4.@key": {
+      "template": "1.3.4",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "3",
+        "4"
+      ],
+      "type": "attribute-static"
+    },
+    "1.3.4.1": {
+      "template": "Condition (myState1 && !myState2):",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "3",
+        "4",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.3.4.2": {
+      "template": "{0}",
+      "bindings": [
+        "myState1&&!myState2?'✓ SHOWN':'✗ HIDDEN'"
+      ],
+      "slots": [
+        0
+      ],
+      "path": [
+        "1",
+        "3",
+        "4"
+      ],
+      "type": "dynamic"
+    },
+    "1.4.@key": {
+      "template": "1.4",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "4"
+      ],
+      "type": "attribute-static"
+    },
+    "1.5.1.@class": {
+      "template": "conditional-content",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "5",
+        "1"
+      ],
+      "type": "attribute-static"
+    },
+    "1.5.1.1.1": {
+      "template": "Conditionally Rendered Section",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "5",
+        "1",
+        "1",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.5.1.2.1": {
+      "template": "This section is only visible when:",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "5",
+        "1",
+        "2",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.5.1.3.1.1": {
+      "template": "myState1 is",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "5",
+        "1",
+        "3",
+        "1",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.5.1.3.1.2.1": {
+      "template": "true",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "5",
+        "1",
+        "3",
+        "1",
+        "2",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.5.1.3.2.1": {
+      "template": "myState2 is",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "5",
+        "1",
+        "3",
+        "2",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.5.1.3.2.2.1": {
+      "template": "false",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "5",
+        "1",
+        "3",
+        "2",
+        "2",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.5.1.4.@class": {
+      "template": "nested-content",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "5",
+        "1",
+        "4"
+      ],
+      "type": "attribute-static"
+    },
+    "1.5.1.4.1.1": {
+      "template": "Some nested DOM elements here",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "5",
+        "1",
+        "4",
+        "1",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.5.1.4.2.@class": {
+      "template": "dynamic-value",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "5",
+        "1",
+        "4",
+        "2"
+      ],
+      "type": "attribute-static"
+    },
+    "1.5.1.4.2.1": {
+      "template": "Dynamic content:",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "5",
+        "1",
+        "4",
+        "2",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.5.1.4.2.2.1": {
+      "template": "{0}",
+      "bindings": [
+        "myState3"
+      ],
+      "slots": [
+        0
+      ],
+      "path": [
+        "1",
+        "5",
+        "1",
+        "4",
+        "2",
+        "2"
+      ],
+      "type": "dynamic"
+    },
+    "1.6.@class": {
+      "template": "test-cases",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.@key": {
+      "template": "1.6",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.1.@key": {
+      "template": "1.6.1",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "1"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.1.1": {
+      "template": "Test Scenarios:",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "1",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.6.2.@key": {
+      "template": "1.6.2",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.2.1.@key": {
+      "template": "1.6.2.1",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "1"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.2.1.1.@key": {
+      "template": "1.6.2.1.1",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "1",
+        "1"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.2.1.1.1": {
+      "template": "Initial State:",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "1",
+        "1",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.6.2.1.2": {
+      "template": "myState1=false, myState2=false → Section HIDDEN",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "1",
+        "2"
+      ],
+      "type": "static"
+    },
+    "1.6.2.1.3.@key": {
+      "template": "1.6.2.1.3",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "1",
+        "3"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.2.1.4.@key": {
+      "template": "1.6.2.1.4",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "1",
+        "4"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.2.1.4.1": {
+      "template": "Tests VNull node generation when condition is initially false",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "1",
+        "4",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.6.2.2.@key": {
+      "template": "1.6.2.2",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "2"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.2.2.1.@key": {
+      "template": "1.6.2.2.1",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "2",
+        "1"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.2.2.1.1": {
+      "template": "Toggle myState1 to true:",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "2",
+        "1",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.6.2.2.2": {
+      "template": "myState1=true, myState2=false → Section SHOWN",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "2",
+        "2"
+      ],
+      "type": "static"
+    },
+    "1.6.2.2.3.@key": {
+      "template": "1.6.2.2.3",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "2",
+        "3"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.2.2.4.@key": {
+      "template": "1.6.2.2.4",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "2",
+        "4"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.2.2.4.1": {
+      "template": "Tests patch to replace VNull with full DOM tree",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "2",
+        "4",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.6.2.3.@key": {
+      "template": "1.6.2.3",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "3"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.2.3.1.@key": {
+      "template": "1.6.2.3.1",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "3",
+        "1"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.2.3.1.1": {
+      "template": "Toggle myState2 to true:",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "3",
+        "1",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.6.2.3.2": {
+      "template": "myState1=true, myState2=true → Section HIDDEN",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "3",
+        "2"
+      ],
+      "type": "static"
+    },
+    "1.6.2.3.3.@key": {
+      "template": "1.6.2.3.3",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "3",
+        "3"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.2.3.4.@key": {
+      "template": "1.6.2.3.4",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "3",
+        "4"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.2.3.4.1": {
+      "template": "Tests patch to replace DOM tree with VNull",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "3",
+        "4",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.6.2.4.@key": {
+      "template": "1.6.2.4",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "4"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.2.4.1.@key": {
+      "template": "1.6.2.4.1",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "4",
+        "1"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.2.4.1.1": {
+      "template": "Toggle myState2 back to false:",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "4",
+        "1",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.6.2.4.2": {
+      "template": "myState1=true, myState2=false → Section SHOWN",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "4",
+        "2"
+      ],
+      "type": "static"
+    },
+    "1.6.2.4.3.@key": {
+      "template": "1.6.2.4.3",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "4",
+        "3"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.2.4.4.@key": {
+      "template": "1.6.2.4.4",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "4",
+        "4"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.2.4.4.1": {
+      "template": "Tests patch to re-show the DOM tree",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "4",
+        "4",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.6.2.5.@key": {
+      "template": "1.6.2.5",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "5"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.2.5.1.@key": {
+      "template": "1.6.2.5.1",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "5",
+        "1"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.2.5.1.1": {
+      "template": "Edit myState3 while visible:",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "5",
+        "1",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.6.2.5.2": {
+      "template": "Change text in input",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "5",
+        "2"
+      ],
+      "type": "static"
+    },
+    "1.6.2.5.3.@key": {
+      "template": "1.6.2.5.3",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "5",
+        "3"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.2.5.4.@key": {
+      "template": "1.6.2.5.4",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "5",
+        "4"
+      ],
+      "type": "attribute-static"
+    },
+    "1.6.2.5.4.1": {
+      "template": "Tests state synchronization and dynamic content updates inside conditional",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "6",
+        "2",
+        "5",
+        "4",
+        "1"
+      ],
+      "type": "static"
+    }
+  },
+  "conditionalElements": {
+    "1.5": {
+      "type": "conditional-element",
+      "conditionExpression": "myState1 && !myState2",
+      "conditionBindings": [
+        "state_0",
+        "state_1"
+      ],
+      "evaluable": true,
+      "operator": "&&",
+      "branches": {
+        "true": {
+          "type": "element",
+          "tag": "div",
+          "hexPath": "1.5.1",
+          "attributes": {
+            "key": "1.5.1",
+            "className": "conditional-content"
+          },
+          "children": [
+            {
+              "type": "element",
+              "tag": "h2",
+              "hexPath": "1.5.1.1",
+              "attributes": {
+                "key": "1.5.1.1"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "hexPath": "1.5.1.1.1",
+                  "value": "Conditionally Rendered Section"
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "tag": "p",
+              "hexPath": "1.5.1.2",
+              "attributes": {
+                "key": "1.5.1.2"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "hexPath": "1.5.1.2.1",
+                  "value": "This section is only visible when:"
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "tag": "ul",
+              "hexPath": "1.5.1.3",
+              "attributes": {
+                "key": "1.5.1.3"
+              },
+              "children": [
+                {
+                  "type": "element",
+                  "tag": "li",
+                  "hexPath": "1.5.1.3.1",
+                  "attributes": {
+                    "key": "1.5.1.3.1"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "hexPath": "1.5.1.3.1.1",
+                      "value": "myState1 is"
+                    },
+                    {
+                      "type": "element",
+                      "tag": "strong",
+                      "hexPath": "1.5.1.3.1.2",
+                      "attributes": {
+                        "key": "1.5.1.3.1.2"
+                      },
+                      "children": [
+                        {
+                          "type": "text",
+                          "hexPath": "1.5.1.3.1.2.1",
+                          "value": "true"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "tag": "li",
+                  "hexPath": "1.5.1.3.2",
+                  "attributes": {
+                    "key": "1.5.1.3.2"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "hexPath": "1.5.1.3.2.1",
+                      "value": "myState2 is"
+                    },
+                    {
+                      "type": "element",
+                      "tag": "strong",
+                      "hexPath": "1.5.1.3.2.2",
+                      "attributes": {
+                        "key": "1.5.1.3.2.2"
+                      },
+                      "children": [
+                        {
+                          "type": "text",
+                          "hexPath": "1.5.1.3.2.2.1",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "tag": "div",
+              "hexPath": "1.5.1.4",
+              "attributes": {
+                "key": "1.5.1.4",
+                "className": "nested-content"
+              },
+              "children": [
+                {
+                  "type": "element",
+                  "tag": "p",
+                  "hexPath": "1.5.1.4.1",
+                  "attributes": {
+                    "key": "1.5.1.4.1"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "hexPath": "1.5.1.4.1.1",
+                      "value": "Some nested DOM elements here"
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "tag": "div",
+                  "hexPath": "1.5.1.4.2",
+                  "attributes": {
+                    "key": "1.5.1.4.2",
+                    "className": "dynamic-value"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "hexPath": "1.5.1.4.2.1",
+                      "value": "Dynamic content:"
+                    },
+                    {
+                      "type": "element",
+                      "tag": "strong",
+                      "hexPath": "1.5.1.4.2.2",
+                      "attributes": {
+                        "key": "1.5.1.4.2.2"
+                      },
+                      "children": [
+                        {
+                          "type": "text",
+                          "hexPath": "1.5.1.4.2.2.1",
+                          "binding": "myState3"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

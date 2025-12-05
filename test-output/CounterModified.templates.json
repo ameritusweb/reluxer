@@ -1,0 +1,121 @@
+{
+  "component": "Counter",
+  "version": "1.0",
+  "generatedAt": 1762620975875,
+  "templates": {
+    "1.1.1": {
+      "template": "{0}",
+      "bindings": [
+        "count"
+      ],
+      "slots": [
+        0
+      ],
+      "path": [
+        "1",
+        "1"
+      ],
+      "type": "dynamic"
+    },
+    "1.18.1": {
+      "template": "This is a new element!",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "18",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.2.1": {
+      "template": "Increment",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "2",
+        "1"
+      ],
+      "type": "static"
+    },
+    "1.@key": {
+      "template": "1",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1"
+      ],
+      "type": "attribute-static"
+    },
+    "1.@id": {
+      "template": "counter-root",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1"
+      ],
+      "type": "attribute-static"
+    },
+    "1.1.@key": {
+      "template": "1.1",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "1"
+      ],
+      "type": "attribute-static"
+    },
+    "1.1.@id": {
+      "template": "counter-value",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "1"
+      ],
+      "type": "attribute-static"
+    },
+    "1.18.@key": {
+      "template": "1.18",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "18"
+      ],
+      "type": "attribute-static"
+    },
+    "1.2.@key": {
+      "template": "1.2",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "2"
+      ],
+      "type": "attribute-static"
+    },
+    "1.2.@id": {
+      "template": "increment-btn",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "2"
+      ],
+      "type": "attribute-static"
+    },
+    "1.2.@type": {
+      "template": "button",
+      "bindings": [],
+      "slots": [],
+      "path": [
+        "1",
+        "2"
+      ],
+      "type": "attribute-static"
+    }
+  }
+}
