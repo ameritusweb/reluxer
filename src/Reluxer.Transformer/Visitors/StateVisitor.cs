@@ -25,8 +25,14 @@ public class StateVisitor : TokenVisitor
         // Get the component body from shared context (set by ComponentVisitor)
         _componentBody = Context.Get<Token[]>($"ComponentBody:{_component.Name}");
 
+        Console.WriteLine($"[StateVisitor] Processing component: {_component.Name}, body tokens: {_componentBody?.Length ?? 0}");
+
         if (_componentBody != null && _componentBody.Length > 0)
         {
+            // Debug: Show first tokens with more detail
+            var firstTokens = string.Join(" ", _componentBody.Take(15).Select(t => $"[{t.Type}]'{t.Value}'"));
+            Console.WriteLine($"[StateVisitor] First tokens: {firstTokens}");
+
             // Traverse just the component body
             Traverse(_componentBody,
                 nameof(VisitUseState),
@@ -35,7 +41,8 @@ public class StateVisitor : TokenVisitor
                 nameof(VisitUseMvcViewModel),
                 nameof(VisitHelperFunction),
                 nameof(VisitHelperFunctionNoParams),
-                nameof(VisitLiftedState));
+                nameof(VisitLiftedState),
+                nameof(VisitLocalVariable));
         }
     }
 
@@ -168,9 +175,12 @@ public class StateVisitor : TokenVisitor
     }
 
     // Match: const varName = state["Component.key"] for lifted state reads
-    [TokenPattern(@"\k""const"" (\i) \o""="" \i""state"" ""["" (\s)", Name = "VisitLiftedState")]
+    // Higher priority (150) because it's more specific than general local variable pattern
+    [TokenPattern(@"\k""const"" (\i) ""="" \i""state"" ""["" (\s)", Priority = 150, Name = "VisitLiftedState")]
     public void VisitLiftedState(TokenMatch match, string varName, string stateKeyString)
     {
+        Console.WriteLine($"[StateVisitor] VisitLiftedState matched: varName={varName}, stateKey={stateKeyString}");
+
         var stateKey = stateKeyString.Trim('"', '\'');
 
         // Skip if already added (prevent duplicates)
@@ -181,6 +191,42 @@ public class StateVisitor : TokenVisitor
         {
             LocalName = varName,
             StateKey = stateKey
+        });
+    }
+
+    // Match: const varName = expression; (simple local variable)
+    // Low priority so other const patterns match first
+    // Uses .*? to match any tokens until semicolon
+    [TokenPattern(@"\k""const"" (\i) ""="" (.*?) "";""", Priority = 10, Name = "VisitLocalVariable")]
+    public void VisitLocalVariable(TokenMatch match, string varName, Token[] exprTokens)
+    {
+        // Skip helper functions (already handled)
+        if (_component.HelperFunctions.Any(h => h.Name == varName))
+            return;
+
+        // Skip if it looks like a function (has arrow)
+        var expr = TokensToString(exprTokens);
+        if (expr.Contains("=>"))
+            return;
+
+        // Skip state-related (already handled)
+        if (expr.Contains("useState") || expr.Contains("useMvcState") || expr.Contains("useMvcViewModel"))
+            return;
+
+        // Skip lifted state reads (already handled by VisitLiftedState)
+        // Pattern: state["Component.key"]
+        if (expr.StartsWith("state["))
+            return;
+
+        // Skip if already added (prevent duplicates)
+        if (_component.LocalVariables.Any(lv => lv.Name == varName))
+            return;
+
+        _component.LocalVariables.Add(new LocalVariable
+        {
+            Name = varName,
+            Expression = expr,
+            IsConst = true
         });
     }
 

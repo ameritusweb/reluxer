@@ -24,7 +24,7 @@ public partial class UserProfile : MinimactComponent
 
     public void handleRefresh()
     {
-        SetState(nameof(isLoading), true);SetState(nameof(timeout), ()=>SetState(nameof(isLoading), false),2000);
+        SetState(nameof(isLoading), true);Task.Delay(2000).ContinueWith(_ => { SetState(nameof(isLoading), false); });
     }
 
     /// <summary>
@@ -55,7 +55,7 @@ public partial class ShoppingCart : MinimactComponent
 
     public void handleRefresh()
     {
-        SetState(nameof(isLoading), true);SetState(nameof(timeout), ()=>SetState(nameof(isLoading), false),1500);
+        SetState(nameof(isLoading), true);Task.Delay(1500).ContinueWith(_ => { SetState(nameof(isLoading), false); });
     }
 
     /// <summary>
@@ -86,7 +86,7 @@ public partial class ContactForm : MinimactComponent
 
     public void handleSubmit()
     {
-        SetState(nameof(isLoading), true);SetState(nameof(timeout), ()=>SetState(nameof(isLoading), false),1000);
+        SetState(nameof(isLoading), true);Task.Delay(1000).ContinueWith(_ => { SetState(nameof(isLoading), false); });
     }
 
     /// <summary>
@@ -109,9 +109,11 @@ public partial class Dashboard : MinimactComponent
     {
         StateManager.SyncMembersToState(this);
 
-        var _UserProfile_isLoading_reader = State["UserProfile.isLoading"];
-        var _ShoppingCart_isLoading_reader = State["ShoppingCart.isLoading"];
-        var _ContactForm_isLoading_reader = State["ContactForm.isLoading"];
+        var userLoading = GetState<dynamic>("UserProfile.isLoading");
+        var cartLoading = GetState<dynamic>("ShoppingCart.isLoading");
+        var formLoading = GetState<dynamic>("ContactForm.isLoading");
+
+        var anyLoading = userLoading||cartLoading||formLoading;
 
         return MinimactHelpers.createElement("div", null, new VElement("h1", "1.1", new Dictionary<string, string>(), "Dashboard"), (new MObject(anyLoading)) ? new VElement("div", "1.2.1", new Dictionary<string, string> { ["id"] = "loading-overlay", ["class"] = "loading-overlay" }, new VNode[]
         {
@@ -142,7 +144,7 @@ public partial class Dashboard : MinimactComponent
                 new VText("User Loading:", "1.6.1.1"),
                 new VElement("span", "1.6.1.2", new Dictionary<string, string> { ["id"] = "user-loading" }, new VNode[]
                 {
-                    new VText($"{(userLoading?'Yes':'No')}", "1.6.1.2.1")
+                    new VText($"{(userLoading?"Yes":"No")}", "1.6.1.2.1")
                 })
             }),
             new VElement("p", "1.6.2", new Dictionary<string, string>(), new VNode[]
@@ -150,7 +152,7 @@ public partial class Dashboard : MinimactComponent
                 new VText("Cart Loading:", "1.6.2.1"),
                 new VElement("span", "1.6.2.2", new Dictionary<string, string> { ["id"] = "cart-loading" }, new VNode[]
                 {
-                    new VText($"{(cartLoading?'Yes':'No')}", "1.6.2.2.1")
+                    new VText($"{(cartLoading?"Yes":"No")}", "1.6.2.2.1")
                 })
             }),
             new VElement("p", "1.6.3", new Dictionary<string, string>(), new VNode[]
@@ -158,7 +160,7 @@ public partial class Dashboard : MinimactComponent
                 new VText("Form Loading:", "1.6.3.1"),
                 new VElement("span", "1.6.3.2", new Dictionary<string, string> { ["id"] = "form-loading" }, new VNode[]
                 {
-                    new VText($"{(formLoading?'Yes':'No')}", "1.6.3.2.1")
+                    new VText($"{(formLoading?"Yes":"No")}", "1.6.3.2.1")
                 })
             }),
             new VElement("p", "1.6.4", new Dictionary<string, string>(), new VNode[]
@@ -166,7 +168,7 @@ public partial class Dashboard : MinimactComponent
                 new VText("Any Loading:", "1.6.4.1"),
                 new VElement("span", "1.6.4.2", new Dictionary<string, string> { ["id"] = "any-loading" }, new VNode[]
                 {
-                    new VText($"{(anyLoading?'Yes':'No')}", "1.6.4.2.1")
+                    new VText($"{(anyLoading?"Yes":"No")}", "1.6.4.2.1")
                 })
             })
         }));

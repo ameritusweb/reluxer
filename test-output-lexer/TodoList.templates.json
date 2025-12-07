@@ -1,7 +1,7 @@
 {
   "component": "TodoList",
   "version": "1.0",
-  "generatedAt": 1764967193423,
+  "generatedAt": 1764968552262,
   "templates": {
     "1.@class": {
       "template": "todo-list",

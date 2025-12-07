@@ -47,13 +47,11 @@ public partial class Counter : MinimactComponent
 [Component]
 public partial class App : MinimactComponent
 {
-    // Client-computed properties (lifted state from child components)
-    [ClientComputed("counterValue")]
-    private dynamic counterValue => GetClientState<dynamic>("counterValue", default);
-
     protected override VNode Render()
     {
         StateManager.SyncMembersToState(this);
+
+        var counterValue = GetState<dynamic>("Counter.count");
 
         return MinimactHelpers.createElement("div", null, new VElement("h1", "1.1", new Dictionary<string, string>(), "Lifted State - Simple Example"), new VElement("div", "1.2", new Dictionary<string, string> { ["class"] = "parent-display" }, new VNode[]
         {

@@ -106,18 +106,6 @@ public class CSharpGenerator
             WriteLine();
         }
 
-        // Client-computed properties (lifted state reads from child components)
-        if (component.LiftedStateReads.Count > 0)
-        {
-            WriteLine("// Client-computed properties (lifted state from child components)");
-            foreach (var liftedState in component.LiftedStateReads)
-            {
-                WriteLine($"[ClientComputed(\"{liftedState.LocalName}\")]");
-                WriteLine($"private dynamic {liftedState.LocalName} => GetClientState<dynamic>(\"{liftedState.LocalName}\", default);");
-                WriteLine();
-            }
-        }
-
         // Render method
         WriteLine("protected override VNode Render()");
         WriteLine("{");
@@ -133,6 +121,16 @@ public class CSharpGenerator
             foreach (var mvcState in component.MvcStateFields)
             {
                 WriteLine($"var {mvcState.LocalName} = GetState<{mvcState.Type}>(\"{mvcState.ViewModelKey}\");");
+            }
+            WriteLine();
+        }
+
+        // Lifted state reads (from child components)
+        if (component.LiftedStateReads.Count > 0)
+        {
+            foreach (var liftedState in component.LiftedStateReads)
+            {
+                WriteLine($"var {liftedState.LocalName} = GetState<dynamic>(\"{liftedState.StateKey}\");");
             }
             WriteLine();
         }
@@ -801,6 +799,18 @@ public class CSharpGenerator
             }
         }
 
+        // Convert setTimeout(() => callback, delay) to Task.Delay(delay).ContinueWith(_ => { callback; })
+        var setTimeoutPattern = new System.Text.RegularExpressions.Regex(
+            @"setTimeout\s*\(\s*\(\s*\)\s*=>\s*([^,]+),\s*(\d+)\s*\)");
+        result = setTimeoutPattern.Replace(result, match =>
+        {
+            var callback = match.Groups[1].Value.Trim();
+            var delay = match.Groups[2].Value;
+            // Convert the callback (e.g., setIsLoading(false) -> SetState(nameof(isLoading), false))
+            var convertedCallback = ConvertSetterCall(callback);
+            return $"Task.Delay({delay}).ContinueWith(_ => {{ {convertedCallback}; }})";
+        });
+
         // First, convert global setState("Component.key", value) to SetState("Component.key", value)
         // This is used for lifted state writes
         result = result.Replace("setState(", "SetState(");
@@ -810,14 +820,7 @@ public class CSharpGenerator
         var setterPattern = new System.Text.RegularExpressions.Regex(
             @"(?<!Set)set([A-Z]\w*)\(([^)]+)\)");
 
-        result = setterPattern.Replace(result, match =>
-        {
-            var fieldName = char.ToLower(match.Groups[1].Value[0]) + match.Groups[1].Value[1..];
-            var value = match.Groups[2].Value.Trim();
-            // Normalize spacing around operators
-            value = System.Text.RegularExpressions.Regex.Replace(value, @"(\w+)\s*([+\-*/])\s*(\d+)", "$1 $2 $3");
-            return $"SetState(nameof({fieldName}), {value})";
-        });
+        result = setterPattern.Replace(result, match => ConvertSetterCall(match.Value));
 
         // Ensure statements end with semicolons
         if (!string.IsNullOrEmpty(result) && !result.EndsWith(";") && !result.EndsWith("}"))
@@ -826,6 +829,21 @@ public class CSharpGenerator
         }
 
         return result;
+    }
+
+    private string ConvertSetterCall(string call)
+    {
+        // Convert setXxx(value) to SetState(nameof(xxx), value)
+        var setterMatch = System.Text.RegularExpressions.Regex.Match(call, @"set([A-Z]\w*)\(([^)]+)\)");
+        if (setterMatch.Success)
+        {
+            var fieldName = char.ToLower(setterMatch.Groups[1].Value[0]) + setterMatch.Groups[1].Value[1..];
+            var value = setterMatch.Groups[2].Value.Trim();
+            // Normalize spacing around operators
+            value = System.Text.RegularExpressions.Regex.Replace(value, @"(\w+)\s*([+\-*/])\s*(\d+)", "$1 $2 $3");
+            return $"SetState(nameof({fieldName}), {value})";
+        }
+        return call;
     }
 
     private bool HasTextContent(VElementModel element)

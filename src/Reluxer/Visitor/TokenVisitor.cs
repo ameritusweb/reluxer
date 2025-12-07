@@ -20,6 +20,12 @@ public abstract class TokenVisitor
     private readonly List<PatternHandler> _defaultHandlers = new();
     private bool _initialized;
 
+    /// <summary>
+    /// Set to a visitor type name to trace all pattern matches for that visitor.
+    /// Example: TokenVisitor.TraceVisitor = "JsToCSharpVisitor";
+    /// </summary>
+    public static string? TraceVisitor { get; set; }
+
     // Current token stream context for balanced extraction
     private IReadOnlyList<Token>? _currentTokens;
     private int _currentIndex;
@@ -744,6 +750,12 @@ public abstract class TokenVisitor
                         AllowedCallers = attr.From
                     };
 
+                    // Debug pattern testing - if Debug property is set, test the pattern
+                    if (!string.IsNullOrEmpty(attr.Debug))
+                    {
+                        TestPatternDebug(method.Name, attr.Pattern, attr.Debug, matcher);
+                    }
+
                     // Add to named handlers (always, so Traverse can find it by name)
                     if (!_handlersByName.TryGetValue(method.Name, out var namedList))
                     {
@@ -783,6 +795,18 @@ public abstract class TokenVisitor
 
     private void InvokeHandler(PatternHandler handler, TokenMatch match)
     {
+        // Trace output if enabled for this visitor type
+        if (TraceVisitor != null && GetType().Name == TraceVisitor)
+        {
+            Console.WriteLine($"[{GetType().Name}] {handler.Method.Name}");
+            Console.WriteLine($"  Matched: {string.Join(" ", match.MatchedTokens.Select(t => t.Value))}");
+            for (int c = 0; c < match.Captures.Length; c++)
+            {
+                Console.WriteLine($"  Capture[{c}]: {string.Join(" ", match.Captures[c].Tokens.Select(t => t.Value))}");
+            }
+            Console.WriteLine();
+        }
+
         var parameters = handler.Method.GetParameters();
         var args = new object?[parameters.Length];
 
@@ -938,6 +962,57 @@ public abstract class TokenVisitor
         finally
         {
             _visitorCallStack.Pop();
+        }
+    }
+
+    /// <summary>
+    /// Tests a pattern against a debug sample input and prints the result to the console.
+    /// </summary>
+    private void TestPatternDebug(string methodName, string pattern, string debugInput, PatternMatcher matcher)
+    {
+        try
+        {
+            // Tokenize the debug input
+            var lexer = new Lexer.TsxLexer(debugInput);
+            var tokens = lexer.Tokenize(includeWhitespace: false);
+            var tokenArray = tokens.ToArray();
+
+            // Try to match
+            if (matcher.TryMatch(tokenArray, 0, out var match))
+            {
+                var captureStrings = match!.Captures.Select((c, i) =>
+                    $"[{i}] = \"{string.Join("", c.Tokens.Select(t => t.Value))}\"");
+
+                var matchedTokensStr = string.Join(" ", match.MatchedTokens.Select(t => t.Value));
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"[Pattern Debug] {methodName}: ✓ MATCH");
+                Console.ResetColor();
+                Console.WriteLine($"  Input: {debugInput}");
+                Console.WriteLine($"  Pattern: {pattern}");
+                Console.WriteLine($"  Tokens: [{string.Join(", ", tokenArray.Select(t => $"[{t.Type}]{t.Value}"))}]");
+                Console.WriteLine($"  Captures: {string.Join(", ", captureStrings)}");
+                Console.WriteLine($"  Matched: {matchedTokensStr}");
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"[Pattern Debug] {methodName}: ✗ NO MATCH");
+                Console.ResetColor();
+                Console.WriteLine($"  Input: {debugInput}");
+                Console.WriteLine($"  Pattern: {pattern}");
+                Console.WriteLine($"  Tokens: [{string.Join(", ", tokenArray.Select(t => $"[{t.Type}]{t.Value}"))}]");
+            }
+            Console.WriteLine();
+        }
+        catch (Exception ex)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine($"[Pattern Debug] {methodName}: ERROR - {ex.Message}");
+            Console.ResetColor();
+            Console.WriteLine($"  Input: {debugInput}");
+            Console.WriteLine($"  Pattern: {pattern}");
+            Console.WriteLine();
         }
     }
 
