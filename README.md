@@ -19,17 +19,23 @@ A token-based pattern matching and visitor framework for C#, inspired by Babel's
 ## Installation
 
 ```bash
-dotnet add reference path/to/TokenLexer.csproj
+dotnet add package Reluxer
+```
+
+Or add a project reference:
+
+```bash
+dotnet add reference ../Reluxer/Reluxer.csproj
 ```
 
 ## Quick Start
 
 ```csharp
-using TokenLexer.Attributes;
-using TokenLexer.Lexer;
-using TokenLexer.Matching;
-using TokenLexer.Tokens;
-using TokenLexer.Visitor;
+using Reluxer.Attributes;
+using Reluxer.Lexer;
+using Reluxer.Matching;
+using Reluxer.Tokens;
+using Reluxer.Visitor;
 
 // 1. Lex your source code
 var lexer = new TsxLexer(sourceCode);
@@ -640,7 +646,7 @@ public class MyVisitor : TokenVisitor
 ## Project Structure
 
 ```
-src/TokenLexer/
+Reluxer/
 ├── Tokens/
 │   ├── Token.cs           # Token class
 │   └── TokenType.cs       # Token type enum
@@ -654,6 +660,8 @@ src/TokenLexer/
 │   └── PatternMatcher.cs  # Pattern execution
 ├── Attributes/
 │   └── TokenPatternAttribute.cs
+├── Extensions/
+│   └── TokenLinqExtensions.cs  # Lux* extension methods
 └── Visitor/
     └── TokenVisitor.cs    # Base visitor class
 ```
