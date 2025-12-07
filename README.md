@@ -1,6 +1,61 @@
 # reluxer
 A token-based pattern matching and visitor framework for C#, inspired by Babel's AST traversal. Designed for transforming TSX/JSX to C# or other source-to-source transformations.
 
+## Why Reluxer over Babel?
+
+For many transpilation tasks, Reluxer offers a simpler, more concise approach:
+
+| | Babel | Reluxer |
+|---|-------|---------|
+| **Model** | Full AST (syntax tree) | Token stream (flat) |
+| **Pattern matching** | Manual node type checking | Declarative DSL (`\k"const" (\i)`) |
+| **Captures** | Extract from AST nodes | Automatic via `(\i)` groups |
+| **Nested structures** | Recursive traversal | Built-in balanced matching (`\Bp`, `\Bb`) |
+| **Boilerplate** | Visitor for each node type | One-liner patterns |
+
+**When to use Reluxer:**
+- Source-to-source transpilation (TSX→C#, JS→other)
+- Pattern-based code analysis
+- When you need to match *structural patterns*, not semantic meaning
+- When token-level fidelity is sufficient
+
+**When to use Babel:**
+- Need full semantic analysis (type inference, scope resolution)
+- Complex AST transformations that depend on node relationships
+- When you need the JavaScript ecosystem
+
+**Example comparison:**
+
+```javascript
+// Babel: Match useState hook
+export default function(babel) {
+  return {
+    visitor: {
+      VariableDeclaration(path) {
+        if (path.node.kind !== 'const') return;
+        const decl = path.node.declarations[0];
+        if (!t.isArrayPattern(decl.id)) return;
+        if (!t.isCallExpression(decl.init)) return;
+        if (decl.init.callee.name !== 'useState') return;
+        const [value, setter] = decl.id.elements;
+        // ... transform
+      }
+    }
+  };
+}
+```
+
+```csharp
+// Reluxer: Match useState hook
+[TokenPattern(@"\k""const"" ""["" (\i) "","" (\i) ""]"" ""="" \i""useState"" \Bp")]
+public void VisitUseState(string value, string setter, Token[] initializer)
+{
+    // ... transform
+}
+```
+
+The pattern DSL captures the *shape* of the code in a single readable line.
+
 ## Features
 
 - **Token Pattern DSL** - Regex-like syntax for matching token sequences
